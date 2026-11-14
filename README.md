@@ -102,7 +102,7 @@ Version, purpose, developer, data sources, privacy, legal notice, support and sh
 
 | File | Contents |
 |---|---|
-| `index.html` (≈170 KB) | The whole app. Three `<script>` blocks: `astro` (ephemerides and calculations), `i18n` (EN/ES strings) and the app itself |
+| `index.html` (≈178 KB) | The whole app. Three `<script>` blocks: `astro` (ephemerides and calculations), `i18n` (EN/ES strings) and the app itself |
 | `history.html` (≈53 KB) | The Voyager Story learning page, self-contained |
 | `README.md` | This document |
 
