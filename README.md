@@ -6,7 +6,7 @@ A phone web app to point at **Voyager 1** in real time and say hello with a beam
 
 Single HTML file, no build step, no server, no tracking.
 
-Author: **Rafa Alcántara** · rafa.alcantara@gmail.com · Issues: https://github.com/rafa1944/un-dia-luz/issues
+Author: **Rafa Alcántara** · rafa.alcantara@gmail.com · Issues: https://github.com/rafa1944/un-dia-luz/issues · Licence: [MIT](LICENSE)
 
 > **Resumen en español.** Web para el móvil que apunta en tiempo real hacia la Voyager 1 y la saluda con un haz de luz el día que llega a un día luz de la Tierra: el 18 de noviembre de 2026 a las 10:16:07 UTC (11:16:07 en Madrid), la misma hora que da la NASA. Te dice cuándo y hacia dónde mirar desde tu ubicación, guía el móvil con la brújula, enciende la linterna (luz fija o un mensaje en Morse) y te enseña el viaje de tu luz por el sistema solar. Está en inglés y español, no tiene publicidad ni seguimiento y es un proyecto educativo sin ánimo de lucro, sin relación con la NASA.
 
@@ -205,7 +205,9 @@ Shown in the app (About › Legal notice, and the Story tab footer) and on `hist
 
 **Logos.** The app deliberately shows data providers as plain-text credits and does **not** use the NASA insignia, the NASA logotype or the JPL logo. NASA's media usage guidelines do not allow those emblems to be used without permission, in particular in ways that could suggest endorsement. NASA images and data are generally not copyrighted and can be used for educational purposes with credit; the hero illustration is an original drawing.
 
-This is a sensible notice for a hobby project, not legal advice. The repository has no licence file yet: by default, all rights are reserved by the author.
+This is a sensible notice for a hobby project, not legal advice.
+
+**Licence.** The code and texts in this repository are released under the [MIT License](LICENSE) © 2026 Rafa Alcántara. You can reuse, modify and redistribute them as long as you keep the copyright and licence notice. The licence covers this project's own work only: NASA/JPL data keeps its own terms, and the typefaces are loaded from Google Fonts under their own licences.
 
 ## 11. Compatibility
 
@@ -282,11 +284,12 @@ These fill `EPH` (`t0`, `step`, `ra`, `dec`, `d`, `dd`), `EPH_H` and `V1_P0` / `
 - History page sources: listed at the end of `history.html`.
 - Typefaces: Jost, Instrument Serif and IBM Plex Mono (Google Fonts).
 
-Developed by Rafa Alcántara.
+Developed by Rafa Alcántara. Released under the [MIT License](LICENSE).
 
 ## 16. Changelog
 
 **1.0.0** (November 2026)
+- MIT licence.
 - Viewer to point at Voyager 1 with compass, Moon/Sun calibration, camera and sound guidance.
 - Automatic flashlight with adaptive Morse (sent once) or steady light.
 - English and Spanish; location by GPS or city.
