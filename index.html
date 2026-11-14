@@ -53,6 +53,46 @@ p{margin:0}
 /* hero */
 .hero{display:grid;gap:22px}
 .topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.icon-btn.sm{width:38px;height:38px}
+.icon-btn.sm svg{width:19px;height:19px}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.92rem;margin-top:-28px}
+.foot-links a{color:var(--gold);text-underline-offset:3px}
+.story-link{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--ink),var(--void));color:var(--star);text-decoration:none;transition:border-color .2s}
+.story-link:hover{border-color:rgba(220,182,94,.6)}
+.story-link span{display:grid;gap:4px;min-width:0}
+.story-link strong{font-weight:500;font-size:1.05rem}
+.story-link small{color:var(--dim);font-size:.88rem}
+.story-link .arr{color:var(--gold);font-size:1.6rem;line-height:1}
+/* calendar reminder */
+.rem-btn{justify-self:start;margin-top:10px;min-height:44px;border-radius:999px;border:1px solid var(--gold);background:rgba(220,182,94,.08);color:var(--gold-hi);padding:10px 16px;font-weight:500;font-size:.95rem}
+#remBody{display:grid;gap:10px}
+.rem-list{display:grid;gap:8px}
+.sheet .rem-opt{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--ink-2);cursor:pointer;color:var(--star);font-size:1rem}
+.rem-opt input{width:20px;height:20px;accent-color:var(--gold);margin:2px 0 0}
+.rem-opt span{display:grid;gap:2px;min-width:0}
+.rem-opt strong{font-weight:500}
+.rem-opt small{color:var(--dim);font-size:.85rem}
+.sheet .rem-small{font-size:.82rem}
+.rem-g{display:grid;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.rem-glink{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;color:var(--star)}
+/* about */
+.sheet.about{gap:0;padding:0}
+.sheet.about>*{padding:16px 20px;border-bottom:1px solid var(--line)}
+.sheet.about>*:last-child{border-bottom:0}
+.about-head{text-align:center;display:grid;gap:4px;padding-top:22px!important}
+.about-head h3{font:400 1.45rem/1.2 var(--f-display);color:var(--star)}
+.about-head p{color:var(--dim);font-size:.9rem}
+.sheet .about-text{color:var(--star);line-height:1.6;font-size:.98rem}
+.about-sec{display:grid;gap:6px}
+.sheet .about-sec p{color:var(--star)}
+.about-sec h4{margin:0;font:500 1rem/1.3 var(--f-display);color:var(--star)}
+.about-sec ul{margin:0;padding-left:1.1em;display:grid;gap:7px;color:var(--dim);font-size:.92rem}
+.about-sec a,.about-sec summary{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.about-sec summary{cursor:pointer}
+.about-sec details p{margin-top:6px;color:var(--dim)!important;font-size:.9rem}
+.about-foot{display:flex;justify-content:flex-end;padding:6px 14px!important}
+.text-btn{background:none;border:0;color:var(--gold);font:500 .85rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;padding:10px 6px;min-height:44px}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}
 .lang button{border:0;background:transparent;border-radius:999px;padding:6px 12px;font:500 .78rem/1 var(--f-display);letter-spacing:.1em;color:var(--dim);min-height:32px}
 .lang button[aria-pressed="true"]{background:var(--gold);color:#1a1405}
@@ -143,6 +183,35 @@ section{display:grid;gap:16px}
 .beam-del{width:36px;height:36px;margin:-7px -9px -7px 0;border:0;border-radius:50%;background:transparent;color:var(--dim);display:grid;place-items:center;padding:0}
 .beam-del:hover,.beam-del:focus-visible{color:var(--warn);background:rgba(236,154,112,.12)}
 .beam-del svg{width:18px;height:18px}
+.beam-item{cursor:pointer;transition:border-color .2s}
+.beam-item:hover{border-color:rgba(220,182,94,.5)}
+.beam-foot2{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap}
+.beam-open{font-size:.88rem;white-space:nowrap}
+
+/* journey of a beam */
+.trip{position:fixed;inset:0;z-index:55;background:var(--void);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.trip-top{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px));background:linear-gradient(180deg,var(--void) 75%,rgba(5,7,14,0))}
+.trip-head{display:grid;gap:2px;min-width:0}
+.trip-head strong{font-weight:500}
+.trip-body{max-width:560px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 32px) max(16px,env(safe-area-inset-left,0px));display:grid;gap:18px}
+.trip-canvas{position:relative;width:100%;aspect-ratio:1;max-width:100%;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#04050b}
+.trip-canvas canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.trip-clock{position:absolute;left:12px;top:11px;font:500 .7rem/1 var(--f-mono);letter-spacing:.08em;color:var(--gold-hi);text-shadow:0 1px 6px #000}
+.trip-stats{display:grid;gap:8px}
+.trip-big{font:400 clamp(2rem,10vw,2.8rem)/1 var(--f-mono);color:var(--gold-hi);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.trip-big .u{font:400 .42em/1 var(--f-display);color:var(--gold);letter-spacing:.02em}
+.trip-km{color:var(--dim);font-size:.9rem}
+.trip-eta{color:var(--star)}
+.ms{list-style:none;margin:0;padding:0;display:grid}
+.ms li{display:grid;grid-template-columns:14px 1fr auto;gap:2px 12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+.ms .dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--line)}
+.ms li.done .dot{background:var(--gold);border-color:var(--gold)}
+.ms li.next .dot{border-color:var(--gold-hi);box-shadow:0 0 0 4px rgba(220,182,94,.22)}
+.ms .nm{min-width:0;color:var(--dim)}
+.ms li.done .nm,.ms li.next .nm{color:var(--star)}
+.ms .nm small{display:block;color:var(--dim);font-size:.8rem;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ms .off{font:400 .9rem/1.2 var(--f-mono);color:var(--dim);font-variant-numeric:tabular-nums;text-align:right}
+.ms li.done .off{color:var(--gold-hi)}
 .beams-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;color:var(--dim);font-size:.85rem}
 .toast{display:flex;align-items:center;justify-content:center;gap:14px}
 .toast button{background:none;border:0;padding:4px 2px;color:var(--gold);font-weight:500;text-decoration:underline;text-underline-offset:3px}
@@ -227,9 +296,12 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
   <header class="hero">
     <div class="topline">
       <p class="eyebrow" data-i18n="eyebrow">Voyager 1 · live</p>
-      <div class="lang" role="group" aria-label="Language · Idioma">
-        <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
-        <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+      <div class="top-actions">
+        <button class="icon-btn sm" id="aboutBtn" type="button" data-i18n-aria="aboutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg></button>
+        <div class="lang" role="group" aria-label="Language · Idioma">
+          <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+          <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+        </div>
       </div>
     </div>
     <h1 data-i18n="h1">One light-day</h1>
@@ -247,6 +319,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
       <span class="left" id="crossLeft">—</span>
       <dl class="zones" id="crossZones"></dl>
       <p class="zones-note" data-i18n="zonesNote"></p>
+      <button class="rem-btn btn-icon" id="remBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span data-i18n="remBtn"></span></button>
     </div>
   </header>
 
@@ -264,6 +337,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
     <dl class="rst" id="rst"></dl>
     <div class="loc-line"><span id="locText"></span><button class="link-btn" id="locLink" type="button" data-i18n="locChange"></button></div>
     <p class="note" id="crossNote" hidden></p>
+    <button class="link-btn" id="remLink" type="button" data-i18n="remBtn" style="justify-self:start"></button>
   </section>
 
   <section class="ruler" aria-label="Light-time scale">
@@ -286,9 +360,14 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
   <section aria-labelledby="factsH">
     <h2 id="factsH" data-i18n="factsH"></h2>
     <dl class="facts" data-i18n-html="facts"></dl>
+    <a class="story-link" href="history.html" data-story data-i18n-html="storyLink"></a>
   </section>
 
   <footer class="foot" data-i18n-html="foot"></footer>
+  <nav class="foot-links" aria-label="More">
+    <a href="history.html" data-story data-i18n="storyShort"></a>
+    <button class="link-btn" id="aboutLink" type="button" data-i18n="aboutBtn"></button>
+  </nav>
 </main>
 
 <div class="dock">
@@ -300,7 +379,51 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
   </div>
 </div>
 
+<div class="trip" id="trip" hidden role="dialog" aria-modal="true" aria-labelledby="tripTitle">
+  <div class="trip-top">
+    <button class="icon-btn" id="tripBack" type="button" data-i18n-aria="tripBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="trip-head"><p class="k" data-i18n="tripK"></p><strong id="tripTitle"></strong></div>
+  </div>
+  <div class="trip-body">
+    <div class="trip-canvas"><canvas id="tripCv" role="img" data-i18n-aria="tripCvLabel"></canvas><p class="trip-clock" id="tripClock"></p></div>
+    <div class="trip-stats">
+      <p class="k" data-i18n="tripTravK"></p>
+      <div class="trip-big"><span id="tripAU">0</span> <span class="u" data-i18n="au"></span></div>
+      <p class="trip-km mono" id="tripKm"></p>
+      <div class="bar"><i id="tripBar"></i></div>
+      <p class="trip-eta" id="tripEta"></p>
+      <button class="secondary" id="tripReplay" type="button"></button>
+    </div>
+    <h3 data-i18n="msK"></h3>
+    <ol class="ms" id="tripMs"></ol>
+    <p class="sec-intro" data-i18n="tripNote" style="font-size:.88rem"></p>
+  </div>
+</div>
+
 <div class="backdrop" id="locBackdrop" hidden></div>
+<div class="sheet fixed" id="remSheet" hidden role="dialog" aria-modal="true" aria-labelledby="remT">
+  <h3 id="remT" data-i18n="remT"></h3>
+  <div id="remBody"></div>
+  <div class="row"><button class="secondary" id="remClose" type="button" data-i18n="close"></button></div>
+</div>
+<div class="sheet fixed about" id="aboutSheet" hidden role="dialog" aria-modal="true" aria-labelledby="aboutT">
+  <div class="about-head"><h3 id="aboutT" data-i18n="title"></h3><p class="mono" id="aboutVer"></p></div>
+  <p class="about-text" data-i18n="aboutText"></p>
+  <div class="about-sec">
+    <p><span data-i18n="aboutDev"></span>: <span class="about-name">Rafa Alcántara</span></p>
+    <p><a href="mailto:rafa.alcantara@gmail.com">rafa.alcantara@gmail.com</a></p>
+    <p><a href="https://github.com/rafa1944/un-dia-luz" target="_blank" rel="noopener" data-i18n="aboutCode"></a></p>
+  </div>
+  <div class="about-sec"><h4 data-i18n="aboutSources"></h4><ul data-i18n-html="aboutSrcList"></ul></div>
+  <div class="about-sec"><h4 data-i18n="aboutLinks"></h4>
+    <ul>
+      <li><details><summary data-i18n="privacyT"></summary><p data-i18n="privacyText"></p></details></li>
+      <li><a href="https://github.com/rafa1944/un-dia-luz/issues" target="_blank" rel="noopener" data-i18n="support"></a></li>
+      <li><button class="link-btn" id="aboutShare" type="button" data-i18n="sharePage"></button></li>
+    </ul>
+  </div>
+  <div class="about-foot"><button class="text-btn" id="aboutClose" type="button" data-i18n="close"></button></div>
+</div>
 <div class="sheet fixed" id="locSheet" hidden role="dialog" aria-modal="true" aria-labelledby="locSheetT">
   <h3 id="locSheetT" data-i18n="locSheetT"></h3>
   <button class="primary btn-icon" id="locGpsBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span data-i18n="locGps"></span></button>
@@ -410,6 +533,25 @@ function bodyAltAz(body,ms,lat,lon){
 function enu(az,alt){const a=az*D2R,h=alt*D2R;return [Math.cos(h)*Math.sin(a),Math.cos(h)*Math.cos(a),Math.sin(h)];}
 /* Time for light sent at ms to reach the spacecraft (it keeps moving away while the light travels) */
 function upleg(ms){const v=voyager(ms);return v.lt*(1+2*V_HELIO/C_KMS);}
+/* Heliocentric ecliptic positions (J2000, AU) for the solar-system view.
+   Planets: JPL Keplerian elements for 1800–2050 (a, e, I, L, perihelion, node + rates per century); checked against Horizons to < 0.08°. */
+const PLANET_EL={mercury:[0.38709927,0.20563593,7.00497902,252.25032350,77.45779628,48.33076593,0.00000037,0.00001906,-0.00594749,149472.67411175,0.16047689,-0.12534081],
+venus:[0.72333566,0.00677672,3.39467605,181.97909950,131.60246718,76.67984255,0.00000390,-0.00004107,-0.00078890,58517.81538729,0.00268329,-0.27769418],
+earth:[1.00000261,0.01671123,-0.00001531,100.46457166,102.93768193,0,0.00000562,-0.00004392,-0.01294668,35999.37244981,0.32327364,0],
+mars:[1.52371034,0.09339410,1.84969142,-4.55343205,-23.94362959,49.55953891,0.00001847,0.00007882,-0.00813131,19140.30268499,0.44441088,-0.29257343],
+jupiter:[5.20288700,0.04838624,1.30439695,34.39644051,14.72847983,100.47390909,-0.00011607,-0.00013253,-0.00183714,3034.74612775,0.21252668,0.20469106],
+saturn:[9.53667594,0.05386179,2.48599187,49.95424423,92.59887831,113.66242448,-0.00125060,-0.00050991,0.00193609,1222.49362201,-0.41897216,-0.28867794],
+uranus:[19.18916464,0.04725744,0.77263783,313.23810451,170.95427630,74.01692503,-0.00196176,-0.00004397,-0.00242939,428.48202785,0.40805281,0.04240589],
+neptune:[30.06992276,0.00859048,1.77004347,-55.12002969,44.96476227,131.78422574,0.00026291,0.00005105,0.00035372,218.45945325,-0.32241464,-0.01262724]};
+function planetPos(k,ms){const p=PLANET_EL[k],T=(jdOf(ms)-2451545)/36525;
+  const a=p[0]+p[6]*T,e=p[1]+p[7]*T,I=(p[2]+p[8]*T)*D2R,Lm=p[3]+p[9]*T,w=p[4]+p[10]*T,O=p[5]+p[11]*T;
+  const M=wrap180(Lm-w)*D2R;let E=M+e*Math.sin(M);for(let i=0;i<8;i++)E-=(E-e*Math.sin(E)-M)/(1-e*Math.cos(E));
+  const xp=a*(Math.cos(E)-e),yp=a*Math.sqrt(1-e*e)*Math.sin(E),om=(w-O)*D2R,Om=O*D2R;
+  const co=Math.cos(om),so=Math.sin(om),cO=Math.cos(Om),sO=Math.sin(Om),cI=Math.cos(I),sI=Math.sin(I);
+  return [(co*cO-so*sO*cI)*xp+(-so*cO-co*sO*cI)*yp,(co*sO+so*cO*cI)*xp+(-so*sO+co*cO*cI)*yp,(so*sI)*xp+(co*sI)*yp];}
+/* Voyager 1: JPL Horizons heliocentric state on 2026-11-18 (AU, AU/day); it moves in a straight line at this scale */
+const V1_JD0=2461362.5,V1_P0=[-32.22039915514457,-137.2019354088705,99.26779061000546],V1_V=[-1.195196945150092e-3,-7.861217678351216e-3,5.678158648322611e-3];
+function voyHelio(ms){const d=jdOf(ms)-V1_JD0;return [V1_P0[0]+V1_V[0]*d,V1_P0[1]+V1_V[1]*d,V1_P0[2]+V1_V[2]*d];}
 </script>
 
 <script id="i18n">
@@ -446,6 +588,26 @@ en:{
   crossAbove:'At the exact moment ({time}), Voyager 1 will be {alt}° above your horizon, toward {dir}.',
   rulerK:'How long light takes from Earth',ruler:[['Moon','1.3 s'],['Sun','8 min'],['Jupiter','44 min'],['Neptune','4 h'],['Voyager 1','1 day']],
   rulerTitle:'Light-time on a log scale: Moon 1.3 s, Sun 8 min, Jupiter 44 min, Neptune 4 h, Voyager 1 one day',
+  storyShort:'The Voyager story',storyLink:'<span><strong>The Voyager story</strong><small>The people and milestones behind the mission, in a short learning module with a quiz.</small></span><span class="arr" aria-hidden="true">›</span>',
+  remBtn:'Add a reminder to my calendar',remT:'Get a reminder',remP:'Your phone’s calendar will remind you. Nothing is sent to us or to anyone else.',
+  remE1:'Best time to point',remE1Day:'While it is above your horizon',remSub1:'{day}, {a} – {b} · alert 15 min before',remE2:'Exact moment of the light-day',remSub2:'{day}, {t} · alert 10 min before',
+  remLoc:'Times for {place}, in your phone’s time zone.',remIcs:'Add to my calendar',remIcsSub:'For iPhone, Mac, Outlook and most Android calendars. Open the file if your phone asks.',
+  remGoogle:'Do you use Google Calendar? Add each reminder here:',remGoogleOne:'Google Calendar: {name}',remNone:'Choose at least one reminder.',remDone:'If your phone asks, open the file to add it to your calendar.',
+  remS1:'Say hello to Voyager 1 (best time)',remD1:'Voyager 1 is above your horizon and the sky is dark. Look toward {dir}. Open the page, point your phone and send your light: {url}',
+  remD1day:'Voyager 1 is above your horizon. Look toward {dir}. Open the page, point your phone and send your light: {url}',
+  remS2:'Voyager 1 reaches one light-day',remD2:'At this moment light from Earth takes exactly one day to reach Voyager 1. Point your phone at it and send your light: {url}',
+  aboutBtn:'About',aboutVersion:'Version {v}',aboutDev:'Developer',aboutCode:'Source code on GitHub',aboutSources:'Data sources',aboutLinks:'Links',
+  aboutText:'I built this page so that anyone can take part in a small moment of history: the night Voyager 1, launched in 1977, reaches one light-day from Earth. It tells you where to point your phone and switches on your flashlight so you can say hello to the most distant spacecraft ever built, with no astronomy knowledge needed. It is free, has no ads and collects no data.',
+  aboutSrcList:'<li><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL Horizons</a> (NASA/JPL-Caltech): position and distance of Voyager 1</li><li><a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener">JPL approximate planet positions</a>: the planets in the journey view</li><li>Jean Meeus, <em>Astronomical Algorithms</em>: positions of the Sun and the Moon</li>',
+  privacyT:'Privacy',privacyText:'Your location, your light beams and your settings are saved only on this phone. The page has no cookies, analytics or ads and sends nothing to any server. The typefaces load from Google Fonts.',
+  support:'Report a problem or suggest an idea',sharePage:'Share this page',
+  shareInvite:'On the night of 18 to 19 November 2026, Voyager 1 reaches one light-day from Earth. Point your phone at it and say hello with a beam of light.',
+  seeTrip:'See its journey ›',tripBack:'Back',tripK:'Your light beam',tripTitle:'Sent {d}',tripCvLabel:'The solar system seen from above, with your beam of light travelling from Earth to Voyager 1',
+  tripTravK:'Your light has travelled',au:'AU',tripKm:'{km} km · {pct} % of the way',tripEta:'Reaches Voyager 1 on {d} at {t}, in {dur}.',tripDone:'Reached Voyager 1 on {d} at {t}.',
+  replay:'Replay the whole journey (15 s)',live:'Back to live',clockLive:'LIVE · +{dur}',clockReplay:'REPLAY · +{dur}',
+  msK:'Along the way',msMoon:'Passes the Moon',msOrbit:'Crosses the orbit of {p}',msHelio:'Leaves the heliosphere, the Sun’s bubble',msVoy:'Reaches Voyager 1',
+  tripNote:'Top view of the solar system, live. Directions are real; distances from the Sun use a logarithmic scale so the planets and Voyager 1 fit on one screen. The dashed line is the path still ahead.',
+  helioName:'Heliopause',planets:{mercury:'Mercury',venus:'Venus',earth:'Earth',mars:'Mars',jupiter:'Jupiter',saturn:'Saturn',uranus:'Uranus',neptune:'Neptune'},
   beamsNote:'Saved only on this phone.',delBeam:'Delete this beam',delAll:'Delete all',beamDeleted:'Beam deleted',beamsDeleted:'{n} beams deleted',undo:'Undo',
   beamsH:'Your light beams',arrives:'arrives {d}',travelled:'{km} km travelled · {pct} % · {dur} to go',reached:'Reached Voyager 1 after {km} km',
   howH:'How to do it',
@@ -520,6 +682,26 @@ es:{
   crossAbove:'En el instante exacto ({time}) la Voyager 1 estará {alt}° sobre tu horizonte, hacia {dir}.',
   rulerK:'Cuánto tarda la luz desde la Tierra',ruler:[['Luna','1,3 s'],['Sol','8 min'],['Júpiter','44 min'],['Neptuno','4 h'],['Voyager 1','1 día']],
   rulerTitle:'Escala logarítmica de tiempo-luz: Luna 1,3 s, Sol 8 min, Júpiter 44 min, Neptuno 4 h, Voyager 1 un día',
+  storyShort:'La historia de la Voyager',storyLink:'<span><strong>La historia de la Voyager</strong><small>Las personas y los hitos de la misión, en un pequeño módulo de formación con test.</small></span><span class="arr" aria-hidden="true">›</span>',
+  remBtn:'Añadir un recordatorio al calendario',remT:'Recibe un aviso',remP:'El calendario de tu móvil te avisará. No se envía nada a nadie.',
+  remE1:'Mejor momento para apuntar',remE1Day:'Mientras está sobre tu horizonte',remSub1:'{day}, {a} – {b} · aviso 15 min antes',remE2:'Instante exacto del día luz',remSub2:'{day}, {t} · aviso 10 min antes',
+  remLoc:'Horas para {place}, en la zona horaria de tu móvil.',remIcs:'Añadir a mi calendario',remIcsSub:'Para iPhone, Mac, Outlook y la mayoría de calendarios de Android. Abre el archivo si el móvil te lo pide.',
+  remGoogle:'¿Usas Google Calendar? Añade cada aviso aquí:',remGoogleOne:'Google Calendar: {name}',remNone:'Elige al menos un aviso.',remDone:'Si el móvil te lo pide, abre el archivo para añadirlo al calendario.',
+  remS1:'Saluda a la Voyager 1 (mejor momento)',remD1:'La Voyager 1 está sobre tu horizonte y ya es de noche. Mira hacia {dir}. Abre la web, apunta el móvil y envíale tu luz: {url}',
+  remD1day:'La Voyager 1 está sobre tu horizonte. Mira hacia {dir}. Abre la web, apunta el móvil y envíale tu luz: {url}',
+  remS2:'La Voyager 1 llega a un día luz',remD2:'En este instante la luz de la Tierra tarda exactamente un día en alcanzar la Voyager 1. Apunta el móvil hacia ella y envíale tu luz: {url}',
+  aboutBtn:'Acerca de',aboutVersion:'Versión {v}',aboutDev:'Programador',aboutCode:'Código fuente en GitHub',aboutSources:'Fuentes de datos',aboutLinks:'Enlaces',
+  aboutText:'He creado esta web para que cualquiera pueda participar en un pequeño momento histórico: la noche en que la Voyager 1, lanzada en 1977, llega a un día luz de la Tierra. Te dice hacia dónde apuntar el móvil y enciende la linterna para que saludes a la nave más lejana jamás construida, sin necesidad de saber astronomía. Es gratuita, no tiene publicidad y no recoge ningún dato.',
+  aboutSrcList:'<li><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL Horizons</a> (NASA/JPL-Caltech): posición y distancia de la Voyager 1</li><li><a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener">Posiciones aproximadas de los planetas de JPL</a>: los planetas de la vista del viaje</li><li>Jean Meeus, <em>Astronomical Algorithms</em>: posiciones del Sol y de la Luna</li>',
+  privacyT:'Privacidad',privacyText:'Tu ubicación, tus haces de luz y tus ajustes se guardan solo en este móvil. La web no tiene cookies, analítica ni publicidad y no envía nada a ningún servidor. Las tipografías se cargan desde Google Fonts.',
+  support:'Avisar de un problema o proponer una idea',sharePage:'Compartir esta web',
+  shareInvite:'La noche del 18 al 19 de noviembre de 2026 la Voyager 1 llega a un día luz de la Tierra. Apunta el móvil hacia ella y salúdala con un haz de luz.',
+  seeTrip:'Ver su viaje ›',tripBack:'Volver',tripK:'Tu haz de luz',tripTitle:'Enviado el {d}',tripCvLabel:'El sistema solar visto desde arriba, con tu haz de luz viajando de la Tierra a la Voyager 1',
+  tripTravK:'Tu luz ha recorrido',au:'UA',tripKm:'{km} km · {pct} % del camino',tripEta:'Llegará a la Voyager 1 el {d} a las {t}, dentro de {dur}.',tripDone:'Llegó a la Voyager 1 el {d} a las {t}.',
+  replay:'Ver el viaje completo (15 s)',live:'Volver al directo',clockLive:'EN DIRECTO · +{dur}',clockReplay:'REPETICIÓN · +{dur}',
+  msK:'Etapas del viaje',msMoon:'Pasa por la Luna',msOrbit:'Cruza la órbita de {p}',msHelio:'Sale de la heliosfera, la burbuja del Sol',msVoy:'Alcanza la Voyager 1',
+  tripNote:'Vista del sistema solar desde arriba, en directo. Las direcciones son reales; las distancias al Sol van en escala logarítmica para que quepan los planetas y la Voyager 1 en una pantalla. La línea discontinua es el camino que le queda.',
+  helioName:'Heliopausa',planets:{mercury:'Mercurio',venus:'Venus',earth:'Tierra',mars:'Marte',jupiter:'Júpiter',saturn:'Saturno',uranus:'Urano',neptune:'Neptuno'},
   beamsNote:'Se guardan solo en este móvil.',delBeam:'Borrar este haz',delAll:'Borrar todos',beamDeleted:'Haz borrado',beamsDeleted:'{n} haces borrados',undo:'Deshacer',
   beamsH:'Tus haces de luz',arrives:'llega {d}',travelled:'{km} km recorridos · {pct} % · faltan {dur}',reached:'Ha alcanzado la Voyager 1 tras {km} km',
   howH:'Cómo hacerlo',
@@ -813,8 +995,61 @@ citySearch.addEventListener('input',()=>renderCities(citySearch.value));
 citySearch.addEventListener('keydown',e=>{if(e.key==='Enter'){const f=$('#cityList button');if(f){e.preventDefault();setCity(findCity(f.dataset.id));}}});
 $('#cityList').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setCity(findCity(b.dataset.id));});
 $('#locGpsBtn').addEventListener('click',e=>useGps(e.currentTarget));
-$('#locClose').addEventListener('click',closeLocSheet);locBd.addEventListener('click',closeLocSheet);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLocSheet();});
+$('#locClose').addEventListener('click',closeLocSheet);locBd.addEventListener('click',()=>{closeLocSheet();closeAbout();closeRem();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLocSheet();closeAbout();closeRem();}});
+/* recordatorio en el calendario: el aviso lo da el propio móvil, sin servidor */
+const SITE_URL='https://rafa1944.github.io/un-dia-luz/',remSheet=$('#remSheet');
+let REM=[];
+function remEvents(){
+  const {lat,lon}=st.loc,url=SITE_URL+(LANG==='es'?'?lang=es':''),ev=[];
+  const d18={start:new Date(2026,10,18).getTime(),end:new Date(2026,10,19).getTime()},D=dayData(d18,lat,lon),win=D.ideal[0]||D.up[0];
+  if(win){const p=bodyAltAz('voyager',Math.min(win.b,win.a+20*60e3),lat,lon);
+    ev.push({id:'best',title:L.remS1,desc:t(D.ideal.length?'remD1':'remD1day',{dir:dir8(p.az),url}),a:win.a,b:win.b,alarms:[15,0],
+      label:D.ideal.length?L.remE1:L.remE1Day,sub:t('remSub1',{day:cap(F.dayS.format(new Date(win.a))),a:F.hm.format(win.a),b:F.hm.format(win.b)}),on:true});}
+  ev.push({id:'cross',title:L.remS2,desc:t('remD2',{url}),a:CROSSING,b:CROSSING+15*60e3,alarms:[10,0],
+    label:L.remE2,sub:t('remSub2',{day:cap(F.dayS.format(new Date(CROSSING))),t:F.hm.format(CROSSING)}),on:new Date(CROSSING).getHours()>=7});
+  return ev.filter(e=>e.b>Date.now());
+}
+const icsDate=ms=>new Date(ms).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+const icsEsc=s=>s.replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+function icsFold(line){const out=[];let s=line;while(s.length>36){out.push(s.slice(0,36));s=' '+s.slice(36);}out.push(s);return out.join('\r\n');}
+function buildIcs(evs){
+  const out=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//One Light-Day//Voyager 1//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  for(const e of evs){out.push('BEGIN:VEVENT',`UID:udl-${e.id}-2026@rafa1944.github.io`,`DTSTAMP:${icsDate(Date.now())}`,`DTSTART:${icsDate(e.a)}`,`DTEND:${icsDate(e.b)}`,
+      `SUMMARY:${icsEsc(e.title)}`,`DESCRIPTION:${icsEsc(e.desc)}`,`URL:${SITE_URL}`);
+    for(const m of e.alarms)out.push('BEGIN:VALARM','ACTION:DISPLAY',`DESCRIPTION:${icsEsc(e.title)}`,`TRIGGER:${m?'-PT'+m+'M':'PT0M'}`,'END:VALARM');
+    out.push('END:VEVENT');}
+  out.push('END:VCALENDAR');return out.map(icsFold).join('\r\n')+'\r\n';
+}
+const gcal=e=>`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(e.title)}&dates=${icsDate(e.a)}/${icsDate(e.b)}&details=${encodeURIComponent(e.desc)}`;
+function saveIcs(evs){
+  const blob=new Blob([buildIcs(evs)],{type:'text/calendar;charset=utf-8'}),href=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=href;a.download='voyager-1-one-light-day.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),60000);
+}
+function openRem(){
+  REM=remEvents();
+  const bell='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>';
+  $('#remBody').innerHTML=`<p>${L.remP}</p>
+    <div class="rem-list">${REM.map((e,i)=>`<label class="rem-opt"><input type="checkbox" data-i="${i}" ${e.on?'checked':''}><span><strong>${e.label}</strong><small>${e.sub}</small></span></label>`).join('')}</div>
+    <p class="rem-small">${t('remLoc',{place:placeName()})}</p>
+    <button class="primary btn-icon" id="remIcs" type="button">${bell}<span>${L.remIcs}</span></button>
+    <p class="rem-small">${L.remIcsSub}</p>
+    <div class="rem-g"><p class="rem-small">${L.remGoogle}</p>${REM.map(e=>`<a class="secondary rem-glink" href="${gcal(e)}" target="_blank" rel="noopener">${t('remGoogleOne',{name:e.label})}</a>`).join('')}</div>`;
+  $('#remIcs').addEventListener('click',()=>{const sel=[...remSheet.querySelectorAll('input[type=checkbox]')].filter(c=>c.checked).map(c=>REM[+c.dataset.i]);
+    if(!sel.length){toast(L.remNone);return;}saveIcs(sel);toast(L.remDone,5000);});
+  remSheet.hidden=false;locBd.hidden=false;document.body.style.overflow='hidden';remSheet.scrollTop=0;$('#remIcs').focus({preventScroll:true});
+}
+function closeRem(){if(remSheet.hidden)return;remSheet.hidden=true;locBd.hidden=true;if(!V.open&&!TR.open)document.body.style.overflow='';}
+$('#remBtn').addEventListener('click',openRem);$('#remLink').addEventListener('click',openRem);$('#remClose').addEventListener('click',closeRem);
+if(Date.now()>CROSSING){$('#remBtn').hidden=true;$('#remLink').hidden=true;}
+/* acerca de */
+const APP_VERSION='1.0.0',aboutSheet=$('#aboutSheet');
+function openAbout(){$('#aboutVer').textContent=t('aboutVersion',{v:APP_VERSION});aboutSheet.hidden=false;locBd.hidden=false;document.body.style.overflow='hidden';aboutSheet.scrollTop=0;$('#aboutClose').focus({preventScroll:true});}
+function closeAbout(){if(aboutSheet.hidden)return;aboutSheet.hidden=true;locBd.hidden=true;if(!V.open&&!TR.open)document.body.style.overflow='';}
+$('#aboutBtn').addEventListener('click',openAbout);$('#aboutLink').addEventListener('click',openAbout);$('#aboutClose').addEventListener('click',closeAbout);
+$('#aboutShare').addEventListener('click',async()=>{const url=location.protocol.startsWith('http')?location.origin+location.pathname:'';
+  try{if(navigator.share){await navigator.share({title:L.title,text:L.shareInvite,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  try{await navigator.clipboard.writeText(L.shareInvite+(url?' '+url:''));toast(L.copied);}catch(e){toast(L.shareInvite,8000);}});
 
 /* ---------- haces enviados ---------- */
 function getBeams(){return store.get('udl-beams',[]);}
@@ -825,7 +1060,7 @@ function renderBeams(){
   $('#beamsList').innerHTML=l.map((b,i)=>`<li class="beam-item" data-i="${i}">
     <div class="beam-head"><div class="beam-when"><span>${cap(F.dayS.format(new Date(b.t)))} · <span class="mono">${F.time.format(new Date(b.t))}</span></span><span>${t('arrives',{d:`<span class="mono">${F.dayS.format(new Date(b.arr))} ${F.time.format(new Date(b.arr))}</span>`})}</span></div>
     <button class="beam-del" type="button" data-del="${b.t}" aria-label="${L.delBeam}" title="${L.delBeam}">${XICON}</button></div>
-    <div class="bar"><i></i></div><div class="sub"></div></li>`).join('');
+    <div class="bar"><i></i></div><div class="beam-foot2"><div class="sub"></div><button class="link-btn beam-open" type="button">${L.seeTrip}</button></div></li>`).join('');
   tickBeams(Date.now());
 }
 /* Borrar haces: se borra al momento y el aviso deja deshacerlo */
@@ -834,7 +1069,8 @@ function deleteBeams(match){
   store.set('udl-beams',keep);renderBeams();
   toast(n===1?L.beamDeleted:t('beamsDeleted',{n}),6000,{label:L.undo,fn:()=>{store.set('udl-beams',all);renderBeams();}});
 }
-$('#beamsList').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b)deleteBeams(x=>x.t===+b.dataset.del);});
+$('#beamsList').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(b){deleteBeams(x=>x.t===+b.dataset.del);return;}
+  const li=e.target.closest('.beam-item');if(li)openTrip(getBeams()[+li.dataset.i]);});
 $('#delAll').addEventListener('click',()=>deleteBeams(()=>true));
 function tickBeams(now){
   const l=getBeams();if(!l.length)return;
@@ -1162,8 +1398,10 @@ function sentSheet(r){
     <p class="big">${t('sentBig',{date:F.day.format(arr),time:F.time.format(arr)})}</p>
     <p>${t('sentBody',{t:F.time.format(new Date(r.t)),d:dur,sep:r.sep!=null?F.n1.format(r.sep)+'°':'—',dur:durText(r.up,true),what:r.up>=86400?L.sentFull:L.sentAlmost,x:F.n1.format(r.up-voyager(r.t).lt)})}</p>
     <div class="bar"><i id="sentBar"></i></div><p class="mono" id="sentKm" style="font-size:.85rem"></p>
+    <button class="link-btn" data-a="trip" type="button" style="justify-self:start">${L.seeTrip}</button>
     <div class="row"><button class="secondary" data-a="share" type="button">${L.share}</button><button class="primary" data-a="x" type="button">${L.done}</button></div>`,s=>{
     s.querySelector('[data-a=x]').onclick=closeSheet;
+    s.querySelector('[data-a=trip]').onclick=()=>{closeSheet();closeVisor(false,true);openTrip(r,true);};
     s.querySelector('[data-a=share]').onclick=()=>shareBeam(r);
     const upd=()=>{if(sheet.hidden||!s.querySelector('#sentKm'))return;const now=Date.now(),f=Math.min(1,(now-r.t)/(r.arr-r.t));s.querySelector('#sentBar').style.width=(f*100).toFixed(4)+'%';s.querySelector('#sentKm').textContent=t('sentKm',{km:F.n0.format(f*r.up*C_KMS),total:F.n0.format(r.up*C_KMS)});requestAnimationFrame(upd);};upd();});
 }
@@ -1223,25 +1461,115 @@ function openVisor(){
   wake();cancelAnimationFrame(V.raf);loop();
   Promise.resolve(perm).then(r=>{if(r!=='granted')setTimeout(()=>{if(!st.Rraw)toast(L.motionDenied,7000);},1800);}).catch(()=>{});
 }
-function closeVisor(fromPop){
+function closeVisor(fromPop,keepHist){
   if(st.beam)stopBeam();closeSheet();endCalibration();$('#morseLine').textContent='';
   cancelAnimationFrame(V.raf);V.open=false;V.el.hidden=true;document.body.classList.remove('visor-open');
   st.cam=false;V.video.classList.remove('on');$('#vCam').setAttribute('aria-pressed','false');releaseCam();
   try{wl&&wl.release();}catch(e){}wl=null;
-  if(!fromPop&&location.hash==='#visor')history.back();
+  if(!fromPop&&!keepHist&&location.hash==='#visor')history.back();
   renderBeams();
 }
 $('#go').addEventListener('click',openVisor);
 $('#vClose').addEventListener('click',()=>closeVisor(false));
-window.addEventListener('popstate',()=>{if(V.open)closeVisor(true);});
+window.addEventListener('popstate',()=>{if(V.open)closeVisor(true);if(TR.open&&location.hash!=='#journey')closeTrip(true);});
+
+/* =====================================================================
+   VIAJE DE UN HAZ: el sistema solar visto desde arriba, en directo
+   ===================================================================== */
+const TR={el:$('#trip'),cv:$('#tripCv'),ctx:null,open:false,raf:0,r:null,g:null,S:0,R:0,cx:0,cy:0,dpr:1,replay:null,stars:null,lastInfo:0,ms:[],path:[]};
+TR.ctx=TR.cv.getContext('2d');
+const AU_KM=149597870.7,HELIO_AU=121.6,REPLAY_MS=15000,LOG_R0=0.6,LOG_MAX=250;
+const PLANETS=['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune'];
+const PCOL={mercury:'#a9a39a',venus:'#e8d3a0',earth:'#6fa8ff',mars:'#e07a5f',jupiter:'#d8b38a',saturn:'#e6cf8f',uranus:'#8fd3d8',neptune:'#7b93ff'};
+const PSZ={mercury:2,venus:3,earth:3.5,mars:2.5,jupiter:5,saturn:4.5,uranus:3.5,neptune:3.5};
+/* distancia al Sol en escala logarítmica; el ángulo es la longitud eclíptica real */
+const mapR=r=>TR.R*Math.log10(1+r/LOG_R0)/Math.log10(1+LOG_MAX/LOG_R0);
+function toXY(p){const r=Math.hypot(p[0],p[1],p[2]),lon=Math.atan2(p[1],p[0]),m=mapR(r);return [TR.cx+m*Math.cos(lon),TR.cy-m*Math.sin(lon)];}
+/* la luz sale de la Tierra al emitir y va en línea recta hasta donde estará la nave al llegar */
+function beamGeo(r){const E=planetPos('earth',r.t),V=voyHelio(r.arr),d=[V[0]-E[0],V[1]-E[1],V[2]-E[2]],D=Math.hypot(d[0],d[1],d[2]);return {E,u:[d[0]/D,d[1]/D,d[2]/D],D};}
+const ptAt=(g,s)=>[g.E[0]+g.u[0]*s,g.E[1]+g.u[1]*s,g.E[2]+g.u[2]*s];
+function crossS(g,R){const b=dot(g.E,g.u),c=dot(g.E,g.E)-R*R,disc=b*b-c;if(disc<0)return null;const s=-b+Math.sqrt(disc);return s>0&&s<g.D?s:null;}
+function offText(sec){if(sec<60)return F.n1.format(sec)+' s';if(sec<3600)return Math.floor(sec/60)+' min';return Math.floor(sec/3600)+' h '+pad(Math.floor(sec%3600/60))+' min';}
+function buildTrip(){
+  const r=TR.r,g=TR.g,T=r.arr-r.t,list=[];
+  const add=(name,s)=>{if(s!=null)list.push({name,s,at:r.t+T*s/g.D});};
+  add(L.msMoon,384400/AU_KM);
+  for(const p of ['mars','jupiter','saturn','uranus','neptune'])add(t('msOrbit',{p:L.planets[p]}),crossS(g,PLANET_EL[p][0]));
+  add(L.msHelio,crossS(g,HELIO_AU));add(L.msVoy,g.D);
+  TR.ms=list.sort((a,b)=>a.s-b.s);
+  $('#tripMs').innerHTML=TR.ms.map(m=>`<li><span class="dot"></span><span class="nm">${m.name}<small>${cap(F.dayS.format(new Date(m.at)))} · ${F.time.format(new Date(m.at))}</small></span><span class="off">+${offText((m.at-r.t)/1000)}</span></li>`).join('');
+  const N=320,s0=1e-4;TR.path=[];for(let k=0;k<=N;k++)TR.path.push(s0*Math.pow(g.D/s0,k/N));
+  $('#tripTitle').textContent=t('tripTitle',{d:`${F.dayS.format(new Date(r.t))} · ${F.time.format(new Date(r.t))}`});
+}
+function sizeTrip(){const box=TR.cv.parentElement.getBoundingClientRect();TR.S=box.width;TR.dpr=Math.min(2.5,window.devicePixelRatio||1);
+  TR.cv.width=Math.round(TR.S*TR.dpr);TR.cv.height=Math.round(TR.S*TR.dpr);TR.cx=TR.cy=TR.S/2;TR.R=TR.S/2-18;
+  if(!TR.stars){let a=1234567;const rnd=()=>((a=(a*1103515245+12345)&0x7fffffff)/0x7fffffff);TR.stars=Array.from({length:160},()=>[rnd(),rnd(),.12+rnd()*.45]);}}
+window.addEventListener('resize',()=>{if(TR.open)sizeTrip();});
+function tripTime(){
+  const r=TR.r;if(!TR.replay)return Date.now();
+  const k=(performance.now()-TR.replay)/REPLAY_MS;if(k>1.2){TR.replay=null;syncReplay();return Date.now();}
+  return r.t+Math.min(1,k)*(r.arr-r.t);}
+function strokePath(c,g,s1,s2){const pts=[s1,...TR.path.filter(s=>s>s1&&s<s2),s2];c.beginPath();
+  pts.forEach((s,i)=>{const [x,y]=toXY(ptAt(g,s));i?c.lineTo(x,y):c.moveTo(x,y);});c.stroke();}
+function label(c,txt,x,y,col,align){c.fillStyle=col;c.textAlign=align||'left';c.fillText(txt,x,y);}
+function drawTrip(vt){
+  const c=TR.ctx,S=TR.S,r=TR.r,g=TR.g,f=Math.max(0,Math.min(1,(vt-r.t)/(r.arr-r.t))),sNow=f*g.D,now=performance.now();
+  c.setTransform(TR.dpr,0,0,TR.dpr,0,0);c.fillStyle='#04050b';c.fillRect(0,0,S,S);
+  for(const [x,y,a] of TR.stars){c.fillStyle=`rgba(236,230,214,${a})`;c.fillRect(x*S,y*S,1.1,1.1);}
+  c.lineWidth=1;c.strokeStyle='rgba(149,155,180,.22)';
+  for(const p of PLANETS){c.beginPath();c.arc(TR.cx,TR.cy,mapR(PLANET_EL[p][0]),0,Math.PI*2);c.stroke();}
+  const hr=mapR(HELIO_AU);c.setLineDash([4,5]);c.strokeStyle='rgba(220,182,94,.4)';c.beginPath();c.arc(TR.cx,TR.cy,hr,0,Math.PI*2);c.stroke();c.setLineDash([]);
+  c.textBaseline='middle';c.font='500 10px Jost, system-ui, sans-serif';
+  label(c,L.helioName.toUpperCase(),TR.cx+hr*Math.cos(.7),TR.cy-hr*Math.sin(.7)-9,'rgba(220,182,94,.75)','center');
+  const sg=c.createRadialGradient(TR.cx,TR.cy,0,TR.cx,TR.cy,16);sg.addColorStop(0,'rgba(255,236,170,1)');sg.addColorStop(.35,'rgba(255,200,90,.65)');sg.addColorStop(1,'rgba(255,200,90,0)');
+  c.fillStyle=sg;c.beginPath();c.arc(TR.cx,TR.cy,16,0,Math.PI*2);c.fill();
+  c.font='500 10.5px Jost, system-ui, sans-serif';
+  for(const p of PLANETS){const [x,y]=toXY(planetPos(p,vt));c.fillStyle=PCOL[p];c.beginPath();c.arc(x,y,PSZ[p],0,Math.PI*2);c.fill();
+    if(p!=='mercury'&&p!=='venus')label(c,L.planets[p],x+PSZ[p]+4,y,p==='earth'?'#9fc3ff':'rgba(236,230,214,.75)');}
+  c.lineWidth=1.2;c.strokeStyle='rgba(255,228,166,.3)';c.setLineDash([3,4]);if(f<1)strokePath(c,g,sNow,g.D);c.setLineDash([]);
+  if(sNow>0){c.save();c.lineWidth=2.4;c.strokeStyle='#ffe4a6';c.shadowColor='rgba(255,200,100,.9)';c.shadowBlur=10;strokePath(c,g,0,sNow);c.restore();}
+  const [ex,ey]=toXY(g.E);c.strokeStyle='rgba(159,195,255,.85)';c.lineWidth=1.2;c.beginPath();c.arc(ex,ey,7.5,0,Math.PI*2);c.stroke();
+  const vh=voyHelio(vt),[vx,vy]=toXY(vh),rt=vx<S-120;
+  c.fillStyle='#dcb65e';c.beginPath();c.arc(vx,vy,4.5,0,Math.PI*2);c.fill();
+  c.strokeStyle='#ffe4a6';c.lineWidth=1.5;c.beginPath();c.arc(vx,vy,f>=1?9+3*Math.sin(now/300):9,0,Math.PI*2);c.stroke();
+  c.font='600 11px Jost, system-ui, sans-serif';label(c,'VOYAGER 1',rt?vx+15:vx-15,vy-7,'#ffe4a6',rt?'left':'right');
+  c.font='400 10px "IBM Plex Mono", monospace';label(c,F.n1.format(Math.hypot(vh[0],vh[1],vh[2]))+' '+L.au,rt?vx+15:vx-15,vy+8,'rgba(236,230,214,.7)',rt?'left':'right');
+  if(f<1){const [fx,fy]=toXY(ptAt(g,sNow)),pr=(6+3*Math.sin(now/220))*2.2,fg=c.createRadialGradient(fx,fy,0,fx,fy,pr);
+    fg.addColorStop(0,'rgba(255,250,232,1)');fg.addColorStop(.4,'rgba(255,228,166,.7)');fg.addColorStop(1,'rgba(255,228,166,0)');c.fillStyle=fg;c.beginPath();c.arc(fx,fy,pr,0,Math.PI*2);c.fill();}
+}
+function tripInfo(vt){
+  const r=TR.r,g=TR.g,f=Math.max(0,Math.min(1,(vt-r.t)/(r.arr-r.t))),s=f*g.D,now=Date.now(),a=new Date(r.arr);
+  $('#tripAU').textContent=F.n2.format(s);
+  $('#tripKm').textContent=t('tripKm',{km:F.n0.format(s*AU_KM),pct:F.n2.format(f*100)});
+  $('#tripBar').style.width=(f*100).toFixed(3)+'%';
+  $('#tripEta').textContent=now<r.arr?t('tripEta',{d:F.day.format(a),t:F.time.format(a),dur:durText((r.arr-now)/1000,false)}):t('tripDone',{d:F.day.format(a),t:F.time.format(a)});
+  $('#tripClock').textContent=t(TR.replay?'clockReplay':'clockLive',{dur:offText(Math.max(0,(Math.min(vt,r.arr)-r.t)/1000))});
+  let nextSet=false;
+  $('#tripMs').querySelectorAll('li').forEach((li,i)=>{const m=TR.ms[i];if(!m)return;const done=vt>=m.at,nx=!done&&!nextSet;if(nx)nextSet=true;li.classList.toggle('done',done);li.classList.toggle('next',nx);});
+}
+function tripLoop(){TR.raf=requestAnimationFrame(tripLoop);const vt=tripTime();drawTrip(vt);const n=performance.now();if(n-TR.lastInfo>150){TR.lastInfo=n;tripInfo(vt);}}
+function syncReplay(){$('#tripReplay').textContent=TR.replay?L.live:L.replay;}
+$('#tripReplay').addEventListener('click',()=>{TR.replay=TR.replay?null:performance.now();syncReplay();TR.lastInfo=0;});
+function openTrip(r,replace){
+  if(!r)return;TR.r=r;TR.g=beamGeo(r);TR.replay=null;TR.el.hidden=false;TR.open=true;document.body.style.overflow='hidden';
+  buildTrip();syncReplay();sizeTrip();TR.el.scrollTop=0;
+  try{history[replace?'replaceState':'pushState']({trip:1},'','#journey');}catch(e){}
+  cancelAnimationFrame(TR.raf);TR.lastInfo=0;tripLoop();$('#tripBack').focus({preventScroll:true});
+}
+function closeTrip(fromPop){if(!TR.open)return;TR.open=false;TR.el.hidden=true;cancelAnimationFrame(TR.raf);document.body.style.overflow='';
+  if(!fromPop&&location.hash==='#journey')history.back();}
+$('#tripBack').addEventListener('click',()=>closeTrip(false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&TR.open)closeTrip(false);});
 
 /* ---------- idioma ---------- */
+const HAS_STORY=false; // se activa cuando history.html esté publicada
 function applyI18n(){
   document.documentElement.lang=LANG;document.title=L.title;
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=L[el.dataset.i18n];});
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=L[el.dataset.i18nHtml];});
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',L[el.dataset.i18nAria]);});
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=L[el.dataset.i18nPh];});
+  document.querySelectorAll('a[data-story]').forEach(a=>{a.href='history.html?lang='+LANG;a.hidden=!HAS_STORY;});
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===LANG));
   $('#dayChips').setAttribute('aria-label',L.whenH);
   syncButtons();
@@ -1258,7 +1586,7 @@ document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',
 setLang(LANG,false);
 setInterval(()=>{if(!V.open)tickHome();},100);
 setInterval(()=>{if(!V.open){const k=dayKey(Date.now());if(!DAYS.some(d=>d.key===k&&d.label===L.today)){DAYS=buildDays();st.dayIdx=0;renderChips();}renderDay();}},60000);
-if(location.hash==='#visor')history.replaceState(null,'',location.pathname+location.search);
+if(location.hash==='#visor'||location.hash==='#journey')history.replaceState(null,'',location.pathname+location.search);
 window.__udl={st,voyager,bodyAltAz,cam,setLang};
 })();
 </script>
