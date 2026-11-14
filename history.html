@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Voyager Story</title>
+<meta name="description" content="The people and milestones behind NASA’s Voyager mission, with a short quiz.">
+<meta name="theme-color" content="#05070e">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070e'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23dcb65e' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23dcb65e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Same visual identity as index.html: one dark theme, single 560px column */
+:root{
+  --void:#05070e;      /* deep space, page ground */
+  --ink:#0c1122;       /* panels */
+  --ink-2:#141b36;     /* raised panels */
+  --line:#262f52;      /* rules and grid */
+  --star:#ece6d6;      /* primary text, warm white */
+  --dim:#959bb4;       /* secondary text */
+  --gold:#dcb65e;      /* Golden Record gold */
+  --gold-hi:#ffe4a6;
+  --warn:#ec9a70;
+  --f-display:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --radius:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--void);scroll-padding-top:16px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--void);color:var(--star);font:400 16px/1.55 var(--f-display);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+[hidden]{display:none!important}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+a{color:var(--gold)}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px calc(40px + env(safe-area-inset-bottom,0px));display:grid;gap:28px}
+main{display:grid;gap:56px;min-width:0}
+.eyebrow,.k{font:500 .72rem/1.2 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+h1{font:300 clamp(2.6rem,12vw,4.2rem)/.95 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font:400 1.5rem/1.2 var(--f-display);margin:0;text-wrap:balance}
+h3{font:500 1.1rem/1.25 var(--f-display);margin:0}
+p{margin:0}
+section{display:grid;gap:16px;min-width:0;scroll-margin-top:16px}
+.sec-intro{color:var(--dim);max-width:34em}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
+.back{display:inline-flex;align-items:center;min-height:44px;color:var(--gold);text-decoration:none;font-weight:500;font-size:.95rem;min-width:0}
+.back:hover{text-decoration:underline;text-underline-offset:3px}
+.lang{display:flex;flex:none;border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;border-radius:999px;padding:6px 12px;font:500 .78rem/1 var(--f-display);letter-spacing:.1em;color:var(--dim);min-height:36px}
+.lang button[aria-pressed="true"]{background:var(--gold);color:#1a1405}
+
+/* hero */
+.hero{display:grid;gap:18px}
+.tour{display:block;width:100%;height:auto;overflow:visible;margin:4px 0 2px}
+.tour .sun{fill:var(--gold-hi)}
+.tour .glow{fill:var(--gold);opacity:.16}
+.tour .pl{fill:var(--dim)}
+.tour .ring{fill:none;stroke:var(--dim);stroke-width:1}
+.tour .v1{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round}
+.tour .v2{fill:none;stroke:var(--star);stroke-width:1.2;stroke-dasharray:3 4;stroke-linecap:round;opacity:.7}
+.tour text{font:500 9px var(--f-mono);fill:var(--dim);letter-spacing:.06em}
+.tour text.l1{fill:var(--gold)}
+.intro{font:300 clamp(1.1rem,4.6vw,1.3rem)/1.5 var(--f-display);color:var(--star);text-wrap:pretty}
+.intro strong{font-weight:500;color:var(--gold-hi)}
+.intro-2{color:var(--dim);text-wrap:pretty}
+.intro-2 strong{font-weight:500;color:var(--star)}
+.toc{display:grid;gap:10px;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;min-height:44px;border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:.92rem;color:var(--star);text-decoration:none;background:transparent}
+.chip:hover{border-color:var(--gold)}
+
+/* people */
+.people{display:grid;gap:26px}
+.group{display:grid;gap:12px}
+.group-k{display:flex;align-items:center;gap:12px}
+.group-k::after{content:"";flex:1;height:1px;background:var(--line)}
+.cards{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.person{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink)}
+.badge{width:40px;height:40px;border-radius:50%;border:1px solid rgba(220,182,94,.45);background:rgba(220,182,94,.08);display:grid;place-items:center;font:500 .78rem/1 var(--f-mono);letter-spacing:.04em;color:var(--gold-hi)}
+.person-body{display:grid;gap:4px;min-width:0}
+.role{font:500 .7rem/1.35 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.person .txt{color:var(--dim);font-size:.95rem;margin-top:4px}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{position:relative;padding:0 0 28px 30px}
+.tl li::before{content:"";position:absolute;left:5px;top:12px;bottom:-12px;width:2px;background:var(--line)}
+.tl li:last-child{padding-bottom:0}
+.tl li:last-child::before{display:none}
+.tl li:nth-last-child(2)::before{background:linear-gradient(var(--line),var(--gold))}
+.tl li::after{content:"";position:absolute;left:0;top:5px;width:12px;height:12px;border-radius:50%;border:2px solid var(--gold);background:var(--void)}
+.ev{display:grid;gap:4px;min-width:0}
+.when{font:400 .8rem/1.35 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--gold);letter-spacing:.02em}
+.ev .txt{color:var(--dim);font-size:.95rem}
+.tl li.ld::after{top:19px;background:var(--gold);box-shadow:0 0 0 5px rgba(220,182,94,.18),0 0 22px rgba(255,228,166,.6)}
+.tl li.ld .ev{padding:14px 16px 16px;border:1px solid var(--gold);border-radius:var(--radius);background:linear-gradient(180deg,rgba(220,182,94,.14),var(--ink));gap:6px}
+.tl li.ld .when{color:var(--gold-hi);font-size:.86rem}
+.tl li.ld h3{font-size:1.3rem;color:var(--gold-hi);font-weight:400}
+.tl li.ld .txt{color:var(--star)}
+.ld-local{font:400 .82rem/1.4 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--dim)}
+.ld-note{font-size:.85rem;color:var(--dim);border-top:1px solid rgba(220,182,94,.3);padding-top:10px;margin-top:4px}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.num{display:grid;gap:6px;align-content:start;padding:14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink);min-width:0}
+.num.wide{grid-column:1/-1;background:linear-gradient(180deg,var(--ink-2),var(--ink))}
+.num .k{font-size:.66rem;letter-spacing:.14em}
+.num .v{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .3em;font:400 clamp(1.45rem,6.6vw,1.9rem)/1.1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--gold-hi);letter-spacing:-.02em;overflow-wrap:anywhere;min-width:0}
+.num.wide .v{font-size:clamp(1.5rem,7.4vw,2.3rem)}
+.num .v .ap{color:var(--gold);font-size:.7em}
+.num .v .u{font:400 .8rem/1.2 var(--f-display);color:var(--gold);letter-spacing:.02em}
+.num .t{color:var(--dim);font-size:.86rem;line-height:1.45}
+
+/* quiz */
+.quiz{display:grid;gap:14px}
+.q{display:grid;gap:10px;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink)}
+.qt{font:500 1.05rem/1.4 var(--f-display)}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:48px;padding:10px 12px;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--ink-2);color:var(--star);transition:border-color .2s,background .2s,opacity .2s}
+.opt:hover:not([aria-disabled="true"]){border-color:rgba(220,182,94,.6)}
+.opt[aria-disabled="true"]{cursor:default}
+.let{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font:500 .75rem/1 var(--f-mono);color:var(--dim)}
+.otx{min-width:0}
+.tag{font:500 .66rem/1.2 var(--f-display);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.opt.right{border-color:var(--gold);background:rgba(220,182,94,.12)}
+.opt.right .let{border-color:var(--gold);background:var(--gold);color:#1a1405}
+.opt.right .tag{color:var(--gold-hi)}
+.opt.wrong{border-color:var(--warn);background:rgba(236,154,112,.1)}
+.opt.wrong .let{border-color:var(--warn);color:var(--warn)}
+.opt.wrong .tag{color:var(--warn)}
+.opt.faded{opacity:.5}
+.fb{border-left:2px solid var(--gold);padding:2px 0 2px 14px;color:var(--star);font-size:.95rem}
+.fb:empty{display:none}
+.fb.no{border-color:var(--warn)}
+.fb strong{font-weight:500}
+.score{display:grid;gap:12px;padding:16px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--ink),var(--void))}
+.score .prog{color:var(--dim);font-size:.92rem}
+.score .final{font:400 1.2rem/1.4 var(--f-display);color:var(--gold-hi)}
+.bar{height:6px;border-radius:6px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-hi));border-radius:inherit;transition:width .3s}
+.secondary{min-height:48px;border-radius:999px;border:1px solid var(--line);background:transparent;padding:10px 20px;justify-self:start;color:var(--star)}
+.secondary:hover{border-color:var(--gold)}
+
+/* sources */
+.src{margin:0;padding-left:1.6em;display:grid;gap:10px;color:var(--dim);font-size:.9rem}
+.src li::marker{font:400 .78rem var(--f-mono);color:var(--dim)}
+.src a{overflow-wrap:anywhere;text-underline-offset:3px}
+.src .pub{color:var(--dim)}
+
+footer.foot{display:grid;gap:14px;border-top:1px solid var(--line);padding-top:20px;color:var(--dim);font-size:.82rem}
+.btn-back{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 20px;border-radius:999px;background:var(--gold);color:#1a1405;font-weight:500;font-size:1rem;text-decoration:none;justify-self:start}
+.btn-back:active{transform:translateY(1px)}
+noscript p{color:var(--warn)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (min-width:700px){.wrap{padding-block:28px calc(56px + env(safe-area-inset-bottom,0px))}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="back" href="./" data-i18n="back">← Back to One Light-Day</a>
+    <div class="lang" role="group" aria-label="Language · Idioma">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="pageH">
+      <p class="eyebrow" data-i18n="eyebrow">Voyager · 1977 to today</p>
+      <h1 id="pageH" data-i18n="h1">The Voyager story</h1>
+      <svg class="tour" viewBox="0 0 340 96" aria-hidden="true" focusable="false">
+        <circle class="glow" cx="12" cy="56" r="11"/>
+        <circle class="sun" cx="12" cy="56" r="5.5"/>
+        <path class="v2" d="M22 58 Q50 64 78 58 Q108 52 138 58 Q171 64 204 58 Q236 52 268 58 Q302 64 334 80"/>
+        <path class="v1" d="M22 54 Q50 60 78 54 Q108 48 138 54 Q200 44 334 8"/>
+        <circle class="pl" cx="78" cy="56" r="4.6"/>
+        <circle class="pl" cx="138" cy="56" r="3.8"/>
+        <ellipse class="ring" cx="138" cy="56" rx="7.5" ry="2.2"/>
+        <circle class="pl" cx="204" cy="56" r="3"/>
+        <circle class="pl" cx="268" cy="56" r="3"/>
+        <text x="78" y="76" text-anchor="middle">J</text>
+        <text x="138" y="76" text-anchor="middle">S</text>
+        <text x="204" y="76" text-anchor="middle">U</text>
+        <text x="268" y="76" text-anchor="middle">N</text>
+        <text class="l1" x="334" y="36" text-anchor="end">VOYAGER 1</text>
+        <text x="334" y="94" text-anchor="end">VOYAGER 2</text>
+      </svg>
+      <p class="intro" data-i18n-html="intro1"></p>
+      <p class="intro-2" data-i18n-html="intro2"></p>
+      <noscript><p>This page needs JavaScript to show its content. · Esta página necesita JavaScript para mostrar su contenido.</p></noscript>
+      <nav class="toc" aria-labelledby="tocK">
+        <p class="k" id="tocK" data-i18n="tocLabel"></p>
+        <div class="chips" id="toc"></div>
+      </nav>
+    </section>
+
+    <section id="people" aria-labelledby="peopleH">
+      <h2 id="peopleH" data-i18n="peopleH"></h2>
+      <p class="sec-intro" data-i18n="peopleIntro"></p>
+      <div class="people" id="peopleList"></div>
+    </section>
+
+    <section id="timeline" aria-labelledby="tlH">
+      <h2 id="tlH" data-i18n="tlH"></h2>
+      <p class="sec-intro" data-i18n="tlIntro"></p>
+      <ol class="tl" id="tlList"></ol>
+    </section>
+
+    <section id="numbers" aria-labelledby="numH">
+      <h2 id="numH" data-i18n="numH"></h2>
+      <p class="sec-intro" data-i18n="numIntro"></p>
+      <div class="nums" id="numList"></div>
+    </section>
+
+    <section id="quiz" aria-labelledby="quizH">
+      <h2 id="quizH" data-i18n="quizH"></h2>
+      <p class="sec-intro" data-i18n="quizIntro"></p>
+      <div class="quiz" id="quizBox"></div>
+      <div class="score" id="score" aria-live="polite"></div>
+    </section>
+
+    <section id="sources" aria-labelledby="srcH">
+      <h2 id="srcH" data-i18n="srcH"></h2>
+      <p class="sec-intro" data-i18n="srcIntro"></p>
+      <ol class="src" id="srcList"></ol>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a class="btn-back" href="./" data-i18n="back">← Back to One Light-Day</a>
+    <p data-i18n="checked"></p>
+  </footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- text: one dictionary per language, same keys and same array lengths ---------- */
+const I18N={
+en:{
+  locale:'en-GB',
+  title:'The Voyager Story',
+  meta:'The people and milestones behind NASA’s Voyager mission, with a short quiz.',
+  back:'← Back to One Light-Day',
+  eyebrow:'Voyager · 1977 to today',
+  h1:'The Voyager story',
+  intro1:'Voyager 1 and Voyager 2 are twin NASA spacecraft, launched in 1977 and built and still flown by the Jet Propulsion Laboratory (JPL) in California. They made use of a line-up of the outer planets that comes round about once every 176 years, letting each planet’s gravity swing them on to the next: the <strong>Grand Tour</strong>.',
+  intro2:'Between them they visited Jupiter, Saturn, Uranus and Neptune, and both now travel through interstellar space. On 18 November 2026, Voyager 1 reaches <strong>one light-day</strong> from Earth, farther than any human-made object has ever been. Here are the people who made the journey possible, the moments that shaped it, and a short quiz to check what you have learnt.',
+  tocLabel:'On this page',
+  toc:['People','Timeline','In numbers','Quiz','Sources'],
+
+  peopleH:'The people',
+  peopleIntro:'Many people have worked on Voyager over five decades. These are some of them, from the first idea to the team that flies the spacecraft today.',
+  groups:['The idea','Building and flying','The message','Discoveries','Today'],
+  people:[
+    {n:'Michael Minovitch',r:'Gravity-assist pioneer',t:'In 1961, as a UCLA graduate student with a summer job at JPL, he began calculating flight paths that use a planet’s gravity to speed up and steer a spacecraft. The idea had earlier roots, but his work helped turn the gravity assist into a practical tool, and Flandro cited it in his Grand Tour paper.'},
+    {n:'Gary Flandro',r:'Found the Grand Tour',t:'In 1965, as a Caltech graduate student working part-time at JPL, he noticed that Jupiter, Saturn, Uranus and Neptune would sit on the same side of the Sun in the 1980s, a line-up that comes round about every 176 years. One spacecraft could hop from planet to planet and save years of travel.'},
+    {n:'John Casani',r:'Project manager',t:'He led Voyager as the twin spacecraft were built, tested and launched. He was also the first to propose that they carry a message for anyone who might find them, and asked Carl Sagan to create it: the start of the Golden Record. He died in 2025, aged 92.'},
+    {n:'Charles Kohlhase',r:'Mission design manager',t:'He led the JPL team that chose the flight paths for both Voyagers past the giant planets. He went on to be science and mission design manager for Cassini, the mission to Saturn.'},
+    {n:'Edward C. Stone',r:'Project scientist, 1972–2022',t:'He took charge of Voyager’s science in 1972, five years before launch, and kept the role for 50 years, through every planetary flyby and into interstellar space. He also directed JPL from 1991 to 2001. He died in 2024, aged 88.'},
+    {n:'Carl Sagan',r:'Golden Record and Pale Blue Dot',t:'The Cornell astronomer, a member of Voyager’s imaging team, chaired the committee that chose the contents of the Golden Record. Back in 1981 he had the idea of turning a Voyager camera towards Earth, which led to the Pale Blue Dot in 1990.'},
+    {n:'Ann Druyan',r:'Golden Record creative director',t:'As the record’s creative director, she helped decide which music, images and sounds would speak for life on Earth. The result includes 90 minutes of music from many cultures and eras.'},
+    {n:'Frank Drake',r:'Golden Record technical director',t:'A radio astronomer and a pioneer of the search for extraterrestrial intelligence, he was the record’s technical director. Each copy is a 30 cm gold-plated copper disc in an aluminium cover, with 115 images stored in analogue form alongside the sound.'},
+    {n:'Linda Morabito',r:'Navigation engineer',t:'On Voyager’s navigation team she processed images of Jupiter’s moons to bring out the background stars, which helped pin down the spacecraft’s position. In March 1979, in a Voyager 1 image of Io, she spotted a huge cloud rising from its edge: a volcanic plume, the first active volcano seen beyond Earth.'},
+    {n:'Suzanne Dodd',r:'Project manager since 2010',t:'She joined Voyager in 1984, writing command sequences for both spacecraft as Voyager 2 headed for Uranus, and stayed until after the Neptune flyby in 1989. She came back as project manager in 2010 and has led the mission ever since.'},
+    {n:'Linda Spilker',r:'Project scientist since 2022',t:'She joined JPL in 1977 to work with Voyager’s infrared instrument team and stayed through the planetary flybys. After leading the science of the Cassini mission at Saturn, she returned and took over from Ed Stone as project scientist in 2022.'}
+  ],
+
+  tlH:'Timeline',
+  tlIntro:'Nearly fifty years of mission, from the first idea to the light-day. Dates are in UTC.',
+  tl:[
+    {h:'The Grand Tour idea',t:'Gary Flandro works out that a rare line-up of the outer planets would let one spacecraft visit them all using gravity assists. NASA dropped the full Grand Tour in 1972 because of its cost and planned two spacecraft for 1977, bound for Jupiter and Saturn.'},
+    {h:'Voyager 2 lifts off',t:'Voyager 2 launches first, from Cape Canaveral, on a Titan IIIE-Centaur rocket. Until March that year the twins had been called Mariner 11 and Mariner 12.'},
+    {h:'Voyager 1 lifts off',t:'Sixteen days later Voyager 1 follows on a faster path, which gets it to Jupiter four months ahead of its twin.'},
+    {h:'Jupiter and the volcanoes of Io',t:'Voyager 1 makes its closest approach to Jupiter. Days later, Linda Morabito spots a plume rising from the moon Io in one of its images: the first active volcano seen beyond Earth.'},
+    {h:'Saturn and Titan',t:'Voyager 1 flies past Saturn after a close look at Titan, a moon with a thick atmosphere made mostly of nitrogen. The Titan flyby ruled out a trip to Uranus and Neptune; instead the spacecraft headed north, out of the plane of the planets.'},
+    {h:'Uranus',t:'Voyager 2 makes the first and only close visit to Uranus, discovering 10 new moons and two new rings.'},
+    {h:'Neptune',t:'Voyager 2 passes about 4,800 km above Neptune’s cloud tops, the closest of all its flybys. It is still the only spacecraft to have visited Uranus and Neptune.'},
+    {h:'The Pale Blue Dot',t:'At Carl Sagan’s suggestion, Voyager 1 looks back from about 6 billion km and takes 60 images for a family portrait of six planets. In one of them Earth is less than a pixel across; 34 minutes later the cameras are switched off for good.'},
+    {h:'The farthest of all',t:'Voyager 1 overtakes Pioneer 10, at 69.4 times the distance from the Earth to the Sun, and becomes the most distant human-made object.'},
+    {h:'Termination shock',t:'Voyager 1 crosses the termination shock, where the solar wind suddenly slows down, and enters the heliosheath, the outer layer of the Sun’s bubble.'},
+    {h:'Into interstellar space',t:'Voyager 1 leaves the heliosphere, the bubble of solar wind around the Sun, and becomes the first spacecraft in interstellar space. The team confirmed the crossing the following year.'},
+    {h:'Thrusters after 37 years',t:'With its usual thrusters wearing out, engineers fire Voyager 1’s trajectory correction thrusters, unused since November 1980. They work perfectly, giving the team a new way to keep the antenna pointed at Earth.'},
+    {h:'Voyager 2 joins its twin',t:'Voyager 2 crosses the heliopause, the edge of the heliosphere, on a different path and more than six years after Voyager 1.'},
+    {h:'A repair from 24 billion km',t:'Voyager 1 starts sending unreadable data on 14 November 2023. Engineers trace the fault to one failed memory chip, move the affected code elsewhere and, by June 2024, have all four science instruments back.'},
+    {h:'Every watt counts',t:'The power supply drops by about 4 watts a year, so instruments are switched off one by one; since April 2026 Voyager 1 runs only its magnetometer and its plasma wave instrument. In September 2026 engineers also swap three of its devices for lower-power ones to make the remaining power last longer.'},
+    {h:'One light-day',t:'Voyager 1 is {km} km from Earth, so far that light needs a whole day to get there. No human-made object has ever been this far away.'}
+  ],
+  ldLocal:'In your time zone: {t}',
+  ldNote:'This is the same moment NASA gives: 05:16:07 in New York. It is when the straight-line distance between the centre of the Earth and Voyager 1 reaches one light-day.',
+
+  numH:'Voyager in numbers',
+  numIntro:'A few figures to measure the journey, all from NASA and JPL.',
+  nums:[
+    {k:'One light-day',u:'km',t:'How far light travels in 24 hours, at 299,792.458 km per second. Voyager 1 reaches this distance in November 2026.'},
+    {k:'Speed',u:'km/s',t:'Voyager 1’s speed relative to the Sun, about 61,000 km/h.'},
+    {k:'Radio power',u:'W',t:'What Voyager 1’s main transmitter puts out, about as much as a fridge light bulb.'},
+    {k:'Antenna',u:'m',t:'Width of the dish that aims that faint signal at Earth.'},
+    {k:'Power loss',u:'W a year',t:'Lost every year as the plutonium in its three generators decays. At launch each one gave about 158 W.'},
+    {k:'Next star',u:'years',t:'Until Voyager 1 passes within 1.7 light-years of the star AC+79 3888.'},
+    {k:'Golden Record',u:'languages',t:'Greetings in 55 languages, plus 115 images and 90 minutes of music.'},
+    {k:'Voyager 2’s turn',u:'',t:'Voyager 2, slower than its twin, reaches one light-day in November 2035.'}
+  ],
+
+  quizH:'Test yourself',
+  quizIntro:'Five questions to check what you have learnt. Pick an answer to see if you are right.',
+  qLabel:'Question {n} of {t}',
+  ok:'Correct',no:'Not quite',
+  progress:'{a} of {t} answered · {c} correct',
+  done5:'Perfect: {c} out of {t}. You know your Voyager.',
+  doneMid:'{c} out of {t}. Nearly there: have another look at the timeline and try again.',
+  doneLow:'{c} out of {t}. Read about the people and the timeline again, then have another go.',
+  retry:'Try again',
+  quiz:[
+    {q:'Which Voyager left Earth first?',o:['Voyager 1','Voyager 2','Both on the same day'],e:'Voyager 2 launched on 20 August 1977, sixteen days before Voyager 1. Voyager 1 took a faster path and reached Jupiter first.'},
+    {q:'What did navigation engineer Linda Morabito spot in a Voyager 1 image in March 1979?',o:['A new moon of Jupiter','An erupting volcano on Io','Water ice on Mars'],e:'It was a volcanic plume rising from Io, the first active volcano ever seen beyond Earth.'},
+    {q:'Which planets has only Voyager 2 visited?',o:['Jupiter and Saturn','Mars and Venus','Uranus and Neptune'],e:'Voyager 2 flew past Uranus in 1986 and Neptune in 1989. No other spacecraft has been to either.'},
+    {q:'What does “one light-day” measure?',o:['A distance: how far light travels in 24 hours','A time: one day as counted on board Voyager 1','A brightness: how strong a beam of light is'],e:'It is a distance of about 25.9 billion km. In November 2026 Voyager 1 is that far away, so light from Earth needs a whole day to reach it.'},
+    {q:'Who chaired the committee that chose what went on the Golden Record?',o:['Ed Stone','Carl Sagan','Gary Flandro'],e:'Carl Sagan led the selection, with Ann Druyan as creative director and Frank Drake as technical director.'}
+  ],
+
+  srcH:'Sources',
+  srcIntro:'Every fact on this page comes from these pages. Links open in a new tab.',
+  src:[
+    'Voyager mission overview',
+    'Voyager 1: facts and key dates',
+    'Voyager 2: facts and key dates',
+    'What is a light-day?',
+    'Voyager frequently asked questions',
+    'What is on the Golden Record',
+    'Voyager 1’s Pale Blue Dot',
+    'Pale Blue Dot Revisited (2020)',
+    'Volcanic eruptions on Io, image of 8 March 1979',
+    'Discovery of volcanic activity on Io: a historical review',
+    'The man behind the mission: Gary Flandro',
+    'The challenge of the planets: gravity (Michael Minovitch)',
+    'Ed Stone retires after 50 years as project scientist',
+    'Ed Stone, former JPL director and Voyager project scientist, dies',
+    'John Casani, former manager of NASA missions, dies',
+    'Charley Kohlhase, Voyager mission design manager',
+    'Suzanne Dodd becomes Voyager project manager (2010)',
+    'Linda Spilker, JPL profile',
+    'Voyager 2 enters interstellar space',
+    'Voyager 1 fires up thrusters after 37 years',
+    'Voyager 1 sends engineering data again (April 2024)',
+    'Voyager 1 returns data from all four instruments (June 2024)',
+    'Two instruments turned off to extend the mission (2025)',
+    'Instrument shut off on Voyager 1 (April 2026)',
+    'Voyager 1 conserves power (October 2026)',
+    'Voyager signal seen by radio telescopes (transmitter power)',
+    'JPL Horizons: position and distance of Voyager 1'
+  ],
+  newTab:'opens in a new tab',
+  checked:'Facts checked against NASA and JPL sources in November 2026.'
+},
+
+es:{
+  locale:'es-ES',
+  title:'Historia de la Voyager',
+  meta:'Las personas y los hitos de la misión Voyager de la NASA, con un pequeño test.',
+  back:'← Volver a Un día luz',
+  eyebrow:'Voyager · de 1977 a hoy',
+  h1:'La historia de la Voyager',
+  intro1:'La Voyager 1 y la Voyager 2 son dos naves gemelas de la NASA, lanzadas en 1977, que construyó y todavía pilota el Laboratorio de Propulsión a Chorro (JPL), en California. Aprovecharon una alineación de los planetas exteriores que se repite más o menos cada 176 años: la gravedad de cada planeta las lanzaba hacia el siguiente. Era el <strong>Gran Tour</strong>.',
+  intro2:'Entre las dos visitaron Júpiter, Saturno, Urano y Neptuno, y hoy ambas viajan por el espacio interestelar. El 18 de noviembre de 2026, la Voyager 1 llega a <strong>un día luz</strong> de la Tierra, más lejos que ningún otro objeto fabricado por el ser humano. Aquí tienes a las personas que hicieron posible el viaje, los momentos que lo marcaron y un pequeño test para comprobar lo que has aprendido.',
+  tocLabel:'En esta página',
+  toc:['Personas','Cronología','En cifras','Test','Fuentes'],
+
+  peopleH:'Las personas',
+  peopleIntro:'Mucha gente ha trabajado en la Voyager durante cinco décadas. Estas son algunas de esas personas, desde la primera idea hasta el equipo que pilota hoy las naves.',
+  groups:['La idea','Construir y volar','El mensaje','Descubrimientos','Hoy'],
+  people:[
+    {n:'Michael Minovitch',r:'Pionero de la asistencia gravitatoria',t:'En 1961, cuando era estudiante de posgrado en UCLA y trabajaba en verano en el JPL, empezó a calcular trayectorias que aprovechan la gravedad de un planeta para acelerar y desviar una nave. La idea tenía precedentes, pero su trabajo ayudó a convertir la asistencia gravitatoria en una herramienta práctica, y Flandro lo citó en su artículo sobre el Gran Tour.'},
+    {n:'Gary Flandro',r:'Descubrió el Gran Tour',t:'En 1965, cuando estudiaba un posgrado en Caltech y trabajaba a tiempo parcial en el JPL, se dio cuenta de que Júpiter, Saturno, Urano y Neptuno estarían en el mismo lado del Sol en los años ochenta, una alineación que se repite más o menos cada 176 años. Una sola nave podría saltar de planeta en planeta y ahorrarse años de viaje.'},
+    {n:'John Casani',r:'Jefe del proyecto',t:'Dirigió la Voyager mientras las naves gemelas se construían, se probaban y se lanzaban. También fue el primero en proponer que llevaran un mensaje para quien pudiera encontrarlas, y se lo encargó a Carl Sagan: así empezó el Disco de Oro. Murió en 2025, a los 92 años.'},
+    {n:'Charles Kohlhase',r:'Responsable del diseño de la misión',t:'Dirigió el equipo del JPL que eligió las trayectorias de las dos Voyager entre los planetas gigantes. Después fue responsable de ciencia y diseño de misión de Cassini, la misión a Saturno.'},
+    {n:'Edward C. Stone',r:'Científico del proyecto, 1972–2022',t:'Asumió la dirección científica de la Voyager en 1972, cinco años antes del lanzamiento, y la mantuvo durante 50 años, en todos los sobrevuelos y hasta el espacio interestelar. También dirigió el JPL de 1991 a 2001. Murió en 2024, a los 88 años.'},
+    {n:'Carl Sagan',r:'Disco de Oro y «Un punto azul pálido»',t:'Este astrónomo de la Universidad Cornell, miembro del equipo de imagen de la Voyager, presidió el comité que eligió el contenido del Disco de Oro. En 1981 tuvo la idea de girar una cámara de la Voyager hacia la Tierra, de la que salió en 1990 la imagen «Un punto azul pálido».'},
+    {n:'Ann Druyan',r:'Directora creativa del Disco de Oro',t:'Como directora creativa del disco, ayudó a decidir qué música, imágenes y sonidos hablarían en nombre de la vida en la Tierra. El resultado incluye 90 minutos de música de muchas culturas y épocas.'},
+    {n:'Frank Drake',r:'Director técnico del Disco de Oro',t:'Radioastrónomo y pionero de la búsqueda de inteligencia extraterrestre, fue el director técnico del disco. Cada copia es un disco de cobre bañado en oro de 30 cm, con funda de aluminio, que guarda 115 imágenes en formato analógico junto al sonido.'},
+    {n:'Linda Morabito',r:'Ingeniera de navegación',t:'En el equipo de navegación de la Voyager procesaba imágenes de las lunas de Júpiter para resaltar las estrellas del fondo, lo que ayudaba a fijar la posición de la nave. En marzo de 1979, en una imagen de Ío tomada por la Voyager 1, vio una enorme nube que asomaba por el borde: un penacho volcánico, el primer volcán activo observado fuera de la Tierra.'},
+    {n:'Suzanne Dodd',r:'Jefa del proyecto desde 2010',t:'Entró en la Voyager en 1984, preparando las secuencias de órdenes de las dos naves mientras la Voyager 2 viajaba hacia Urano, y siguió hasta después del sobrevuelo de Neptuno en 1989. Volvió como jefa del proyecto en 2010 y desde entonces dirige la misión.'},
+    {n:'Linda Spilker',r:'Científica del proyecto desde 2022',t:'Entró en el JPL en 1977 para trabajar con el equipo del instrumento infrarrojo de la Voyager y siguió durante los sobrevuelos de los planetas. Tras dirigir la ciencia de la misión Cassini en Saturno, volvió y sustituyó a Ed Stone como científica del proyecto en 2022.'}
+  ],
+
+  tlH:'Cronología',
+  tlIntro:'Casi cincuenta años de misión, desde la primera idea hasta el día luz. Fechas en UTC.',
+  tl:[
+    {h:'La idea del Gran Tour',t:'Gary Flandro calcula que una rara alineación de los planetas exteriores permitiría a una sola nave visitarlos todos con asistencias gravitatorias. En 1972 la NASA descartó el Gran Tour completo por su coste y planeó dos naves para 1977, rumbo a Júpiter y Saturno.'},
+    {h:'Despega la Voyager 2',t:'La Voyager 2 sale primero, desde Cabo Cañaveral, a bordo de un cohete Titan IIIE-Centaur. Hasta marzo de ese año, las gemelas se llamaban Mariner 11 y Mariner 12.'},
+    {h:'Despega la Voyager 1',t:'Dieciséis días después la sigue la Voyager 1, por una trayectoria más rápida que la lleva a Júpiter cuatro meses antes que su gemela.'},
+    {h:'Júpiter y los volcanes de Ío',t:'La Voyager 1 pasa por su punto más cercano a Júpiter. Días después, Linda Morabito descubre en una de sus imágenes un penacho que surge de la luna Ío: el primer volcán activo visto fuera de la Tierra.'},
+    {h:'Saturno y Titán',t:'La Voyager 1 sobrevuela Saturno tras observar de cerca Titán, una luna con una atmósfera densa formada sobre todo por nitrógeno. Ese sobrevuelo le cerró el camino hacia Urano y Neptuno: la nave salió hacia el norte, fuera del plano de los planetas.'},
+    {h:'Urano',t:'La Voyager 2 hace la primera y única visita cercana a Urano y descubre 10 lunas y dos anillos nuevos.'},
+    {h:'Neptuno',t:'La Voyager 2 pasa a unos 4800 km de las nubes de Neptuno, el más cercano de todos sus sobrevuelos. Sigue siendo la única nave que ha visitado Urano y Neptuno.'},
+    {h:'Un punto azul pálido',t:'A propuesta de Carl Sagan, la Voyager 1 mira atrás desde unos 6000 millones de km y toma 60 imágenes para un retrato de familia de seis planetas. En una de ellas la Tierra ocupa menos de un píxel; 34 minutos después, las cámaras se apagan para siempre.'},
+    {h:'La más lejana',t:'La Voyager 1 adelanta a la Pioneer 10, a 69,4 veces la distancia entre la Tierra y el Sol, y se convierte en el objeto fabricado por el ser humano más lejano.'},
+    {h:'El choque de terminación',t:'La Voyager 1 cruza el choque de terminación, donde el viento solar frena de golpe, y entra en la heliofunda, la capa exterior de la burbuja del Sol.'},
+    {h:'Rumbo al espacio interestelar',t:'La Voyager 1 sale de la heliosfera, la burbuja de viento solar que rodea al Sol, y se convierte en la primera nave en el espacio interestelar. El equipo confirmó el cruce al año siguiente.'},
+    {h:'Propulsores tras 37 años',t:'Con sus propulsores habituales desgastados, los ingenieros encienden los propulsores de corrección de trayectoria de la Voyager 1, sin usar desde noviembre de 1980. Funcionan a la perfección y dan al equipo una nueva forma de mantener la antena apuntando a la Tierra.'},
+    {h:'La Voyager 2 se une a su gemela',t:'La Voyager 2 cruza la heliopausa, el borde de la heliosfera, por otro camino y más de seis años después que la Voyager 1.'},
+    {h:'Una reparación a 24.000 millones de km',t:'El 14 de noviembre de 2023 la Voyager 1 empieza a enviar datos ilegibles. Los ingenieros localizan el fallo en un chip de memoria averiado, trasladan el código afectado a otra zona y, en junio de 2024, recuperan los cuatro instrumentos científicos.'},
+    {h:'Cada vatio cuenta',t:'La energía disponible baja unos 4 vatios al año, así que los instrumentos se apagan uno a uno; desde abril de 2026 la Voyager 1 solo mantiene el magnetómetro y el instrumento de ondas de plasma. En septiembre de 2026 los ingenieros cambian además tres de sus aparatos por otros de menor consumo para que la energía restante dure más.'},
+    {h:'Un día luz',t:'La Voyager 1 está a {km} km de la Tierra, tan lejos que la luz tarda un día entero en llegar. Ningún objeto fabricado por el ser humano había llegado nunca tan lejos.'}
+  ],
+  ldLocal:'En tu zona horaria: {t}',
+  ldNote:'Es la misma hora que da la NASA: las 05:16:07 en Nueva York. Es cuando la distancia en línea recta entre el centro de la Tierra y la Voyager 1 llega a un día luz.',
+
+  numH:'La Voyager en cifras',
+  numIntro:'Algunas cifras para medir el viaje, todas de la NASA y el JPL.',
+  nums:[
+    {k:'Un día luz',u:'km',t:'Lo que recorre la luz en 24 horas, a 299.792,458 km por segundo. La Voyager 1 alcanza esa distancia en noviembre de 2026.'},
+    {k:'Velocidad',u:'km/s',t:'Velocidad de la Voyager 1 respecto al Sol, unos 61.000 km/h.'},
+    {k:'Potencia de radio',u:'W',t:'Lo que emite el transmisor principal de la Voyager 1, más o menos como la bombilla de una nevera.'},
+    {k:'Antena',u:'m',t:'Diámetro de la antena parabólica que apunta esa débil señal hacia la Tierra.'},
+    {k:'Pérdida de energía',u:'W al año',t:'Se pierden cada año porque el plutonio de sus tres generadores se desintegra. Al lanzarse, cada uno daba unos 158 W.'},
+    {k:'La próxima estrella',u:'años',t:'Lo que tardará la Voyager 1 en pasar a 1,7 años luz de la estrella AC+79 3888.'},
+    {k:'Disco de Oro',u:'idiomas',t:'Saludos en 55 idiomas, además de 115 imágenes y 90 minutos de música.'},
+    {k:'El turno de la Voyager 2',u:'',t:'La Voyager 2, más lenta que su gemela, llegará a un día luz en noviembre de 2035.'}
+  ],
+
+  quizH:'Ponte a prueba',
+  quizIntro:'Cinco preguntas para comprobar lo que has aprendido. Elige una respuesta y verás si has acertado.',
+  qLabel:'Pregunta {n} de {t}',
+  ok:'Correcta',no:'No es esta',
+  progress:'{a} de {t} respondidas · aciertos: {c}',
+  done5:'Perfecto: {c} de {t}. Conoces bien la Voyager.',
+  doneMid:'{c} de {t}. Casi: repasa la cronología y vuelve a intentarlo.',
+  doneLow:'{c} de {t}. Repasa las personas y la cronología y prueba otra vez.',
+  retry:'Volver a empezar',
+  quiz:[
+    {q:'¿Qué Voyager salió primero de la Tierra?',o:['La Voyager 1','La Voyager 2','Las dos el mismo día'],e:'La Voyager 2 despegó el 20 de agosto de 1977, dieciséis días antes que la Voyager 1. La Voyager 1 tomó una trayectoria más rápida y llegó antes a Júpiter.'},
+    {q:'¿Qué vio la ingeniera de navegación Linda Morabito en una imagen de la Voyager 1 en marzo de 1979?',o:['Una luna nueva de Júpiter','Un volcán en erupción en Ío','Hielo de agua en Marte'],e:'Era un penacho volcánico que surgía de Ío, el primer volcán activo observado fuera de la Tierra.'},
+    {q:'¿Qué planetas ha visitado solo la Voyager 2?',o:['Júpiter y Saturno','Marte y Venus','Urano y Neptuno'],e:'La Voyager 2 sobrevoló Urano en 1986 y Neptuno en 1989. Ninguna otra nave ha estado en ninguno de los dos.'},
+    {q:'¿Qué mide «un día luz»?',o:['Una distancia: lo que recorre la luz en 24 horas','Un tiempo: un día contado a bordo de la Voyager 1','Un brillo: la intensidad de un haz de luz'],e:'Es una distancia de unos 25.900 millones de km. En noviembre de 2026 la Voyager 1 está así de lejos, y la luz de la Tierra tarda un día entero en llegar hasta ella.'},
+    {q:'¿Quién presidió el comité que eligió el contenido del Disco de Oro?',o:['Ed Stone','Carl Sagan','Gary Flandro'],e:'Carl Sagan dirigió la selección, con Ann Druyan como directora creativa y Frank Drake como director técnico.'}
+  ],
+
+  srcH:'Fuentes',
+  srcIntro:'Todos los datos de esta página salen de estas fuentes (en inglés). Los enlaces se abren en otra pestaña.',
+  src:[
+    'Resumen de la misión Voyager',
+    'Voyager 1: datos y fechas clave',
+    'Voyager 2: datos y fechas clave',
+    '¿Qué es un día luz?',
+    'Preguntas frecuentes sobre la Voyager',
+    'Contenido del Disco de Oro',
+    '«Un punto azul pálido» de la Voyager 1',
+    '«Un punto azul pálido», versión de 2020',
+    'Erupciones volcánicas en Ío, imagen del 8 de marzo de 1979',
+    'El descubrimiento de la actividad volcánica de Ío, relato histórico',
+    'El hombre detrás de la misión: Gary Flandro',
+    'El reto de los planetas: la gravedad (Michael Minovitch)',
+    'Ed Stone se jubila tras 50 años como científico del proyecto',
+    'Muere Ed Stone, exdirector del JPL y científico de la Voyager',
+    'Muere John Casani, exjefe de proyectos de la NASA',
+    'Charley Kohlhase, responsable del diseño de la misión',
+    'Suzanne Dodd, nueva jefa del proyecto Voyager (2010)',
+    'Linda Spilker, perfil en el JPL',
+    'La Voyager 2 entra en el espacio interestelar',
+    'La Voyager 1 enciende propulsores tras 37 años',
+    'La Voyager 1 vuelve a enviar datos técnicos (abril de 2024)',
+    'La Voyager 1 recupera sus cuatro instrumentos (junio de 2024)',
+    'Dos instrumentos apagados para alargar la misión (2025)',
+    'Instrumento apagado en la Voyager 1 (abril de 2026)',
+    'La Voyager 1 ahorra energía (octubre de 2026)',
+    'Radiotelescopios captan la señal de la Voyager (potencia del transmisor)',
+    'JPL Horizons: posición y distancia de la Voyager 1'
+  ],
+  newTab:'se abre en otra pestaña',
+  checked:'Datos contrastados con fuentes de la NASA y el JPL en noviembre de 2026.'
+}
+};
+/* END I18N */
+
+/* ---------- language-neutral data ---------- */
+const SECTIONS=['people','timeline','numbers','quiz','sources'];
+const GROUPS=[[0,1],[2,3,4],[5,6,7],[8],[9,10]];          /* indexes into people[] */
+const LD_ISO='2026-11-18T10:16:07Z';                         /* JPL Horizons: geometric distance from Earth's centre; same moment NASA gives */
+const LD_MS=Date.UTC(2026,10,18,10,16,7);
+const LD_KM=25902068371;                                     /* 299,792.458 km/s × 86,400 s */
+const TL=['1965','1977-08-20','1977-09-05','1979-03-05','1980-11-12','1986-01-24','1989-08-25','1990-02-14','1998-02-17','2004-12-16','2012-08-25','2017-11-28','2018-11-05','2023-11/2024-06','2024-10/2026-09','LD'];
+const NUMS=[{v:LD_KM,wide:true},{v:17,ap:true},{v:22,ap:true},{v:3.7,dec:1},{v:4},{v:40000,ap:true},{v:55},{v:2035,year:true}];
+const ANS=[1,1,2,0,1];
+const SRC=[
+  ['https://science.nasa.gov/mission/voyager/','NASA'],
+  ['https://science.nasa.gov/mission/voyager/voyager-1/','NASA'],
+  ['https://science.nasa.gov/mission/voyager/voyager-2/','NASA'],
+  ['https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/','NASA'],
+  ['https://science.nasa.gov/mission/voyager/frequently-asked-questions/','NASA'],
+  ['https://science.nasa.gov/mission/voyager/golden-record-contents/','NASA'],
+  ['https://science.nasa.gov/mission/voyager/voyager-1s-pale-blue-dot/','NASA'],
+  ['https://www.jpl.nasa.gov/images/pale-blue-dot-revisited','NASA/JPL'],
+  ['https://science.nasa.gov/photojournal/volcanic-eruptions-on-io/','NASA Photojournal'],
+  ['https://arxiv.org/abs/1211.2554','L. A. Morabito, arXiv'],
+  ['https://www.pbs.org/the-farthest/science/man-behind-mission','PBS, The Farthest'],
+  ['https://spaceflighthistory.blogspot.com/2015/03/the-challenge-of-planets-part-three_22.html','David S. F. Portree'],
+  ['https://www.jpl.nasa.gov/news/edward-stone-retires-after-50-years-as-nasa-voyagers-project-scientist','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/ed-stone-former-director-of-jpl-and-voyager-project-scientist-dies','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/john-casani-former-manager-of-multiple-nasa-missions-dies/','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/charlie-kohlhase-long-time-mission-manager/','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/new-project-manager-as-voyager-explores-new-territory/','NASA/JPL'],
+  ['https://science.jpl.nasa.gov/people/Spilker/','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/nasas-voyager-2-probe-enters-interstellar-space','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/voyager-1-fires-up-thrusters-after-37-years','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/nasas-voyager-1-resumes-sending-engineering-updates-to-earth','NASA/JPL'],
+  ['https://www.jpl.nasa.gov/news/voyager-1-returning-science-data-from-all-four-instruments/','NASA/JPL'],
+  ['https://science.nasa.gov/blogs/voyager/2025/03/05/nasa-turns-off-2-voyager-science-instruments-to-extend-mission/','NASA'],
+  ['https://www.jpl.nasa.gov/news/nasa-shuts-off-instrument-on-voyager-1-to-keep-spacecraft-operating/','NASA/JPL'],
+  ['https://science.nasa.gov/blogs/voyager/2026/10/29/nasas-voyager-1-conserves-power-resolves-brief-communications-pause/','NASA'],
+  ['https://www.jpl.nasa.gov/images/pia17047-voyager-signal-spotted-by-earth-radio-telescopes/','NASA/JPL'],
+  ['https://ssd.jpl.nasa.gov/horizons/','NASA/JPL']
+];
+
+/* ---------- language: ?lang= wins, then the app's saved choice, then English ---------- */
+function readStored(){try{const v=localStorage.getItem('udl-lang');if(!v)return null;const p=JSON.parse(v);return (p==='en'||p==='es')?p:null;}catch(e){return null;}}
+function saveLang(l){try{localStorage.setItem('udl-lang',JSON.stringify(l));}catch(e){}}
+let qLang=null;
+try{qLang=new URLSearchParams(location.search).get('lang');}catch(e){}
+let LANG=(qLang==='en'||qLang==='es')?qLang:(readStored()||'en');
+let L=I18N[LANG];
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tpl=(s,p)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>p[k]!=null?p[k]:m);
+const df=o=>new Intl.DateTimeFormat(L.locale,Object.assign({timeZone:'UTC'},o));
+const nf=(v,dec,group)=>new Intl.NumberFormat(L.locale,{minimumFractionDigits:dec||0,maximumFractionDigits:dec||0,useGrouping:group!==false}).format(v);
+const reduceMotion=()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){return false;}};
+function initials(name){const w=name.replace(/\./g,'').split(/\s+/).filter(Boolean);return (w[0][0]+w[w.length-1][0]).toUpperCase();}
+function fmtPart(s){
+  const a=s.split('-').map(Number);
+  if(a.length===1)return df({year:'numeric'}).format(Date.UTC(a[0],0,1));
+  if(a.length===2)return df({month:'long',year:'numeric'}).format(Date.UTC(a[0],a[1]-1,1));
+  return df({day:'numeric',month:'long',year:'numeric'}).format(Date.UTC(a[0],a[1]-1,a[2]));
+}
+function whenHTML(d){return d.split('/').map(p=>`<time datetime="${p}">${esc(fmtPart(p))}</time>`).join(' – ');}
+
+/* ---------- renderers ---------- */
+function renderToc(){
+  $('#toc').innerHTML=SECTIONS.map((id,i)=>`<a class="chip" href="#${id}">${esc(L.toc[i])}</a>`).join('');
+}
+function renderPeople(){
+  $('#peopleList').innerHTML=GROUPS.map((ids,g)=>`<div class="group"><p class="k group-k">${esc(L.groups[g])}</p><ul class="cards">${
+    ids.map(i=>{const p=L.people[i];return `<li class="person"><span class="badge" aria-hidden="true">${esc(initials(p.n))}</span><div class="person-body"><h3>${esc(p.n)}</h3><p class="role">${esc(p.r)}</p><p class="txt">${esc(p.t)}</p></div></li>`;}).join('')
+  }</ul></div>`).join('');
+}
+function renderTimeline(){
+  $('#tlList').innerHTML=TL.map((d,i)=>{
+    const e=L.tl[i];
+    if(d!=='LD')return `<li><div class="ev"><p class="when">${whenHTML(d)}</p><h3>${esc(e.h)}</h3><p class="txt">${esc(e.t)}</p></div></li>`;
+    const utc=`${df({day:'numeric',month:'long',year:'numeric'}).format(LD_MS)} · ${df({hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(LD_MS)} UTC`;
+    let local='';
+    try{local=new Intl.DateTimeFormat(L.locale,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23',timeZoneName:'short'}).format(LD_MS);}catch(err){local='';}
+    return `<li class="ld"><div class="ev"><p class="when"><time datetime="${LD_ISO}">${esc(utc)}</time></p><h3>${esc(e.h)}</h3><p class="txt">${esc(tpl(e.t,{km:nf(LD_KM)}))}</p>${local?`<p class="ld-local">${esc(tpl(L.ldLocal,{t:local}))}</p>`:''}<p class="ld-note">${esc(L.ldNote)}</p></div></li>`;
+  }).join('');
+}
+function renderNums(){
+  $('#numList').innerHTML=NUMS.map((n,i)=>{
+    const x=L.nums[i];
+    const val=n.year?nf(n.v,0,false):nf(n.v,n.dec);
+    return `<div class="num${n.wide?' wide':''}"><p class="k">${esc(x.k)}</p><p class="v">${n.ap?'<span class="ap" aria-hidden="true">≈</span>':''}<span>${esc(val)}</span>${x.u?`<span class="u">${esc(x.u)}</span>`:''}</p><p class="t">${esc(x.t)}</p></div>`;
+  }).join('');
+}
+function renderSources(){
+  $('#srcList').innerHTML=SRC.map((s,i)=>`<li><a href="${esc(s[0])}" target="_blank" rel="noopener">${esc(L.src[i])}<span class="vh"> (${esc(L.newTab)})</span></a> <span class="pub">· ${esc(s[1])}</span></li>`).join('');
+}
+
+/* ---------- quiz ---------- */
+const answers=new Array(ANS.length).fill(null);
+function renderQuiz(){
+  const t=L.quiz.length;
+  $('#quizBox').innerHTML=L.quiz.map((it,i)=>`<div class="q" role="group" aria-labelledby="q${i}k q${i}t"><p class="k" id="q${i}k">${esc(tpl(L.qLabel,{n:i+1,t}))}</p><p class="qt" id="q${i}t">${esc(it.q)}</p><div class="opts">${
+    it.o.map((o,j)=>`<button type="button" class="opt" data-q="${i}" data-o="${j}"><span class="let" aria-hidden="true">${'ABCD'[j]}</span><span class="otx">${esc(o)}</span><span class="tag"></span></button>`).join('')
+  }</div><p class="fb" id="q${i}f" aria-live="polite"></p></div>`).join('');
+  answers.forEach((a,i)=>{if(a!=null)paintQ(i);});
+  renderScore();
+}
+function paintQ(i){
+  const a=answers[i],c=ANS[i];
+  document.querySelectorAll(`.opt[data-q="${i}"]`).forEach(b=>{
+    const o=+b.dataset.o,tag=b.querySelector('.tag');
+    b.setAttribute('aria-disabled','true');
+    b.classList.remove('right','wrong','faded');
+    b.setAttribute('aria-pressed',o===a?'true':'false');
+    if(o===c){b.classList.add('right');tag.textContent=L.ok;}
+    else if(o===a){b.classList.add('wrong');tag.textContent=L.no;}
+    else{b.classList.add('faded');tag.textContent='';}
+  });
+  const fb=$(`#q${i}f`),good=a===c;
+  fb.className='fb'+(good?'':' no');
+  fb.innerHTML=`<strong>${esc(good?L.ok:L.no)}.</strong> ${esc(L.quiz[i].e)}`;
+}
+function renderScore(){
+  const t=ANS.length,n=answers.filter(a=>a!=null).length,c=answers.filter((a,i)=>a===ANS[i]).length;
+  const bar=`<div class="bar" aria-hidden="true"><i style="width:${Math.round(100*n/t)}%"></i></div>`;
+  if(n<t){$('#score').innerHTML=`<p class="prog">${esc(tpl(L.progress,{a:n,t,c}))}</p>${bar}`;return;}
+  const msg=c===t?L.done5:(c>=3?L.doneMid:L.doneLow);
+  $('#score').innerHTML=`<p class="final">${esc(tpl(msg,{c,t}))}</p>${bar}<button type="button" class="secondary" id="retry">${esc(L.retry)}</button>`;
+}
+$('#quizBox').addEventListener('click',e=>{
+  const b=e.target.closest('.opt');if(!b)return;
+  const i=+b.dataset.q,j=+b.dataset.o;
+  if(answers[i]!=null)return;
+  answers[i]=j;paintQ(i);renderScore();
+});
+$('#score').addEventListener('click',e=>{
+  if(!e.target.closest('#retry'))return;
+  answers.fill(null);renderQuiz();
+  $('#quiz').scrollIntoView({behavior:reduceMotion()?'auto':'smooth',block:'start'});
+  const first=document.querySelector('.opt');if(first)first.focus({preventScroll:true});
+});
+
+/* ---------- apply language ---------- */
+function applyI18n(){
+  document.documentElement.lang=LANG;
+  document.title=L.title;
+  const md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content',L.meta);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=L[el.dataset.i18n];});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=L[el.dataset.i18nHtml];});
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===LANG?'true':'false'));
+  renderToc();renderPeople();renderTimeline();renderNums();renderQuiz();renderSources();
+}
+function setLang(lang,save){
+  LANG=lang;L=I18N[lang];
+  if(save){
+    saveLang(lang);
+    try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',lang);history.replaceState(history.state,'',u.toString());}}catch(e){}
+  }
+  applyI18n();
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.lang!==LANG)setLang(b.dataset.lang,true);}));
+
+setLang(LANG,false);
+})();
+</script>
+</body>
+</html>
