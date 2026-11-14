@@ -91,6 +91,12 @@ The app has an **app bar** (name, EN/ES switch, About) and a **tab bar** at the 
 - Link to **The Voyager Story** (`history.html`): a separate learning page in English and Spanish with 11 key people (Minovitch, Flandro, Casani, Kohlhase, Stone, Sagan, Druyan, Drake, Morabito, Dodd, Spilker), 16 milestones from 1965 to 2026, 8 numbers, a 5-question quiz checked in the page and 27 linked sources (NASA, JPL and others). Every fact was checked against primary sources; anything that couldn't be verified was left out.
 - The spacecraft in figures, the light-time scale (Moon 1.3 s, Sun 8 min, Jupiter 44 min, Neptune 4 h, Voyager 1 one day), **data sources** and the legal notice.
 
+### Sharing
+
+- **Share card**: after sending light, the phone draws a 1080×1350 image (4:5, good for WhatsApp, Instagram and other apps) with the gold Voyager 1 drawing, "I sent light to Voyager 1", the time sent and the city, the arrival time and the distance. It is shared together with the text and the follow link through the system share sheet (Web Share with files); where that isn't available the image is saved and the text copied. "Save image" downloads it.
+- **Follow link**: `https://rafa1944.github.io/un-dia-luz/?lang=es&beam=<sent time in base 36>.<travel time in ms, base 36>&from=<city>`. Opening it shows that light's journey live ("Shared light · Sent from Madrid") with a "Send your own light" button. No server is involved: everything needed is in the link. Only the city name is shared, never coordinates; with no chosen city or nearby city, `from` is left out.
+- **Link preview**: Open Graph and Twitter Card tags with `og.png` (1200×630), so pasting the link in WhatsApp, Telegram, X or Slack shows the image, title and a bilingual description. `og.png` was rendered from an HTML layout with headless Chrome.
+
 ### About
 
 Version, purpose, developer, data sources, privacy, legal notice, support and share.
@@ -104,6 +110,7 @@ Version, purpose, developer, data sources, privacy, legal notice, support and sh
 |---|---|
 | `index.html` (≈178 KB) | The whole app. Three `<script>` blocks: `astro` (ephemerides and calculations), `i18n` (EN/ES strings) and the app itself |
 | `history.html` (≈53 KB) | The Voyager Story learning page, self-contained |
+| `og.png` | 1200×630 link preview image |
 | `README.md` | This document |
 
 Inside `index.html`:
@@ -290,6 +297,8 @@ Developed by Rafa Alcántara. Released under the [MIT License](LICENSE).
 
 **1.0.0** (November 2026)
 - MIT licence.
+- Share card image, follow-my-light links and link previews.
+- Header logo reloads the app on Home.
 - Viewer to point at Voyager 1 with compass, Moon/Sun calibration, camera and sound guidance.
 - Automatic flashlight with adaptive Morse (sent once) or steady light.
 - English and Spanish; location by GPS or city.

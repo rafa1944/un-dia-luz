@@ -9,8 +9,24 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta property="og:title" content="One Light-Day">
-<meta property="og:description" content="Point your phone at Voyager 1 and say hello with a beam of light.">
+<link rel="canonical" href="https://rafa1944.github.io/un-dia-luz/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="One Light-Day · Un día luz">
+<meta property="og:title" content="One Light-Day · Un día luz">
+<meta property="og:description" content="On 18 November 2026 Voyager 1 reaches one light-day from Earth. Point your phone at it and say hello with a beam of light. · El 18 de noviembre de 2026 la Voyager 1 llega a un día luz: apunta el móvil y salúdala con luz.">
+<meta property="og:url" content="https://rafa1944.github.io/un-dia-luz/">
+<meta property="og:image" content="https://rafa1944.github.io/un-dia-luz/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gold line drawing of Voyager 1 with the title One Light-Day · Un día luz, 18 Nov 2026, 10:16 UTC">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="One Light-Day · Un día luz">
+<meta name="twitter:description" content="On 18 November 2026 Voyager 1 reaches one light-day from Earth. Point your phone at it and say hello with a beam of light. · El 18 de noviembre de 2026 la Voyager 1 llega a un día luz: apunta el móvil y salúdala con luz.">
+<meta name="twitter:image" content="https://rafa1944.github.io/un-dia-luz/og.png">
+<meta name="twitter:image:alt" content="Gold line drawing of Voyager 1 with the title One Light-Day · Un día luz">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070e'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23dcb65e' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23dcb65e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -285,6 +301,11 @@ section{display:grid;gap:16px}
 .trip-big .u{font:400 .42em/1 var(--f-display);color:var(--gold);letter-spacing:.02em}
 .trip-km{color:var(--dim);font-size:.9rem}
 .trip-eta{color:var(--star)}
+.trip-actions{display:flex;flex-wrap:wrap;gap:10px}
+.trip-actions>*{flex:1 1 220px}
+.card-prev{display:grid;place-items:center}
+.card-prev img{display:block;width:min(52%,210px);aspect-ratio:4/5;border-radius:12px;border:1px solid var(--line);background:var(--void)}
+.sheet .row-2{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .ms{list-style:none;margin:0;padding:0;display:grid}
 .ms li{display:grid;grid-template-columns:14px 1fr auto;gap:2px 12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
 .ms .dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--line)}
@@ -527,7 +548,9 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
       <p class="trip-km mono" id="tripKm"></p>
       <div class="bar"><i id="tripBar"></i></div>
       <p class="trip-eta" id="tripEta"></p>
-      <button class="secondary" id="tripReplay" type="button"></button>
+      <button class="primary" id="tripOwn" type="button" hidden></button>
+      <div class="trip-actions"><button class="primary btn-icon" id="tripShare" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span></span></button><button class="secondary" id="tripReplay" type="button"></button></div>
+
     </div>
     <h3 data-i18n="msK"></h3>
     <ol class="ms" id="tripMs"></ol>
@@ -738,6 +761,9 @@ en:{
   legalT:'Legal notice',legalLine:'Non-profit educational project. Free, with no ads and no tracking. Not affiliated with or endorsed by NASA, JPL or Caltech.',
   legalText:'<p><strong>Non-profit and educational.</strong> One Light-Day is a free, non-commercial project made for outreach and learning. It has no advertising, sells nothing and does not collect, store or share personal data: no cookies, analytics or tracking.</p><p><strong>Not affiliated with NASA.</strong> This is an independent project, not affiliated with, sponsored or endorsed by NASA, JPL or Caltech. Voyager data comes from public NASA/JPL sources and is credited to NASA/JPL-Caltech. Names and trademarks belong to their owners.</p><p><strong>No warranty.</strong> Positions and times are calculated in good faith and provided as they are, for information only. A phone compass can be off by several degrees.</p><p><strong>Safety.</strong> Never look at the Sun, directly or through the camera. Don’t shine your flashlight at people, drivers or aircraft, and watch your step outdoors at night.</p>',
   tabsLabel:'Sections',tabHome:'Home',tabWhen:'When',tabGo:'Point',tabBeams:'My beams',tabStory:'Story',
+  cardEyebrow:'One light-day · {d}',cardL1:'I sent light',cardL2:'to Voyager 1',cardSent:'Sent',cardArr:'Reaches Voyager 1',cardDist:'Distance',cardFollow:'Follow this light live',cardAlt:'Your light card to share',
+  shareLight:'Share my light',seeTripBtn:'See its journey',saveImg:'Save image',shareFollow:'Follow it live:',
+  tripKShared:'Shared light',tripSharedFrom:'Sent from {from} · {d}',tripOwn:'Send your own light',tripShare:'Share this light',
   remBtn:'Add a reminder to my calendar',remT:'Get a reminder',remP:'Your phone’s calendar will remind you. Nothing is sent to us or to anyone else.',
   remE1:'Best time to point',remE1Day:'While it is above your horizon',remSub1:'{day}, {a} – {b} · alert 15 min before',remE2:'Exact moment of the light-day',remSub2:'{day}, {t} · alert 10 min before',
   remLoc:'Times for {place}, in your phone’s time zone.',remIcs:'Add to my calendar',remIcsSub:'For iPhone, Mac, Outlook and most Android calendars. Open the file if your phone asks.',
@@ -845,6 +871,9 @@ es:{
   legalT:'Aviso legal',legalLine:'Proyecto educativo sin ánimo de lucro. Gratuito, sin publicidad ni seguimiento. Sin relación ni respaldo de la NASA, el JPL o Caltech.',
   legalText:'<p><strong>Sin ánimo de lucro y con fines educativos.</strong> Un día luz es un proyecto gratuito y no comercial, hecho para divulgar y aprender. No tiene publicidad, no vende nada y no recoge, guarda ni comparte datos personales: sin cookies, analítica ni seguimiento.</p><p><strong>Sin relación con la NASA.</strong> Es un proyecto independiente, sin relación, patrocinio ni respaldo de la NASA, el JPL o Caltech. Los datos de la Voyager proceden de fuentes públicas de NASA/JPL y se citan como NASA/JPL-Caltech. Los nombres y marcas pertenecen a sus titulares.</p><p><strong>Sin garantías.</strong> Las posiciones y horas se calculan de buena fe y se ofrecen tal cual, solo a título informativo. La brújula del móvil puede desviarse varios grados.</p><p><strong>Seguridad.</strong> No mires nunca al Sol, ni directamente ni a través de la cámara. No apuntes la linterna a personas, conductores ni aviones, y mira dónde pisas al salir de noche.</p>',
   tabsLabel:'Secciones',tabHome:'Inicio',tabWhen:'Cuándo',tabGo:'Apuntar',tabBeams:'Mis haces',tabStory:'Historia',
+  cardEyebrow:'Un día luz · {d}',cardL1:'He enviado luz',cardL2:'a la Voyager 1',cardSent:'Enviada',cardArr:'Llega a la Voyager 1',cardDist:'Distancia',cardFollow:'Sigue esta luz en directo',cardAlt:'Tu tarjeta para compartir',
+  shareLight:'Compartir mi luz',seeTripBtn:'Ver su viaje',saveImg:'Guardar imagen',shareFollow:'Síguela en directo:',
+  tripKShared:'Luz compartida',tripSharedFrom:'Enviada desde {from} · {d}',tripOwn:'Envía tu propia luz',tripShare:'Compartir esta luz',
   remBtn:'Añadir un recordatorio al calendario',remT:'Recibe un aviso',remP:'El calendario de tu móvil te avisará. No se envía nada a nadie.',
   remE1:'Mejor momento para apuntar',remE1Day:'Mientras está sobre tu horizonte',remSub1:'{day}, {a} – {b} · aviso 15 min antes',remE2:'Instante exacto del día luz',remSub2:'{day}, {t} · aviso 10 min antes',
   remLoc:'Horas para {place}, en la zona horaria de tu móvil.',remIcs:'Añadir a mi calendario',remIcsSub:'Para iPhone, Mac, Outlook y la mayoría de calendarios de Android. Abre el archivo si el móvil te lo pide.',
@@ -1574,7 +1603,7 @@ function stopBeam(){
   const b=st.beam;if(!b)return;st.beam=null;b.lightOn=false;if(b.torch)setTorch(false);
   $('#vBeam').classList.remove('on');$('#vBeamLabel').textContent=L.send;$('#flash').classList.remove('on');
   if(b.mode!=='morse')$('#morseLine').textContent='';
-  const up=upleg(b.t),rec={t:b.t,end:Date.now(),up,arr:b.t+up*1000,sep:b.sep,alt:b.alt,az:b.az,mode:b.mode,torch:b.torch};
+  const up=upleg(b.t),rec={t:b.t,end:Date.now(),up,arr:b.t+up*1000,sep:b.sep,alt:b.alt,az:b.az,mode:b.mode,torch:b.torch,place:sharePlace()};
   saveBeam(rec);sentSheet(rec);
 }
 
@@ -1595,21 +1624,61 @@ function sentSheet(r){
   const arr=new Date(r.arr),dur=Math.max(1,Math.round((r.end-r.t)/1000));
   openSheet(`<h3>${L.sentT}</h3>
     <p class="big">${t('sentBig',{date:F.day.format(arr),time:F.time.format(arr)})}</p>
-    <p>${t('sentBody',{t:F.time.format(new Date(r.t)),d:dur,sep:r.sep!=null?F.n1.format(r.sep)+'°':'—',dur:durText(r.up,true),what:r.up>=86400?L.sentFull:L.sentAlmost,x:F.n1.format(r.up-voyager(r.t).lt)})}</p>
+    <div class="card-prev"><img id="cardImg" alt="${L.cardAlt}"></div>
+    <p style="font-size:.88rem">${t('sentBody',{t:F.time.format(new Date(r.t)),d:dur,sep:r.sep!=null?F.n1.format(r.sep)+'°':'—',dur:durText(r.up,true),what:r.up>=86400?L.sentFull:L.sentAlmost,x:F.n1.format(r.up-voyager(r.t).lt)})}</p>
     <div class="bar"><i id="sentBar"></i></div><p class="mono" id="sentKm" style="font-size:.85rem"></p>
-    <button class="link-btn" data-a="trip" type="button" style="justify-self:start">${L.seeTrip}</button>
-    <div class="row"><button class="secondary" data-a="share" type="button">${L.share}</button><button class="primary" data-a="x" type="button">${L.done}</button></div>`,s=>{
+    <div class="row"><button class="primary btn-icon" data-a="share" type="button" style="flex-basis:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>${L.shareLight}</span></button><button class="secondary" data-a="trip" type="button">${L.seeTripBtn}</button></div>
+    <div class="row-2"><button class="link-btn" data-a="save" type="button">${L.saveImg}</button><button class="text-btn" data-a="x" type="button">${L.done}</button></div>`,s=>{
     s.querySelector('[data-a=x]').onclick=closeSheet;
     s.querySelector('[data-a=trip]').onclick=()=>{closeSheet();closeVisor(false,true);openTrip(r,true);};
     s.querySelector('[data-a=share]').onclick=()=>shareBeam(r);
+    s.querySelector('[data-a=save]').onclick=async()=>{try{saveCard(await beamCard(r));}catch(e){}};
+    beamCard(r).then(bl=>{const im=s.querySelector('#cardImg');if(im)im.src=URL.createObjectURL(bl);}).catch(()=>{});
     const upd=()=>{if(sheet.hidden||!s.querySelector('#sentKm'))return;const now=Date.now(),f=Math.min(1,(now-r.t)/(r.arr-r.t));s.querySelector('#sentBar').style.width=(f*100).toFixed(4)+'%';s.querySelector('#sentKm').textContent=t('sentKm',{km:F.n0.format(f*r.up*C_KMS),total:F.n0.format(r.up*C_KMS)});requestAnimationFrame(upd);};upd();});
 }
+/* ---------- compartir: tarjeta-imagen, enlace para seguir el haz ---------- */
+function sharePlace(){const lc=st.loc;if(lc.src==='city'){const c=findCity(lc.city);return c?cityName(c):'';}if(lc.src==='gps'||lc.src==='saved'){const n=nearestCity(lc.lat,lc.lon);return n?cityName(n):'';}return '';}
+function beamUrl(r){const u=new URL(SITE_URL);u.searchParams.set('lang',LANG);u.searchParams.set('beam',Math.round(r.t).toString(36)+'.'+Math.round(r.up*1000).toString(36));if(r.place)u.searchParams.set('from',r.place);return u.toString();}
+function svgImg(node,w){const c=node.cloneNode(true);c.removeAttribute('class');c.setAttribute('xmlns','http://www.w3.org/2000/svg');c.setAttribute('width',w);c.setAttribute('height',Math.round(w*214/260));
+  const src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(c));
+  return new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=src;});}
+function fitFont(x,txt,maxW,size,tpl){let z=size;x.font=tpl(z);while(x.measureText(txt).width>maxW&&z>14){z-=2;x.font=tpl(z);}}
+/* Tarjeta de 1080×1350 (formato 4:5 para redes) dibujada en el propio móvil */
+async function beamCard(r){
+  if(r._card)return r._card;
+  const W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d');
+  try{await Promise.all(['400 100px "Instrument Serif"','italic 400 100px "Instrument Serif"','500 26px Jost','400 34px "IBM Plex Mono"'].map(f=>document.fonts.load(f)));}catch(e){}
+  x.fillStyle='#05070e';x.fillRect(0,0,W,H);
+  const gl=x.createRadialGradient(W*.8,H*.2,0,W*.8,H*.2,W*.85);gl.addColorStop(0,'rgba(220,182,94,.22)');gl.addColorStop(1,'rgba(220,182,94,0)');x.fillStyle=gl;x.fillRect(0,0,W,H);
+  let sd=(Math.floor(r.t/1000)%2147483647)||7;const rnd=()=>((sd=(sd*1103515245+12345)&0x7fffffff)/0x7fffffff);
+  for(let i=0;i<170;i++){const z=.8+rnd()*2;x.fillStyle=`rgba(236,230,214,${(.12+rnd()*.5).toFixed(2)})`;x.fillRect(rnd()*W,rnd()*H,z,z);}
+  const AW=840,ax=W-AW+70,ay=20,k=AW/260;
+  x.save();x.strokeStyle='rgba(255,228,166,.85)';x.lineWidth=4;x.setLineDash([4,16]);x.lineCap='round';x.beginPath();x.moveTo(-20,610);x.lineTo(ax+124*k,ay+116*k);x.stroke();x.restore();
+  try{const im=await svgImg(document.querySelector('.voy-art'),AW);x.drawImage(im,ax,ay);}catch(e){}
+  x.textBaseline='alphabetic';x.textAlign='left';
+  const dY=new Intl.DateTimeFormat(L.locale,{day:'numeric',month:'short',year:'numeric'}).format(new Date(CROSSING));
+  x.fillStyle='#dcb65e';x.font='500 28px "IBM Plex Mono", monospace';x.fillText(t('cardEyebrow',{d:dY}).toUpperCase(),80,700);
+  const ser=z=>`400 ${z}px "Instrument Serif", Georgia, serif`,seri=z=>`italic 400 ${z}px "Instrument Serif", Georgia, serif`;
+  x.fillStyle='#ece6d6';fitFont(x,L.cardL1,W-160,112,ser);x.fillText(L.cardL1,80,812);
+  x.fillStyle='#ffe4a6';fitFont(x,L.cardL2,W-160,112,seri);x.fillText(L.cardL2,80,918);
+  const rows=[[L.cardSent,`${cap(F.dayS.format(new Date(r.t)))} · ${F.time.format(new Date(r.t))}${r.place?' · '+r.place:''}`],[L.cardArr,`${cap(F.dayS.format(new Date(r.arr)))} · ${F.time.format(new Date(r.arr))}`],[L.cardDist,`${F.n0.format(r.up*C_KMS)} km`]];
+  let y=990;for(const [lab,val] of rows){x.fillStyle='#959bb4';x.font='500 24px Jost, system-ui, sans-serif';x.fillText(lab.toUpperCase(),80,y);x.fillStyle='#ece6d6';fitFont(x,val,W-160,36,z=>`400 ${z}px "IBM Plex Mono", monospace`);x.fillText(val,80,y+46);y+=90;}
+  x.strokeStyle='#262f52';x.lineWidth=2;x.beginPath();x.moveTo(80,H-100);x.lineTo(W-80,H-100);x.stroke();
+  x.strokeStyle='#dcb65e';x.lineWidth=3;x.beginPath();x.arc(98,H-52,15,0,Math.PI*2);x.stroke();x.fillStyle='#dcb65e';x.beginPath();x.arc(98,H-52,5,0,Math.PI*2);x.fill();
+  x.fillStyle='#ece6d6';x.font='500 30px Jost, system-ui, sans-serif';x.fillText(L.title,128,H-42);
+  x.fillStyle='#dcb65e';x.font='500 25px Jost, system-ui, sans-serif';x.textAlign='right';x.fillText(L.cardFollow+' ›',W-80,H-43);x.textAlign='left';
+  const blob=await new Promise(res=>cv.toBlob(res,'image/png'));
+  Object.defineProperty(r,'_card',{value:blob,enumerable:false,configurable:true});return blob;
+}
+function saveCard(blob){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='voyager-1-light.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);}
 async function shareBeam(r){
-  const a=new Date(r.t),b=new Date(r.arr);
-  const text=t('shareText',{d1:F.day.format(a),t1:F.time.format(a),d2:F.day.format(b),t2:F.time.format(b)});
-  const url=location.protocol.startsWith('http')?location.href.split('#')[0]:'';
+  const url=beamUrl(r),a=new Date(r.t),b=new Date(r.arr);
+  const text=t('shareText',{d1:F.day.format(a),t1:F.time.format(a),d2:F.day.format(b),t2:F.time.format(b)})+' '+L.shareFollow;
+  let file=null;try{file=new File([await beamCard(r)],'voyager-1-light.png',{type:'image/png'});}catch(e){}
+  try{if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:L.title,text:text+' '+url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
   try{if(navigator.share){await navigator.share({title:L.title,text,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
-  try{await navigator.clipboard.writeText(text+(url?' '+url:''));toast(L.copied);}catch(e){toast(text,8000);}
+  if(file)saveCard(file);
+  try{await navigator.clipboard.writeText(text+' '+url);toast(L.copied);}catch(e){toast(text+' '+url,8000);}
 }
 function calibSheet(){
   const P=positions(),opt=(b,p)=>{const ok=p.alt>3,high=p.alt>75;
@@ -1708,7 +1777,10 @@ function buildTrip(){
   TR.ms=list.sort((a,b)=>a.s-b.s);
   $('#tripMs').innerHTML=TR.ms.map(m=>`<li><span class="dot"></span><span class="nm">${m.name}<small>${cap(F.dayS.format(new Date(m.at)))} · ${F.time.format(new Date(m.at))}</small></span><span class="off">+${offText((m.at-r.t)/1000)}</span></li>`).join('');
   const N=320,s0=1e-4;TR.path=[];for(let k=0;k<=N;k++)TR.path.push(s0*Math.pow(g.D/s0,k/N));
-  $('#tripTitle').textContent=t('tripTitle',{d:`${F.dayS.format(new Date(r.t))} · ${F.time.format(new Date(r.t))}`});
+  const when=`${F.dayS.format(new Date(r.t))} · ${F.time.format(new Date(r.t))}`;
+  $('#tripTitle').textContent=r.shared&&r.from?t('tripSharedFrom',{from:r.from,d:when}):t('tripTitle',{d:when});
+  $('.trip-head .k').textContent=r.shared?L.tripKShared:L.tripK;
+  $('#tripOwn').hidden=!r.shared;$('#tripOwn').textContent=L.tripOwn;$('#tripShare span').textContent=L.tripShare;$('#tripShare').className=(r.shared?'secondary':'primary')+' btn-icon';
 }
 function sizeTrip(){const box=TR.cv.parentElement.getBoundingClientRect();TR.S=box.width;TR.dpr=Math.min(2.5,window.devicePixelRatio||1);
   TR.cv.width=Math.round(TR.S*TR.dpr);TR.cv.height=Math.round(TR.S*TR.dpr);TR.cx=TR.cy=TR.S/2;TR.R=TR.S/2-18;
@@ -1764,7 +1836,10 @@ function openTrip(r,replace){
   buildTrip();syncReplay();sizeTrip();TR.el.scrollTop=0;
   try{history[replace?'replaceState':'pushState']({trip:1},'','#journey');}catch(e){}
   cancelAnimationFrame(TR.raf);TR.lastInfo=0;tripLoop();$('#tripBack').focus({preventScroll:true});
+  beamCard(r).catch(()=>{});
 }
+$('#tripShare').addEventListener('click',()=>{if(TR.r)shareBeam(TR.r);});
+$('#tripOwn').addEventListener('click',()=>{closeTrip(false);showTab('home');});
 function closeTrip(fromPop){if(!TR.open)return;TR.open=false;TR.el.hidden=true;cancelAnimationFrame(TR.raf);document.body.style.overflow='';
   if(!fromPop&&location.hash==='#journey')history.back();}
 $('#tripBack').addEventListener('click',()=>closeTrip(false));
@@ -1797,6 +1872,12 @@ setLang(LANG,false);
 setInterval(()=>{if(!V.open)tickHome();},100);
 setInterval(()=>{if(!V.open){const k=dayKey(Date.now());if(!DAYS.some(d=>d.key===k&&d.label===L.today)){DAYS=buildDays();st.dayIdx=0;renderChips();}renderDay();}},60000);
 {const h0=location.hash.slice(1);if(h0==='visor'||h0==='journey')history.replaceState(null,'',location.pathname+location.search);showTab(VIEWS.includes(h0)?h0:'home',true);}
+/* enlace compartido: ?beam=<salida en base 36>.<ms de viaje en base 36>&from=<ciudad> abre el viaje de esa luz */
+{const q=new URLSearchParams(location.search),bq=q.get('beam');
+  if(bq){const [p1,p2]=bq.split('.'),tt=parseInt(p1,36),up=parseInt(p2,36)/1000;
+    q.delete('beam');const from=(q.get('from')||'').replace(/[<>"]/g,'').slice(0,40);q.delete('from');
+    try{history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:''));}catch(e){}
+    if(tt>Date.UTC(2026,0,1)&&tt<Date.UTC(2031,0,1)&&up>80000&&up<90000)openTrip({t:tt,up,arr:tt+up*1000,shared:true,place:from,from},false);}}
 window.__udl={st,voyager,bodyAltAz,cam,setLang};
 })();
 </script>
