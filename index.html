@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070e'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23dcb65e' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23dcb65e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600&display=swap">
 <style>
 /* Layout: a single-column field instrument for night use; the pointing viewer opens as a full-screen layer */
 :root{
@@ -42,7 +42,7 @@ body.visor-open{overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 a{color:var(--gold)}
-.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px calc(132px + env(safe-area-inset-bottom,0px));display:grid;gap:44px}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px calc(112px + env(safe-area-inset-bottom,0px));display:grid;gap:18px}
 .eyebrow,.k{font:500 .72rem/1.2 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0}
 .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 h1{font:300 clamp(3rem,15vw,5.2rem)/.92 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
@@ -56,7 +56,7 @@ p{margin:0}
 .top-actions{display:flex;align-items:center;gap:8px}
 .icon-btn.sm{width:38px;height:38px}
 .icon-btn.sm svg{width:19px;height:19px}
-.foot-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.92rem;margin-top:-28px}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.92rem}
 .foot-links a{color:var(--gold);text-underline-offset:3px}
 .story-link{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--ink),var(--void));color:var(--star);text-decoration:none;transition:border-color .2s}
 .story-link:hover{border-color:rgba(220,182,94,.6)}
@@ -91,6 +91,7 @@ p{margin:0}
 .about-sec a,.about-sec summary{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
 .about-sec summary{cursor:pointer}
 .about-sec details p{margin-top:6px;color:var(--dim)!important;font-size:.9rem}
+.about-sec details strong{color:var(--star);font-weight:500}
 .about-foot{display:flex;justify-content:flex-end;padding:6px 14px!important}
 .text-btn{background:none;border:0;color:var(--gold);font:500 .85rem/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;padding:10px 6px;min-height:44px}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}
@@ -118,9 +119,90 @@ p{margin:0}
 .ruler{display:grid;gap:8px}
 .ruler svg{width:100%;height:auto;display:block;overflow:visible}
 
-/* floating button, always at the bottom */
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:40;pointer-events:none;padding:28px max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 14px) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(180deg,rgba(5,7,14,0),rgba(5,7,14,.9) 45%,var(--void))}
-.dock-inner{max-width:560px;margin:0 auto;pointer-events:auto}
+/* app bar (top) and tab bar (bottom) */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--void)}
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(5,7,14,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.appbar-in{max-width:560px;margin:0 auto;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:500;font-size:1rem;letter-spacing:.01em;min-width:0;white-space:nowrap}
+.brand svg{width:22px;height:22px;color:var(--gold);flex:none}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(9,12,24,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabbar-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;padding:4px max(4px,env(safe-area-inset-right,0px)) 6px max(4px,env(safe-area-inset-left,0px))}
+.tab{position:relative;background:none;border:0;color:var(--dim);display:grid;justify-items:center;gap:3px;font-size:.7rem;letter-spacing:.02em;padding:7px 0 4px;min-height:52px}
+.tab svg{width:23px;height:23px}
+.tab[aria-current="page"]{color:var(--gold-hi)}
+.tab .dot{position:absolute;top:6px;left:calc(50% + 7px);width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px rgba(9,12,24,.95)}
+.tab-go{background:none;border:0;display:grid;justify-items:center;gap:3px;color:var(--gold-hi);font-size:.7rem;font-weight:500;padding:0 0 4px}
+.go-circle{width:58px;height:58px;margin-top:-24px;border-radius:50%;background:var(--gold);color:#1a1405;display:grid;place-items:center;box-shadow:0 0 0 5px var(--void),0 10px 30px -8px rgba(220,182,94,.8)}
+.go-circle svg{width:27px;height:27px}
+.tab-go:active .go-circle{transform:scale(.96)}
+.view{display:grid;gap:18px;align-content:start}
+.view-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px 14px;flex-wrap:wrap;margin-top:4px}
+.loc-pill{display:inline-flex;align-items:center;gap:6px;max-width:100%;border:1px solid var(--line);border-radius:999px;background:var(--ink);color:var(--star);padding:7px 12px;font-size:.86rem;min-height:36px}
+.loc-pill svg{width:16px;height:16px;color:var(--gold);flex:none}
+.loc-pill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* display type */
+.display{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(2.7rem,12.5vw,3.7rem);line-height:.95;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.display em{font-style:italic;color:var(--gold-hi)}
+.display.sm{font-size:clamp(2.1rem,9.5vw,2.7rem)}
+
+/* hero card */
+.hero-card{position:relative;overflow:hidden;display:grid;gap:12px;padding:20px 18px 20px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(120% 80% at 85% 0%,rgba(220,182,94,.11),rgba(220,182,94,0) 55%),var(--ink)}
+.voy-art{position:absolute;top:-14px;right:-44px;width:min(90%,350px);height:auto;pointer-events:none}
+.voy-beam{animation:beam 2.4s linear infinite}
+@keyframes beam{to{stroke-dashoffset:-36}}
+.date-pill{position:relative;justify-self:start;display:inline-flex;align-items:center;gap:8px;margin-top:clamp(196px,60vw,262px);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.date-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(220,182,94,.18)}
+.hero-card .display{position:relative}
+.hero-text{position:relative;color:#bcc0d3;font-size:1rem;line-height:1.55;max-width:27em}
+.hero-card .btn-main{position:relative;justify-self:start;width:auto;padding:0 22px;min-height:54px;font-size:1.05rem;margin-top:4px}
+
+/* key numbers */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:18px;background:var(--ink);overflow:hidden}
+.stat{display:grid;gap:3px;padding:14px 16px;min-width:0}
+.stat.wide{grid-column:1/-1;border-bottom:1px solid var(--line)}
+.stat+.stat+.stat{border-left:1px solid var(--line)}
+.stat .v{font-size:.95rem;color:var(--star);overflow-wrap:anywhere}
+.stat.wide .v{font-size:clamp(1.9rem,8.6vw,2.4rem);color:var(--gold-hi);line-height:1.1}
+.stat .v .dec{font-size:.7em;color:var(--gold)}
+.stat .s{color:var(--dim);font-size:.8rem}
+
+/* section cards */
+.card{display:grid;gap:14px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--ink)}
+.sec-head{display:flex;align-items:center;gap:12px}
+.sec-head>div{min-width:0}
+.sec-head h2{font:500 1.15rem/1.2 var(--f-display)}
+.sec-head .sub{color:var(--dim);font-size:.85rem;margin-top:2px}
+.ico{flex:none;width:38px;height:38px;border-radius:11px;background:var(--ink-2);border:1px solid var(--line);color:var(--gold);display:grid;place-items:center}
+.ico svg{width:20px;height:20px}
+.ico.big{width:52px;height:52px;border-radius:14px}
+.ico.big svg{width:26px;height:26px}
+.cross-when{font:500 1.35rem/1.25 var(--f-display);color:var(--star)}
+.zones-note{color:var(--dim);font-size:.86rem}
+.zones-d summary{cursor:pointer;color:var(--gold);font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
+.zones-d .zones{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto auto;gap:4px 14px;font-size:.86rem;color:var(--dim)}
+.zones-d .zones dd{margin:0;text-align:right}
+.zones-d .zones dd.mono{color:var(--star)}
+.sec-intro.small{font-size:.86rem}
+.empty{justify-items:center;text-align:center;padding:28px 20px}
+.empty p{color:var(--dim);max-width:24em}
+.btn-main.sm{width:auto;min-height:48px;padding:0 20px;font-size:1rem}
+
+/* sky dial */
+.dial-card{justify-items:center;gap:8px;padding-top:14px}
+.dial{width:100%;max-width:320px}
+.dial svg{display:block;width:100%;height:auto;overflow:visible}
+.dial-cap{text-align:center;color:var(--star);font-size:1rem}
+.dial-note{text-align:center;color:var(--dim);font-size:.8rem;max-width:30em}
+
+/* sources and legal */
+.providers{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.providers li{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--void)}
+.providers .pn{font:500 .78rem/1.2 var(--f-mono);letter-spacing:.06em;color:var(--gold-hi);border:1px solid rgba(220,182,94,.45);border-radius:6px;padding:3px 7px;white-space:nowrap}
+.providers .pd{color:var(--dim);font-size:.86rem;min-width:0}
+.providers a{color:var(--star)}
+.legal-line{color:var(--dim);font-size:.8rem;line-height:1.5}
 .btn-main{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:60px;border:0;border-radius:999px;background:var(--gold);color:#1a1405;font:500 1.15rem/1 var(--f-display);letter-spacing:.01em;box-shadow:0 0 0 1px rgba(255,228,166,.25),0 10px 40px -10px rgba(220,182,94,.55)}
 .btn-main:active{transform:translateY(1px)}
 .cta .fine{color:var(--dim);font-size:.86rem;text-align:center}
@@ -287,97 +369,149 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 .primary{min-height:48px;border-radius:999px;border:0;background:var(--gold);color:#1a1405;font-weight:500;padding:10px 18px}
 .secondary{min-height:48px;border-radius:999px;border:1px solid var(--line);background:transparent;padding:10px 18px}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 200px);transform:translateX(-50%);z-index:80;background:rgba(20,27,54,.96);border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:.9rem;max-width:calc(100% - 32px);text-align:center;transition:opacity .3s}
-@media (prefers-reduced-motion:reduce){.beam-btn.aligned{animation:none}*{transition:none!important}}
-@media (min-width:700px){.wrap{padding-block:40px calc(140px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){.beam-btn.aligned,.voy-beam{animation:none}*{transition:none!important}}
+@media (min-width:700px){.wrap{padding-block:28px calc(120px + env(safe-area-inset-bottom,0px))}}
 </style>
 </head>
 <body>
-<main class="wrap" id="home">
-  <header class="hero">
-    <div class="topline">
-      <p class="eyebrow" data-i18n="eyebrow">Voyager 1 · live</p>
-      <div class="top-actions">
-        <button class="icon-btn sm" id="aboutBtn" type="button" data-i18n-aria="aboutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg></button>
-        <div class="lang" role="group" aria-label="Language · Idioma">
-          <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
-          <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
-        </div>
+<header class="appbar">
+  <div class="appbar-in">
+    <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg><span data-i18n="title">One Light-Day</span></div>
+    <div class="top-actions">
+      <div class="lang" role="group" aria-label="Language · Idioma">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
       </div>
+      <button class="icon-btn sm" id="aboutBtn" type="button" data-i18n-aria="aboutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg></button>
     </div>
-    <h1 data-i18n="h1">One light-day</h1>
-    <p class="intro" data-i18n-html="intro"></p>
-    <div class="locbar" id="locbar"></div>
-    <div class="lt">
-      <p class="k" data-i18n="ltK"></p>
-      <div class="lt-big" id="ltBig"></div>
-      <div class="lt-meta" data-i18n-html="ltMeta"></div>
-    </div>
-    <div class="cross">
-      <p class="k" id="crossK"></p>
-      <strong id="crossWhen"></strong>
-      <span class="tzl" id="crossTz"></span>
-      <span class="left" id="crossLeft">—</span>
-      <dl class="zones" id="crossZones"></dl>
-      <p class="zones-note" data-i18n="zonesNote"></p>
-      <button class="rem-btn btn-icon" id="remBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span data-i18n="remBtn"></span></button>
-    </div>
-  </header>
+  </div>
+</header>
 
-  <section aria-labelledby="whenH">
-    <h2 id="whenH" data-i18n="whenH">When to point</h2>
+<main class="wrap" id="home">
+  <!-- Inicio -->
+  <div class="view" data-view="home">
+    <section class="hero-card" aria-labelledby="heroT">
+      <svg class="voy-art" viewBox="0 0 260 214" aria-hidden="true">
+        <g fill="#ece6d6"><circle cx="16" cy="70" r="1"/><circle cx="64" cy="10" r=".8"/><circle cx="236" cy="14" r="1.1"/><circle cx="250" cy="120" r=".8"/><circle cx="30" cy="128" r=".7"/><circle cx="214" cy="206" r="1"/><circle cx="100" cy="6" r=".7"/><circle cx="8" cy="190" r=".9"/></g>
+        <path class="voy-beam" d="M-14 236 L124 116" stroke="#ffe4a6" stroke-width="1.4" stroke-dasharray="2 7" fill="none"/>
+        <g fill="none" stroke="#dcb65e" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M146 166 L10 22" stroke-dasharray="4 3" stroke-opacity=".75"/>
+          <ellipse cx="150" cy="92" rx="74" ry="64" transform="rotate(-24 150 92)" fill="#0c1122" stroke-width="1.5"/>
+          <path d="M150 92L217.6 61.9M150 92L221.6 95.2M150 92L206.3 127.6M150 92L176.0 150.5M150 92L138.7 157.7M150 92L104.5 147.3M150 92L82.4 122.1M150 92L78.4 88.8M150 92L93.7 56.4M150 92L124.0 33.5M150 92L161.3 26.3M150 92L195.5 36.7" stroke-opacity=".22"/>
+          <ellipse cx="150" cy="92" rx="48.8" ry="42.2" transform="rotate(-24 150 92)" stroke-opacity=".38"/>
+          <ellipse cx="150" cy="92" rx="24.4" ry="21.1" transform="rotate(-24 150 92)" stroke-opacity=".3"/>
+          <path d="M218.2 100.6L124 116M101.2 142.4L124 116M130.6 33.0L124 116" stroke-opacity=".85"/>
+          <ellipse cx="124" cy="116" rx="6" ry="4.5" transform="rotate(-24 124 116)" fill="#0c1122"/>
+          <path d="M150 154 v10"/>
+          <path d="M138 164 h36 l8 11 l-8 11 h-36 l-8 -11 z" fill="#0c1122"/>
+          <circle cx="146" cy="175" r="4.6" fill="#dcb65e" stroke="none"/>
+          <path d="M182 178 L254 204"/>
+          <rect x="196" y="179" width="15" height="9" rx="2" transform="rotate(20 203 183)" fill="#0c1122"/><rect x="216" y="186" width="15" height="9" rx="2" transform="rotate(20 223 190)" fill="#0c1122"/><rect x="236" y="193" width="15" height="9" rx="2" transform="rotate(20 243 197)" fill="#0c1122"/>
+          <path d="M130 172 L74 160"/><rect x="50" y="150" width="24" height="17" rx="2" fill="#0c1122"/><circle cx="62" cy="158.5" r="4"/><path d="M74 154 h8"/>
+          <path d="M146 186 L128 214 M166 186 L182 214" stroke-opacity=".45"/>
+        </g>
+      </svg>
+      <p class="date-pill mono" id="datePill"></p>
+      <h1 class="display" id="heroT" data-i18n-html="h1html">A light for<br><em>Voyager 1</em></h1>
+      <p class="hero-text" data-i18n="heroText"></p>
+      <button class="btn-main" id="go2" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5"/></svg><span data-i18n="go">Point at Voyager 1</span></button>
+    </section>
+
+    <div class="stats" aria-live="off">
+      <div class="stat wide"><p class="k" id="stLeftK"></p><p class="v mono" id="stLeft">—</p><p class="s" id="stLeftS"></p></div>
+      <div class="stat"><p class="k" data-i18n="stDistK"></p><p class="v mono" id="stDist">—</p><p class="s" id="stDistS"></p></div>
+      <div class="stat"><p class="k" data-i18n="stLtK"></p><p class="v mono" id="stLt">—</p><p class="s" data-i18n="stLtS"></p></div>
+    </div>
+
+    <div class="locbar" id="locbar"></div>
+
+    <section class="card" aria-labelledby="crossK">
+      <div class="sec-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><h2 id="crossK"></h2><p class="sub" id="crossTz"></p></div></div>
+      <strong class="cross-when" id="crossWhen"></strong>
+      <p class="zones-note" data-i18n="zonesNote"></p>
+      <details class="zones-d"><summary data-i18n="zonesMore"></summary><dl class="zones" id="crossZones"></dl></details>
+      <button class="rem-btn btn-icon" id="remBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span data-i18n="remBtn"></span></button>
+    </section>
+
+    <section class="card" aria-labelledby="howH">
+      <div class="sec-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/></svg></span><div><h2 id="howH" data-i18n="howH"></h2><p class="sub" data-i18n="howSub"></p></div></div>
+      <ol class="steps" data-i18n-html="steps"></ol>
+      <p class="sec-intro small" data-i18n="goFine"></p>
+    </section>
+  </div>
+
+  <!-- Cuándo -->
+  <div class="view" data-view="when" hidden>
+    <div class="view-head"><h1 class="display sm" data-i18n="whenH">When to point</h1><button class="loc-pill" id="locPill" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span id="locPillT"></span></button></div>
     <p class="sec-intro" data-i18n="whenIntro"></p>
     <div class="chips" id="dayChips" role="group"></div>
+    <section class="card dial-card"><div class="dial" id="dial"></div><p class="dial-cap" id="dialCap"></p><p class="dial-note" data-i18n="dialNote"></p></section>
     <div class="answer" id="answer" aria-live="polite"></div>
-    <div class="timeline" id="timeline"></div>
-    <ul class="legend">
-      <li><i class="sw below"></i><span data-i18n="lgBelow"></span></li>
-      <li><i class="sw day"></i><span data-i18n="lgDay"></span></li>
-      <li><i class="sw best"></i><span data-i18n="lgBest"></span></li>
-    </ul>
-    <dl class="rst" id="rst"></dl>
-    <div class="loc-line"><span id="locText"></span><button class="link-btn" id="locLink" type="button" data-i18n="locChange"></button></div>
+    <section class="card" aria-labelledby="dayH">
+      <div class="sec-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg></span><div><h2 id="dayH" data-i18n="dayH"></h2><p class="sub" data-i18n="daySub"></p></div></div>
+      <div class="timeline" id="timeline"></div>
+      <ul class="legend">
+        <li><i class="sw below"></i><span data-i18n="lgBelow"></span></li>
+        <li><i class="sw day"></i><span data-i18n="lgDay"></span></li>
+        <li><i class="sw best"></i><span data-i18n="lgBest"></span></li>
+      </ul>
+      <dl class="rst" id="rst"></dl>
+    </section>
     <p class="note" id="crossNote" hidden></p>
     <button class="link-btn" id="remLink" type="button" data-i18n="remBtn" style="justify-self:start"></button>
-  </section>
+    <div class="loc-line"><span id="locText"></span><button class="link-btn" id="locLink" type="button" data-i18n="locChange"></button></div>
+  </div>
 
-  <section class="ruler" aria-label="Light-time scale">
-    <p class="k" data-i18n="rulerK"></p>
-    <svg viewBox="0 0 340 92" role="img" id="ruler"></svg>
-  </section>
+  <!-- Mis haces -->
+  <div class="view" data-view="beams" hidden>
+    <div class="view-head"><h1 class="display sm" data-i18n="beamsH">Your light beams</h1></div>
+    <p class="sec-intro" data-i18n="beamsIntro"></p>
+    <section class="card empty" id="beamsEmpty">
+      <span class="ico big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 21l9-9"/><path d="M15 3l1.6 3.4L20 8l-3.4 1.6L15 13l-1.6-3.4L10 8l3.4-1.6z"/></svg></span>
+      <p data-i18n="beamsEmpty"></p>
+      <button class="btn-main sm" id="go3" type="button"><span data-i18n="go">Point at Voyager 1</span></button>
+    </section>
+    <section id="beamsSec" aria-labelledby="beamsH2">
+      <h2 class="vh" id="beamsH2" data-i18n="beamsH"></h2>
+      <ul class="beams" id="beamsList"></ul>
+      <div class="beams-foot"><span data-i18n="beamsNote"></span><button class="link-btn" id="delAll" type="button" data-i18n="delAll"></button></div>
+    </section>
+  </div>
 
-  <section id="beamsSec" aria-labelledby="beamsH" hidden>
-    <h2 id="beamsH" data-i18n="beamsH"></h2>
-    <ul class="beams" id="beamsList"></ul>
-    <div class="beams-foot"><span data-i18n="beamsNote"></span><button class="link-btn" id="delAll" type="button" data-i18n="delAll"></button></div>
-  </section>
-
-  <section aria-labelledby="howH">
-    <h2 id="howH" data-i18n="howH"></h2>
-    <ol class="steps" data-i18n-html="steps"></ol>
-    <p class="sec-intro" data-i18n="goFine"></p>
-  </section>
-
-  <section aria-labelledby="factsH">
-    <h2 id="factsH" data-i18n="factsH"></h2>
-    <dl class="facts" data-i18n-html="facts"></dl>
+  <!-- Historia -->
+  <div class="view" data-view="story" hidden>
+    <div class="view-head"><h1 class="display sm" data-i18n="storyH">The mission</h1></div>
     <a class="story-link" href="history.html" data-story data-i18n-html="storyLink"></a>
-  </section>
-
-  <footer class="foot" data-i18n-html="foot"></footer>
-  <nav class="foot-links" aria-label="More">
-    <a href="history.html" data-story data-i18n="storyShort"></a>
-    <button class="link-btn" id="aboutLink" type="button" data-i18n="aboutBtn"></button>
-  </nav>
+    <section class="card" aria-labelledby="factsH">
+      <div class="sec-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l5-5"/><path d="M6.5 6.5a8 8 0 0 0 11 11z"/><path d="M13 11l5-5"/><circle cx="19" cy="5" r="1.6"/></svg></span><div><h2 id="factsH" data-i18n="factsH"></h2><p class="sub" data-i18n="shipSub"></p></div></div>
+      <dl class="facts" data-i18n-html="facts"></dl>
+    </section>
+    <section class="card ruler" aria-labelledby="rulerH">
+      <div class="sec-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h18"/><path d="M6 9v6M10 10v4M14 10v4M18 9v6"/></svg></span><div><h2 id="rulerH" data-i18n="rulerK"></h2><p class="sub" data-i18n="rulerSub"></p></div></div>
+      <svg viewBox="0 0 340 92" role="img" id="ruler"></svg>
+    </section>
+    <section class="card" aria-labelledby="srcH">
+      <div class="sec-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span><div><h2 id="srcH" data-i18n="srcH"></h2><p class="sub" data-i18n="srcSub"></p></div></div>
+      <ul class="providers" data-i18n-html="providers"></ul>
+    </section>
+    <footer class="foot" data-i18n-html="foot"></footer>
+    <p class="legal-line" data-i18n="legalLine"></p>
+    <nav class="foot-links" aria-label="More">
+      <button class="link-btn" id="aboutLink" type="button" data-i18n="aboutBtn"></button>
+      <button class="link-btn" id="legalLink" type="button" data-i18n="legalT"></button>
+    </nav>
+  </div>
 </main>
 
-<div class="dock">
-  <div class="dock-inner">
-    <button class="btn-main" id="go" type="button">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5"/></svg>
-      <span data-i18n="go">Point at Voyager 1</span>
-    </button>
+<nav class="tabbar" id="tabbar" data-i18n-aria="tabsLabel">
+  <div class="tabbar-in">
+    <button class="tab" type="button" data-tab="home" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6h-6v6H4z"/></svg><span data-i18n="tabHome"></span></button>
+    <button class="tab" type="button" data-tab="when"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg><span data-i18n="tabWhen"></span></button>
+    <button class="tab-go" id="go" type="button"><span class="go-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5"/></svg></span><span data-i18n="tabGo"></span></button>
+    <button class="tab" type="button" data-tab="beams"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21l9-9"/><path d="M15 3l1.6 3.4L20 8l-3.4 1.6L15 13l-1.6-3.4L10 8l3.4-1.6z"/></svg><span data-i18n="tabBeams"></span><i class="dot" id="beamsDot" hidden></i></button>
+    <button class="tab" type="button" data-tab="story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span data-i18n="tabStory"></span></button>
   </div>
-</div>
+</nav>
 
 <div class="trip" id="trip" hidden role="dialog" aria-modal="true" aria-labelledby="tripTitle">
   <div class="trip-top">
@@ -418,6 +552,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
   <div class="about-sec"><h4 data-i18n="aboutLinks"></h4>
     <ul>
       <li><details><summary data-i18n="privacyT"></summary><p data-i18n="privacyText"></p></details></li>
+      <li><details id="legalD"><summary data-i18n="legalT"></summary><div data-i18n-html="legalText"></div></details></li>
       <li><a href="https://github.com/rafa1944/un-dia-luz/issues" target="_blank" rel="noopener" data-i18n="support"></a></li>
       <li><button class="link-btn" id="aboutShare" type="button" data-i18n="sharePage"></button></li>
     </ul>
@@ -591,6 +726,17 @@ en:{
   rulerK:'How long light takes from Earth',ruler:[['Moon','1.3 s'],['Sun','8 min'],['Jupiter','44 min'],['Neptune','4 h'],['Voyager 1','1 day']],
   rulerTitle:'Light-time on a log scale: Moon 1.3 s, Sun 8 min, Jupiter 44 min, Neptune 4 h, Voyager 1 one day',
   storyShort:'The Voyager story',storyLink:'<span><strong>The Voyager story</strong><small>The people and milestones behind the mission, in a short learning module with a quiz.</small></span><span class="arr" aria-hidden="true">›</span>',
+  h1html:'A light for<br><em>Voyager 1</em>',heroText:'On 18 November 2026 Voyager 1 will be one light-day from Earth. Point your phone’s flashlight at it and say hello.',ldShort:'one light-day',
+  stLeftK:'Time to the light-day',stSinceK:'Since the light-day',stLeftS:'{d} · your phone’s time',stDistK:'Distance from Earth',stDistS:'km · moving away {rate} km/s',stLtK:'Light-time',stLtS:'One light-day is 24:00:00',
+  zonesMore:'See it in other time zones',howSub:'Three steps, about a minute',dayH:'Your day, hour by hour',daySub:'When it is above your horizon, and when it is dark',
+  dialNow:'Right now: {alt}° up, toward {dir}',dialNowBelow:'Right now it is below your horizon. It rises at {t}.',dialNowBelow0:'Right now it is below your horizon.',dialAt:'At {time}: {alt}° up, toward {dir}',
+  dialNote:'Your sky as a map: the centre is straight overhead and the edge is the horizon. The line is Voyager 1’s path across your sky that day, in gold once the sky is dark.',
+  beamsIntro:'Each beam travels for a day to reach Voyager 1. Tap one to follow its journey across the solar system.',beamsEmpty:'You haven’t sent any light yet. Point at Voyager 1 and send your first beam.',
+  storyH:'The mission',shipSub:'Launched in 1977 and still sending data',rulerSub:'From the Moon to Voyager 1',srcH:'Data sources',srcSub:'Where the numbers come from',
+  providers:'<li><span class="pn">JPL HORIZONS</span><span class="pd"><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA/JPL-Caltech</a>: position and distance of Voyager 1</span></li><li><span class="pn">NASA</span><span class="pd"><a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener">Voyager mission</a>: official time of the light-day</span></li><li><span class="pn">JPL SSD</span><span class="pd"><a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener">Approximate planet positions</a>: the planets in the journey view</span></li><li><span class="pn">MEEUS</span><span class="pd">Jean Meeus, <em>Astronomical Algorithms</em>: the Sun and the Moon</span></li>',
+  legalT:'Legal notice',legalLine:'Non-profit educational project. Free, with no ads and no tracking. Not affiliated with or endorsed by NASA, JPL or Caltech.',
+  legalText:'<p><strong>Non-profit and educational.</strong> One Light-Day is a free, non-commercial project made for outreach and learning. It has no advertising, sells nothing and does not collect, store or share personal data: no cookies, analytics or tracking.</p><p><strong>Not affiliated with NASA.</strong> This is an independent project, not affiliated with, sponsored or endorsed by NASA, JPL or Caltech. Voyager data comes from public NASA/JPL sources and is credited to NASA/JPL-Caltech. Names and trademarks belong to their owners.</p><p><strong>No warranty.</strong> Positions and times are calculated in good faith and provided as they are, for information only. A phone compass can be off by several degrees.</p><p><strong>Safety.</strong> Never look at the Sun, directly or through the camera. Don’t shine your flashlight at people, drivers or aircraft, and watch your step outdoors at night.</p>',
+  tabsLabel:'Sections',tabHome:'Home',tabWhen:'When',tabGo:'Point',tabBeams:'My beams',tabStory:'Story',
   remBtn:'Add a reminder to my calendar',remT:'Get a reminder',remP:'Your phone’s calendar will remind you. Nothing is sent to us or to anyone else.',
   remE1:'Best time to point',remE1Day:'While it is above your horizon',remSub1:'{day}, {a} – {b} · alert 15 min before',remE2:'Exact moment of the light-day',remSub2:'{day}, {t} · alert 10 min before',
   remLoc:'Times for {place}, in your phone’s time zone.',remIcs:'Add to my calendar',remIcsSub:'For iPhone, Mac, Outlook and most Android calendars. Open the file if your phone asks.',
@@ -687,6 +833,17 @@ es:{
   rulerK:'Cuánto tarda la luz desde la Tierra',ruler:[['Luna','1,3 s'],['Sol','8 min'],['Júpiter','44 min'],['Neptuno','4 h'],['Voyager 1','1 día']],
   rulerTitle:'Escala logarítmica de tiempo-luz: Luna 1,3 s, Sol 8 min, Júpiter 44 min, Neptuno 4 h, Voyager 1 un día',
   storyShort:'La historia de la Voyager',storyLink:'<span><strong>La historia de la Voyager</strong><small>Las personas y los hitos de la misión, en un pequeño módulo de formación con test.</small></span><span class="arr" aria-hidden="true">›</span>',
+  h1html:'Una luz para<br><em>la Voyager 1</em>',heroText:'El 18 de noviembre de 2026 la Voyager 1 estará a un día luz de la Tierra. Apunta la linterna de tu móvil hacia ella y salúdala.',ldShort:'un día luz',
+  stLeftK:'Falta para el día luz',stSinceK:'Desde el día luz',stLeftS:'{d} · hora de tu móvil',stDistK:'Distancia desde la Tierra',stDistS:'km · se aleja {rate} km/s',stLtK:'Tiempo-luz',stLtS:'Un día luz son 24:00:00',
+  zonesMore:'Ver en otras zonas horarias',howSub:'Tres pasos, en un minuto',dayH:'Tu día, hora a hora',daySub:'Cuándo está sobre tu horizonte y cuándo es de noche',
+  dialNow:'Ahora mismo: a {alt}° de altura, hacia {dir}',dialNowBelow:'Ahora está bajo tu horizonte. Sale a las {t}.',dialNowBelow0:'Ahora está bajo tu horizonte.',dialAt:'A las {time}: a {alt}° de altura, hacia {dir}',
+  dialNote:'Tu cielo como un mapa: el centro es el punto sobre tu cabeza y el borde, el horizonte. La línea es el recorrido de la Voyager 1 por tu cielo ese día, en dorado cuando ya es de noche.',
+  beamsIntro:'Cada haz viaja un día hasta la Voyager 1. Pulsa uno para seguir su viaje por el sistema solar.',beamsEmpty:'Todavía no has enviado luz. Apunta a la Voyager 1 y envía tu primer haz.',
+  storyH:'La misión',shipSub:'Lanzada en 1977 y todavía enviando datos',rulerSub:'De la Luna a la Voyager 1',srcH:'Fuentes de datos',srcSub:'De dónde salen las cifras',
+  providers:'<li><span class="pn">JPL HORIZONS</span><span class="pd"><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA/JPL-Caltech</a>: posición y distancia de la Voyager 1</span></li><li><span class="pn">NASA</span><span class="pd"><a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener">Misión Voyager</a>: hora oficial del día luz</span></li><li><span class="pn">JPL SSD</span><span class="pd"><a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener">Posiciones aproximadas de los planetas</a>: los planetas de la vista del viaje</span></li><li><span class="pn">MEEUS</span><span class="pd">Jean Meeus, <em>Astronomical Algorithms</em>: el Sol y la Luna</span></li>',
+  legalT:'Aviso legal',legalLine:'Proyecto educativo sin ánimo de lucro. Gratuito, sin publicidad ni seguimiento. Sin relación ni respaldo de la NASA, el JPL o Caltech.',
+  legalText:'<p><strong>Sin ánimo de lucro y con fines educativos.</strong> Un día luz es un proyecto gratuito y no comercial, hecho para divulgar y aprender. No tiene publicidad, no vende nada y no recoge, guarda ni comparte datos personales: sin cookies, analítica ni seguimiento.</p><p><strong>Sin relación con la NASA.</strong> Es un proyecto independiente, sin relación, patrocinio ni respaldo de la NASA, el JPL o Caltech. Los datos de la Voyager proceden de fuentes públicas de NASA/JPL y se citan como NASA/JPL-Caltech. Los nombres y marcas pertenecen a sus titulares.</p><p><strong>Sin garantías.</strong> Las posiciones y horas se calculan de buena fe y se ofrecen tal cual, solo a título informativo. La brújula del móvil puede desviarse varios grados.</p><p><strong>Seguridad.</strong> No mires nunca al Sol, ni directamente ni a través de la cámara. No apuntes la linterna a personas, conductores ni aviones, y mira dónde pisas al salir de noche.</p>',
+  tabsLabel:'Secciones',tabHome:'Inicio',tabWhen:'Cuándo',tabGo:'Apuntar',tabBeams:'Mis haces',tabStory:'Historia',
   remBtn:'Añadir un recordatorio al calendario',remT:'Recibe un aviso',remP:'El calendario de tu móvil te avisará. No se envía nada a nadie.',
   remE1:'Mejor momento para apuntar',remE1Day:'Mientras está sobre tu horizonte',remSub1:'{day}, {a} – {b} · aviso 15 min antes',remE2:'Instante exacto del día luz',remSub2:'{day}, {t} · aviso 10 min antes',
   remLoc:'Horas para {place}, en la zona horaria de tu móvil.',remIcs:'Añadir a mi calendario',remIcsSub:'Para iPhone, Mac, Outlook y la mayoría de calendarios de Android. Abre el archivo si el móvil te lo pide.',
@@ -850,13 +1007,16 @@ function ltHTML(sec){const p=split(sec);const si=Math.floor(p.s),dec=String(Math
   h+=`<span>${p.d?p.h:pad(p.h)}</span><span class="u">h</span><span>${pad(p.m)}</span><span class="u">min</span><span>${pad(si)}<span class="dec">${sep}${dec}</span></span><span class="u">s</span>`;return h;}
 
 /* ---------- portada ---------- */
+function hms(sec){sec=Math.max(0,sec);return `${pad(Math.floor(sec/3600))}:${pad(Math.floor(sec%3600/60))}:${pad(Math.floor(sec%60))}`;}
 function tickHome(){
-  const now=Date.now(),v=voyager(now);
-  $('#ltBig').innerHTML=ltHTML(v.lt);
-  const km=$('#kmNow');if(km){km.textContent=F.n0.format(v.d);$('#auNow').textContent=F.n2.format(v.d/149597870.7);$('#rateNow').textContent=F.n1.format(v.dd);}
-  const left=(CROSSING-now)/1000;
+  const now=Date.now(),v=voyager(now),left=(CROSSING-now)/1000,a=Math.abs(left),d=Math.floor(a/86400);
+  $('#stLeftK').textContent=left>0?L.stLeftK:L.stSinceK;
+  $('#stLeft').textContent=(d?d+' d · ':'')+hms(a-d*86400);
   $('#crossK').textContent=left>0?L.crossK:L.crossKPast;
-  $('#crossLeft').textContent=left>0?t('left',{dur:durText(left,false)}):t('ago',{dur:durText(-left,false)});
+  $('#stDist').textContent=F.n0.format(v.d);
+  $('#stDistS').textContent=t('stDistS',{rate:F.n1.format(v.dd)});
+  const li=Math.floor(v.lt),dec=String(Math.floor((v.lt-li)*1e4)).padStart(4,'0'),sep=F.n1.format(1.5).charAt(1);
+  $('#stLt').innerHTML=`${hms(li)}<span class="dec">${sep}${dec}</span>`;
   const h=Math.floor(v.ra/15),m=Math.floor((v.ra/15-h)*60),rd=$('#radec');
   if(rd)rd.textContent=t('radec',{h,m:pad(m),dec:(v.dec>=0?'+':'−')+F.n1.format(Math.abs(v.dec))});
   tickBeams(now);
@@ -864,6 +1024,8 @@ function tickHome(){
 function initCross(){
   const d=new Date(CROSSING);
   $('#crossWhen').textContent=`${cap(F.day.format(d))} · ${F.time.format(d)}`;
+  $('#datePill').textContent=`${new Intl.DateTimeFormat(L.locale,{day:'numeric',month:'short',year:'numeric'}).format(d)} · ${F.hm.format(d)} · ${L.ldShort}`;
+  $('#stLeftS').textContent=t('stLeftS',{d:`${F.dayS.format(d)}, ${F.time.format(d)}`});
   $('#crossTz').textContent=t('crossTz',{tz:tz.replace(/_/g,' ')});
   $('#crossZones').innerHTML=L.zones.map(([tzn,label])=>{
     const fd=new Intl.DateTimeFormat(L.locale,{timeZone:tzn,weekday:'short',day:'numeric',month:'short'}),ft=new Intl.DateTimeFormat(L.locale,{timeZone:tzn,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
@@ -912,15 +1074,16 @@ function dayData(day,lat,lon){
 function renderDay(){
   const day=DAYS[st.dayIdx],{lat,lon}=st.loc,D=dayData(day,lat,lon);
   /* respuesta */
-  let html,muted=false;
+  let html,muted=false,lookT=null;
   if(D.ideal.length){
     const iv=D.ideal[0],a=Math.min(iv.b,iv.a+15*60e3),b=Math.max(a,iv.b-15*60e3);
     let tt=bodyAltAz('voyager',a,lat,lon).alt>=bodyAltAz('voyager',b,lat,lon).alt?a:b;tt=Math.round(tt/300000)*300000;
-    const p=bodyAltAz('voyager',tt,lat,lon);
+    const p=bodyAltAz('voyager',tt,lat,lon);lookT=tt;
     html=`<p class="k">${L.bestK}</p><p class="big">${ivText(D.ideal)}</p><p class="desc">${L.bestDesc}</p><p class="look">${t('look',{dir:dir8(p.az),time:F.hm.format(tt),alt:F.n0.format(Math.max(0,p.alt)),fists:L.fists(Math.round(Math.max(0,p.alt)/5)/2)})}</p>`;
   }else if(D.up.length){muted=true;html=`<p class="k">${L.dayOnlyK}</p><p class="big">${ivText(D.up)}</p><p class="desc">${L.dayOnlyDesc}</p>`;}
   else{muted=true;html=`<p class="k">${L.neverK}</p><p class="desc">${L.neverDesc}</p>`;}
   const ans=$('#answer');ans.innerHTML=html;ans.classList.toggle('muted',muted);
+  renderDial(day,D,lat,lon,lookT);
   /* barra de 24 h */
   const W=340,x0=2,x1=338,by=24,bh=18,N=D.pts.length-1,X=tt=>x0+(x1-x0)*(tt-day.start)/(day.end-day.start);
   const stOf=(p,q)=>{const a=(p.a+q.a)/2,s=(p.s+q.s)/2;return a<0?'below':s>-6?'day':'best';};
@@ -955,6 +1118,30 @@ function renderDay(){
   else if(cs.alt>=-6){n.className='note';n.textContent=t('crossAboveDay',{...P0,alt:F.n0.format(c.alt)})+tip;}
   else{n.className='note';n.textContent=t('crossAbove',{...P0,alt:F.n0.format(c.alt)});}
 }
+/* dial: tu cielo como un mapa (centro = sobre tu cabeza, borde = horizonte) */
+function renderDial(day,D,lat,lon,lookT){
+  const now=Date.now(),isToday=now>=day.start&&now<day.end,tRef=isToday?now:(lookT||D.max.t);
+  const v=bodyAltAz('voyager',tRef,lat,lon),mo=bodyAltAz('moon',tRef,lat,lon),su=bodyAltAz('sun',tRef,lat,lon);
+  const W=280,C=140,R=108,pos=(az,alt,extra)=>{const r=alt>=0?R*(90-alt)/90:R+(extra||14);return [C+r*Math.sin(az*D2R),C-r*Math.cos(az*D2R)];};
+  let g=`<circle cx="${C}" cy="${C}" r="${R}" fill="#070a16" stroke="#959bb4" stroke-opacity=".5"/>`;
+  for(const a of [30,60])g+=`<circle cx="${C}" cy="${C}" r="${R*(90-a)/90}" fill="none" stroke="var(--line)" stroke-dasharray="2 4"/><text x="${C+4}" y="${C-R*(90-a)/90+11}" font-size="9" fill="var(--dim)" font-family="IBM Plex Mono,monospace">${a}°</text>`;
+  g+=`<path d="M${C-R} ${C}H${C+R}M${C} ${C-R}V${C+R}" stroke="var(--line)" stroke-dasharray="2 4"/>`;
+  [[0,0],[90,4],[180,8],[270,12]].forEach(([az,i])=>{const r=R+17;g+=`<text x="${C+r*Math.sin(az*D2R)}" y="${C-r*Math.cos(az*D2R)+4}" text-anchor="middle" font-size="12" font-weight="500" fill="${az?'var(--dim)':'var(--star)'}" font-family="Jost,system-ui,sans-serif">${L.dir16[i]}</text>`;});
+  let best='',lite='';
+  for(let i=0;i<D.pts.length-1;i++){const p=D.pts[i],q=D.pts[i+1];if(p.a<0||q.a<0)continue;const [x1,y1]=pos(p.z,p.a),[x2,y2]=pos(q.z,q.a),seg=`M${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}`;if((p.s+q.s)/2<-6)best+=seg;else lite+=seg;}
+  g+=`<path d="${lite}" stroke="#6f80bf" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".8"/><path d="${best}" stroke="var(--gold)" stroke-width="3.2" stroke-linecap="round" fill="none"/>`;
+  const body=(b,c,r,col)=>{if(b.alt<=0)return '';const [x,y]=pos(b.az,b.alt);return `<circle cx="${x}" cy="${y}" r="${r}" fill="${col}"/><text x="${x+r+4}" y="${y+4}" font-size="10.5" fill="var(--dim)" font-family="Jost,system-ui,sans-serif">${c}</text>`;};
+  g+=body(su,bodyBare('sun'),6,'#ffd27a')+body(mo,bodyBare('moon'),5,'#d9dbe6');
+  const [vx,vy]=pos(v.az,v.alt,13),lt=vx<C,lx=lt?vx-14:vx+14;
+  g+=v.alt>=0?`<circle cx="${vx}" cy="${vy}" r="13" fill="none" stroke="var(--gold-hi)" stroke-opacity=".6"/><circle cx="${vx}" cy="${vy}" r="6" fill="var(--gold-hi)"/>`
+    :`<circle cx="${vx}" cy="${vy}" r="6" fill="none" stroke="var(--warn)" stroke-width="1.6" stroke-dasharray="2 2"/>`;
+  g+=`<text x="${lx}" y="${vy-9}" text-anchor="${lt?'end':'start'}" font-size="12" font-weight="500" fill="var(--gold-hi)" font-family="Jost,system-ui,sans-serif">Voyager 1</text>`;
+  let cap;
+  if(isToday){if(v.alt>=0)cap=t('dialNow',{alt:F.n0.format(v.alt),dir:dir8(v.az)});else{const nx=D.up.find(x=>!x.openA&&x.a>now);cap=nx?t('dialNowBelow',{t:F.hm.format(nx.a)}):L.dialNowBelow0;}}
+  else cap=v.alt>=0?t('dialAt',{time:F.hm.format(tRef),alt:F.n0.format(v.alt),dir:dir8(v.az)}):L.neverDesc;
+  $('#dial').innerHTML=`<svg viewBox="-14 -14 ${W+28} ${W+28}" role="img" aria-label="${cap}">${g}</svg>`;
+  $('#dialCap').textContent=cap;
+}
 function renderChips(){
   $('#dayChips').innerHTML=DAYS.map((d,i)=>`<button class="chip" type="button" data-i="${i}" aria-pressed="${i===st.dayIdx}">${d.label}</button>`).join('');
 }
@@ -976,14 +1163,16 @@ function useGps(btn){
   requestLocation(ok=>{if(btn){btn.disabled=false;}if(ok){closeLocSheet();}else{toast(L.locFail);renderLocbar();const g=$('#locGpsBtn span');if(g)g.textContent=L.locGps;}});
 }
 const PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+function shortPlace(){const lc=st.loc;if(lc.src==='default')return L.pDefault;if(lc.src==='city'){const c=findCity(lc.city);if(c)return cityName(c);}const n=nearestCity(lc.lat,lc.lon);return n?cityName(n):L.locMine;}
 function renderLocbar(){
+  $('#locPillT').textContent=shortPlace();
   const el=$('#locbar'),ask=st.loc.src==='default';
   el.classList.toggle('ask',ask);
   el.innerHTML=ask?`${PIN}<p class="ask-text">${L.locAsk}</p><div class="ask-actions"><button class="primary" type="button" data-a="gps">${L.locGps}</button><button class="secondary" type="button" data-a="city">${L.locCity}</button></div>`
     :`${PIN}<div class="locbar-text"><span class="k">${L.locK}</span><strong>${placeName()}</strong></div><button class="ghost" type="button" data-a="open">${L.locChange}</button>`;
 }
 $('#locbar').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.a==='gps')useGps(b);else openLocSheet();});
-$('#locLink').addEventListener('click',openLocSheet);
+$('#locLink').addEventListener('click',openLocSheet);$('#locPill').addEventListener('click',openLocSheet);
 /* hoja para elegir ubicación */
 const locSheet=$('#locSheet'),locBd=$('#locBackdrop'),citySearch=$('#citySearch');
 const myCC=((navigator.language||'').split('-')[1]||'').toUpperCase();
@@ -1053,7 +1242,8 @@ if(Date.now()>CROSSING){$('#remBtn').hidden=true;$('#remLink').hidden=true;}
 const APP_VERSION='1.0.0',aboutSheet=$('#aboutSheet');
 function openAbout(){$('#aboutVer').textContent=t('aboutVersion',{v:APP_VERSION});aboutSheet.hidden=false;locBd.hidden=false;document.body.style.overflow='hidden';aboutSheet.scrollTop=0;$('#aboutClose').focus({preventScroll:true});}
 function closeAbout(){if(aboutSheet.hidden)return;aboutSheet.hidden=true;locBd.hidden=true;if(!V.open&&!TR.open)document.body.style.overflow='';}
-$('#aboutBtn').addEventListener('click',openAbout);$('#aboutLink').addEventListener('click',openAbout);$('#aboutClose').addEventListener('click',closeAbout);
+$('#aboutBtn').addEventListener('click',openAbout);
+$('#legalLink').addEventListener('click',()=>{openAbout();const d=$('#legalD');d.open=true;setTimeout(()=>d.scrollIntoView({block:'start'}),60);});$('#aboutLink').addEventListener('click',openAbout);$('#aboutClose').addEventListener('click',closeAbout);
 $('#aboutShare').addEventListener('click',async()=>{const url=location.protocol.startsWith('http')?location.origin+location.pathname:'';
   try{if(navigator.share){await navigator.share({title:L.title,text:L.shareInvite,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
   try{await navigator.clipboard.writeText(L.shareInvite+(url?' '+url:''));toast(L.copied);}catch(e){toast(L.shareInvite,8000);}});
@@ -1063,7 +1253,8 @@ function getBeams(){return store.get('udl-beams',[]);}
 function saveBeam(b){const l=getBeams();l.unshift(b);store.set('udl-beams',l.slice(0,40));renderBeams();}
 const XICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>';
 function renderBeams(){
-  const l=getBeams();$('#beamsSec').hidden=!l.length;$('#delAll').hidden=l.length<2;
+  const l=getBeams();$('#beamsSec').hidden=!l.length;$('#beamsEmpty').hidden=!!l.length;$('#delAll').hidden=l.length<2;
+  $('#beamsDot').hidden=!l.some(b=>Date.now()<b.arr);
   $('#beamsList').innerHTML=l.map((b,i)=>`<li class="beam-item" data-i="${i}">
     <div class="beam-head"><div class="beam-when"><span>${cap(F.dayS.format(new Date(b.t)))} · <span class="mono">${F.time.format(new Date(b.t))}</span></span><span>${t('arrives',{d:`<span class="mono">${F.dayS.format(new Date(b.arr))} ${F.time.format(new Date(b.arr))}</span>`})}</span></div>
     <button class="beam-del" type="button" data-del="${b.t}" aria-label="${L.delBeam}" title="${L.delBeam}">${XICON}</button></div>
@@ -1476,7 +1667,17 @@ function closeVisor(fromPop,keepHist){
   if(!fromPop&&!keepHist&&location.hash==='#visor')history.back();
   renderBeams();
 }
-$('#go').addEventListener('click',openVisor);
+['#go','#go2','#go3'].forEach(id=>$(id).addEventListener('click',openVisor));
+/* pestañas */
+const VIEWS=['home','when','beams','story'];
+function showTab(name,init){
+  if(!VIEWS.includes(name))name='home';
+  document.querySelectorAll('.view').forEach(v=>{v.hidden=v.dataset.view!==name;});
+  document.querySelectorAll('.tab').forEach(b=>{if(b.dataset.tab===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+  st.tab=name;
+  if(!init){try{history.replaceState(history.state,'',location.pathname+location.search+(name==='home'?'':'#'+name));}catch(e){}window.scrollTo(0,0);}
+}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
 $('#vClose').addEventListener('click',()=>closeVisor(false));
 window.addEventListener('popstate',()=>{if(V.open)closeVisor(true);if(TR.open&&location.hash!=='#journey')closeTrip(true);});
 
@@ -1593,7 +1794,7 @@ document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',
 setLang(LANG,false);
 setInterval(()=>{if(!V.open)tickHome();},100);
 setInterval(()=>{if(!V.open){const k=dayKey(Date.now());if(!DAYS.some(d=>d.key===k&&d.label===L.today)){DAYS=buildDays();st.dayIdx=0;renderChips();}renderDay();}},60000);
-if(location.hash==='#visor'||location.hash==='#journey')history.replaceState(null,'',location.pathname+location.search);
+{const h0=location.hash.slice(1);if(h0==='visor'||h0==='journey')history.replaceState(null,'',location.pathname+location.search);showTab(VIEWS.includes(h0)?h0:'home',true);}
 window.__udl={st,voyager,bodyAltAz,cam,setLang};
 })();
 </script>
