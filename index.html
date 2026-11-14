@@ -1,35 +1,34 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Un día luz</title>
-<meta name="description" content="Apunta el móvil hacia la Voyager 1 en tiempo real y envíale un haz de luz el día que alcanza un día luz de distancia.">
+<title>One Light-Day</title>
+<meta name="description" content="Point your phone at Voyager 1 in real time and send it a beam of light on the day it reaches one light-day from Earth.">
 <meta name="theme-color" content="#05070e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta property="og:title" content="Un día luz">
-<meta property="og:description" content="Apunta el móvil hacia la Voyager 1 y envíale luz.">
+<meta property="og:title" content="One Light-Day">
+<meta property="og:description" content="Point your phone at Voyager 1 and say hello with a beam of light.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070e'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23dcb65e' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23dcb65e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500;600&display=swap">
 <style>
-/* Layout: a single-column field instrument for night use; the pointing visor opens as a full-screen layer */
+/* Layout: a single-column field instrument for night use; the pointing viewer opens as a full-screen layer */
 :root{
   --void:#05070e;      /* deep space, page ground */
   --ink:#0c1122;       /* panels */
-  --ink-2:#141b36;     /* raised panels, twilight band */
+  --ink-2:#141b36;     /* raised panels */
   --line:#262f52;      /* rules and grid */
   --star:#ece6d6;      /* primary text, warm white */
   --dim:#959bb4;       /* secondary text */
   --gold:#dcb65e;      /* Golden Record gold: Voyager, light, action */
   --gold-hi:#ffe4a6;
   --warn:#ec9a70;      /* below the horizon */
-  --sky-day:#1b2347;
-  --sky-twi:#121935;
-  --sky-night:#0a0e1d;
+  --tl-below:#161c33;  /* timeline: below the horizon */
+  --tl-day:#3d4f8f;    /* timeline: up in daylight */
   --f-display:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
   --radius:14px;
@@ -41,20 +40,24 @@ body{margin:0;background:var(--void);color:var(--star);font:400 16px/1.55 var(--
 body.visor-open{overflow:hidden}
 [hidden]{display:none!important}
 button{font:inherit;color:inherit;cursor:pointer}
-button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 a{color:var(--gold)}
-.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px;display:grid;gap:44px}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:grid;gap:44px}
 .eyebrow,.k{font:500 .72rem/1.2 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0}
 .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-h1{font:300 clamp(3rem,15vw,5.2rem)/.92 var(--f-display);letter-spacing:-.02em;margin:.3rem 0 0;text-wrap:balance}
+h1{font:300 clamp(3rem,15vw,5.2rem)/.92 var(--f-display);letter-spacing:-.02em;margin:0;text-wrap:balance}
 h2{font:400 1.5rem/1.2 var(--f-display);margin:0;text-wrap:balance}
 h3{font:500 1.15rem/1.25 var(--f-display);margin:0}
 p{margin:0}
-.lede{color:var(--dim);max-width:34em}
-.lede strong{color:var(--star);font-weight:500}
 
-/* hero counter */
+/* hero */
 .hero{display:grid;gap:22px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;border-radius:999px;padding:6px 12px;font:500 .78rem/1 var(--f-display);letter-spacing:.1em;color:var(--dim);min-height:32px}
+.lang button[aria-pressed="true"]{background:var(--gold);color:#1a1405}
+.intro{font:300 clamp(1.15rem,4.8vw,1.35rem)/1.5 var(--f-display);color:var(--star);max-width:30em;text-wrap:pretty}
+.intro strong{font-weight:500;color:var(--gold-hi)}
 .lt{display:grid;gap:8px}
 .lt-big{display:flex;flex-wrap:wrap;align-items:baseline;gap:.08em .32em;font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-weight:400;font-size:clamp(2.3rem,12vw,3.7rem);line-height:1;color:var(--gold-hi);letter-spacing:-.02em}
 .lt-big .u{font:400 .38em/1 var(--f-display);color:var(--gold);letter-spacing:.02em;margin-left:-.18em}
@@ -63,13 +66,13 @@ p{margin:0}
 .lt-meta .mono{color:var(--star)}
 .cross{display:grid;gap:6px;padding:18px 18px 16px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,var(--ink),var(--void))}
 .cross strong{font:500 1.35rem/1.25 var(--f-display);color:var(--star)}
-.cross .left{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--gold);font-size:1rem}
 .cross .tzl{color:var(--dim);font-size:.82rem;margin-top:-4px}
-.cross .left{margin-top:4px}
+.cross .left{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--gold);font-size:1rem;margin-top:4px}
 .cross .zones{margin:8px 0 0;padding-top:10px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto auto;gap:4px 14px;font-size:.86rem;color:var(--dim)}
 .cross .zones dt{min-width:0}
 .cross .zones dd{margin:0;text-align:right}
 .cross .zones dd.mono{color:var(--star)}
+.cross .zones-note{color:var(--dim);font-size:.86rem;margin-top:4px}
 
 /* light-time ruler */
 .ruler{display:grid;gap:8px}
@@ -81,20 +84,54 @@ p{margin:0}
 .cta .fine{color:var(--dim);font-size:.86rem;text-align:center}
 
 section{display:grid;gap:16px}
+.sec-intro{color:var(--dim);max-width:34em}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:7px 14px;font-size:.9rem;color:var(--dim)}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:7px 14px;font-size:.9rem;color:var(--dim);min-height:36px}
 .chip[aria-pressed="true"]{border-color:var(--gold);color:var(--star);background:rgba(220,182,94,.1)}
-.chart{border:1px solid var(--line);border-radius:var(--radius);background:var(--sky-night);padding:10px 8px 4px;overflow:hidden}
-.chart svg{display:block;width:100%;height:auto}
-.vis-sum{display:grid;gap:10px}
-.vis-row{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;align-items:baseline}
-.vis-row dt{font:500 .72rem/1.3 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.vis-row dd{margin:0;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
-.vis-row dd.ideal{color:var(--gold-hi)}
+
+/* when to point */
+.answer{display:grid;gap:8px;padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink)}
+.answer .big{font:400 clamp(1.7rem,8.5vw,2.3rem)/1.1 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--gold-hi);letter-spacing:-.02em}
+.answer.muted .big{color:var(--star)}
+.answer .desc{color:var(--dim)}
+.answer .look{color:var(--star);padding-top:10px;border-top:1px solid var(--line)}
+.timeline svg{display:block;width:100%;height:auto;overflow:visible}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0;padding:0;list-style:none;font-size:.86rem;color:var(--dim)}
+.legend li{display:flex;align-items:center;gap:8px}
+.sw{width:18px;height:10px;border-radius:3px;display:inline-block}
+.sw.below{background:var(--tl-below);box-shadow:inset 0 0 0 1px var(--line)}
+.sw.day{background:var(--tl-day)}
+.sw.best{background:var(--gold)}
+.rst{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rst div{display:grid;gap:3px;min-width:0}
+.rst dt{font:500 .7rem/1.3 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.rst dd{margin:0;font:400 .95rem/1.3 var(--f-mono);font-variant-numeric:tabular-nums}
+.rst dd small{display:block;font:400 .78rem/1.3 var(--f-display);color:var(--dim)}
 .loc-line{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;color:var(--dim);font-size:.88rem}
 .link-btn{background:none;border:0;padding:0;color:var(--gold);text-decoration:underline;text-underline-offset:3px;font-size:inherit}
 .note{border-left:2px solid var(--gold);padding:2px 0 2px 14px;color:var(--star);font-size:.95rem}
 .note.warn{border-color:var(--warn)}
+
+/* location */
+.locbar{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink)}
+.locbar>svg{width:22px;height:22px;color:var(--gold)}
+.locbar-text{display:grid;gap:2px;min-width:0}
+.locbar-text strong{font-weight:500;overflow-wrap:anywhere}
+.locbar .ghost{white-space:nowrap}
+.locbar.ask{grid-template-columns:auto 1fr;border-color:var(--gold);background:linear-gradient(180deg,rgba(220,182,94,.12),var(--ink))}
+.locbar.ask .ghost{display:none}
+.locbar .ask-text{color:var(--star)}
+.locbar .ask-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px}
+.locbar .ask-actions>*{flex:1 1 150px}
+.backdrop{position:fixed;inset:0;z-index:60;background:rgba(2,3,8,.7)}
+.sheet.fixed{position:fixed;z-index:61;top:calc(env(safe-area-inset-top,0px) + 12px);bottom:auto;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));max-width:536px;margin:0 auto;border:1px solid var(--line);border-radius:20px;max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px));padding:20px 18px}
+.sheet input[type=search]{font:400 1rem/1.2 var(--f-display);padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--void);color:var(--star);width:100%}
+.city-list{list-style:none;margin:0;padding:0;display:grid;gap:4px;max-height:42vh;overflow:auto}
+.city-list button{width:100%;display:flex;justify-content:space-between;gap:12px;align-items:baseline;text-align:left;padding:11px 12px;border-radius:10px;border:1px solid transparent;background:var(--ink-2)}
+.city-list button:hover,.city-list button:focus-visible{border-color:var(--gold)}
+.city-list small{color:var(--dim);font-size:.82rem;white-space:nowrap}
+.btn-icon{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-icon svg{width:18px;height:18px}
 
 .beams{display:grid;gap:12px;margin:0;padding:0;list-style:none}
 .beam-item{display:grid;gap:8px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink)}
@@ -114,9 +151,10 @@ dl.facts{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px}
 dl.facts div{display:grid;gap:2px;min-width:0}
 dl.facts dt{font:500 .7rem/1.3 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
 dl.facts dd{margin:0;font-size:1rem}
+dl.facts .sub{font-size:.88rem;color:var(--dim)}
 footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1px solid var(--line);padding-top:18px}
 
-/* ---------- visor ---------- */
+/* ---------- viewer ---------- */
 .visor{position:fixed;inset:0;z-index:50;background:var(--void);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
 .visor video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;transition:opacity .4s}
 .visor video.on{opacity:1}
@@ -154,6 +192,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 @keyframes breathe{50%{box-shadow:0 0 0 12px rgba(220,182,94,.08),0 0 56px rgba(255,228,166,.7)}}
 .morse-line{font:400 .9rem/1.3 var(--f-mono);letter-spacing:.2em;color:var(--dim);text-align:center;min-height:1.3em}
 .morse-line b{color:var(--gold-hi);font-weight:500}
+.morse-line .sent{color:var(--gold)}
 
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:var(--ink);border-top:1px solid var(--line);border-radius:22px 22px 0 0;padding:22px max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 20px) max(18px,env(safe-area-inset-left,0px));display:grid;gap:14px;max-height:85%;overflow:auto;box-shadow:0 -20px 60px rgba(0,0,0,.6)}
 .sheet p{color:var(--dim);font-size:.95rem}
@@ -162,6 +201,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 .sheet .row{display:flex;gap:10px;flex-wrap:wrap}
 .sheet .row>*{flex:1 1 140px}
 .sheet .opt{display:grid;gap:2px;text-align:left;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--ink-2)}
+.sheet .opt.sel{border-color:var(--gold)}
 .sheet .opt:disabled{opacity:.45;cursor:default}
 .sheet .opt small{color:var(--dim);font-size:.82rem}
 .sheet label{display:grid;gap:6px;font-size:.85rem;color:var(--dim)}
@@ -170,115 +210,122 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 .secondary{min-height:48px;border-radius:999px;border:1px solid var(--line);background:transparent;padding:10px 18px}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 200px);transform:translateX(-50%);z-index:80;background:rgba(20,27,54,.96);border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-size:.9rem;max-width:calc(100% - 32px);text-align:center;transition:opacity .3s}
 @media (prefers-reduced-motion:reduce){.beam-btn.aligned{animation:none}*{transition:none!important}}
-@media (min-width:700px){.wrap{padding-block:56px 64px}}
+@media (min-width:700px){.wrap{padding-block:40px 64px}}
 </style>
 </head>
 <body>
 <main class="wrap" id="home">
   <header class="hero">
-    <div>
-      <p class="eyebrow">Voyager 1 · en tiempo real</p>
-      <h1>Un día luz</h1>
-    </div>
-    <div class="lt" aria-live="off">
-      <p class="k">La luz tarda en llegar hasta la Voyager 1</p>
-      <div class="lt-big" id="ltBig"><span>23</span><span class="u">h</span><span>59</span><span class="u">min</span><span>57,0</span><span class="u">s</span></div>
-      <div class="lt-meta">
-        <span><span class="mono" id="kmNow">25.901.000.000</span> km</span>
-        <span><span class="mono" id="auNow">173,1</span> UA</span>
-        <span>se aleja <span class="mono" id="rateNow">25,3</span> km cada segundo</span>
+    <div class="topline">
+      <p class="eyebrow" data-i18n="eyebrow">Voyager 1 · live</p>
+      <div class="lang" role="group" aria-label="Language · Idioma">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
       </div>
     </div>
+    <h1 data-i18n="h1">One light-day</h1>
+    <p class="intro" data-i18n-html="intro"></p>
+    <div class="locbar" id="locbar"></div>
+    <div class="lt">
+      <p class="k" data-i18n="ltK"></p>
+      <div class="lt-big" id="ltBig"></div>
+      <div class="lt-meta" data-i18n-html="ltMeta"></div>
+    </div>
     <div class="cross">
-      <p class="k" id="crossK">Alcanza un día luz</p>
-      <strong id="crossWhen">jueves, 19 nov · 03:17:27</strong>
+      <p class="k" id="crossK"></p>
+      <strong id="crossWhen"></strong>
       <span class="tzl" id="crossTz"></span>
       <span class="left" id="crossLeft">—</span>
       <dl class="zones" id="crossZones"></dl>
+      <p class="zones-note" data-i18n="zonesNote"></p>
     </div>
-    <p class="lede" id="lede">Ese instante la luz que salga de tu móvil tardará exactamente un día en alcanzar la nave más lejana que ha construido la humanidad. Esta web te dice hacia dónde apuntar y enciende la linterna por ti.</p>
   </header>
-
-  <section class="ruler" aria-label="Escala en tiempo-luz">
-    <p class="k">Cuánto tarda la luz desde la Tierra</p>
-    <svg viewBox="0 0 340 92" role="img" aria-labelledby="rulerTitle" id="ruler"><title id="rulerTitle">Escala logarítmica de tiempo-luz: Luna 1,3 s, Sol 8 min, Júpiter 44 min, Neptuno 4 h, Voyager 1 un día</title></svg>
-  </section>
 
   <div class="cta">
     <button class="btn-main" id="go" type="button">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5"/></svg>
-      Apuntar a la Voyager 1
+      <span data-i18n="go">Point at Voyager 1</span>
     </button>
-    <p class="fine">Usa la brújula, la ubicación y la linterna del móvil. Nada sale de tu teléfono.</p>
+    <p class="fine" data-i18n="goFine"></p>
   </div>
 
   <section aria-labelledby="whenH">
-    <h2 id="whenH">Cuándo está sobre tu horizonte</h2>
-    <div class="chips" id="dayChips" role="group" aria-label="Elegir día"></div>
-    <div class="chart" id="chart" aria-describedby="visSum"></div>
-    <dl class="vis-sum" id="visSum"></dl>
-    <div class="loc-line"><span id="locText">Calculado para Madrid</span><button class="link-btn" id="useLoc" type="button">Usar mi ubicación</button></div>
+    <h2 id="whenH" data-i18n="whenH">When to point</h2>
+    <p class="sec-intro" data-i18n="whenIntro"></p>
+    <div class="chips" id="dayChips" role="group"></div>
+    <div class="answer" id="answer" aria-live="polite"></div>
+    <div class="timeline" id="timeline"></div>
+    <ul class="legend">
+      <li><i class="sw below"></i><span data-i18n="lgBelow"></span></li>
+      <li><i class="sw day"></i><span data-i18n="lgDay"></span></li>
+      <li><i class="sw best"></i><span data-i18n="lgBest"></span></li>
+    </ul>
+    <dl class="rst" id="rst"></dl>
+    <div class="loc-line"><span id="locText"></span><button class="link-btn" id="locLink" type="button" data-i18n="locChange"></button></div>
     <p class="note" id="crossNote" hidden></p>
   </section>
 
+  <section class="ruler" aria-label="Light-time scale">
+    <p class="k" data-i18n="rulerK"></p>
+    <svg viewBox="0 0 340 92" role="img" id="ruler"></svg>
+  </section>
+
   <section id="beamsSec" aria-labelledby="beamsH" hidden>
-    <h2 id="beamsH">Tus haces de luz</h2>
+    <h2 id="beamsH" data-i18n="beamsH"></h2>
     <ul class="beams" id="beamsList"></ul>
   </section>
 
   <section aria-labelledby="howH">
-    <h2 id="howH">Cómo hacerlo</h2>
-    <ol class="steps">
-      <li><div><strong>Despierta la brújula.</strong><p>Haz un ocho en el aire con el móvil. Si ves la Luna, pulsa Calibrar en el visor y céntrala: corrige el error de la brújula, que suele ser de 5 a 15°.</p></div></li>
-      <li><div><strong>Apunta con la parte de atrás.</strong><p>Sujeta el móvil con la pantalla hacia ti. La linterna y la cámara son las que apuntan: mueve el móvil hasta que el círculo dorado de la Voyager 1 entre en la mira central.</p></div></li>
-      <li><div><strong>Pulsa Enviar luz.</strong><p>La linterna se enciende fija o en Morse. La web calcula cuándo llegará tu luz a la nave: algo más de 24 horas después.</p></div></li>
-    </ol>
+    <h2 id="howH" data-i18n="howH"></h2>
+    <ol class="steps" data-i18n-html="steps"></ol>
   </section>
 
   <section aria-labelledby="factsH">
-    <h2 id="factsH">La nave</h2>
-    <dl class="facts">
-      <div><dt>Lanzamiento</dt><dd>5 sep 1977, Cabo Cañaveral</dd></div>
-      <div><dt>Espacio interestelar</dt><dd>desde el 25 ago 2012</dd></div>
-      <div><dt>Velocidad</dt><dd><span class="mono">16,9</span> km/s respecto al Sol (unos <span class="mono">61.000</span> km/h)</dd></div>
-      <div><dt>Dónde está</dt><dd>Constelación de Ofiuco<br><span class="mono" id="radec" style="font-size:.88rem;color:var(--dim)">AR 17h 16m · Dec +12,0°</span></dd></div>
-    </dl>
+    <h2 id="factsH" data-i18n="factsH"></h2>
+    <dl class="facts" data-i18n-html="facts"></dl>
   </section>
 
-  <footer class="foot">
-    <p>Posición y distancia: efemérides de JPL Horizons (NASA/JPL-Caltech) incluidas en la página, válidas de octubre de 2026 a diciembre de 2030. Error de la posición calculada: menos de 0,001°. La brújula de un móvil es mucho menos precisa que eso; calibrar con la Luna ayuda.</p>
-    <p>El día luz se mide desde el centro de la Tierra: <span class="mono">25.902.068.371</span> km.</p>
-  </footer>
+  <footer class="foot" data-i18n-html="foot"></footer>
 </main>
+
+<div class="backdrop" id="locBackdrop" hidden></div>
+<div class="sheet fixed" id="locSheet" hidden role="dialog" aria-modal="true" aria-labelledby="locSheetT">
+  <h3 id="locSheetT" data-i18n="locSheetT"></h3>
+  <button class="primary btn-icon" id="locGpsBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span data-i18n="locGps"></span></button>
+  <input type="search" id="citySearch" autocomplete="off" autocapitalize="words" enterkeyhint="search" data-i18n-ph="locSearch" data-i18n-aria="locSearch">
+  <ul class="city-list" id="cityList"></ul>
+  <p class="fine" data-i18n="locTz" style="font-size:.85rem"></p>
+  <div class="row"><button class="secondary" id="locClose" type="button" data-i18n="close"></button></div>
+</div>
 
 <div class="visor" id="visor" hidden>
   <video id="cam" playsinline muted autoplay></video>
-  <canvas id="sky" aria-label="Visor del cielo"></canvas>
+  <canvas id="sky"></canvas>
   <div class="flash" id="flash"></div>
   <div class="v-top">
-    <button class="icon-btn" id="vClose" type="button" aria-label="Cerrar el visor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    <div class="v-status"><span class="pill" id="pCompass">Brújula…</span><span class="pill" id="pLoc">Madrid</span></div>
+    <button class="icon-btn" id="vClose" type="button" data-i18n-aria="vClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="v-status"><span class="pill" id="pCompass"></span><span class="pill" id="pLoc"></span></div>
     <div class="v-toggles">
-      <button class="icon-btn" id="vCam" type="button" aria-pressed="false" aria-label="Ver la cámara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.5-2h6.4l1.5 2h2.8A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.6"/></svg></button>
-      <button class="icon-btn" id="vSound" type="button" aria-pressed="false" aria-label="Guía por sonido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg></button>
+      <button class="icon-btn" id="vCam" type="button" aria-pressed="false" data-i18n-aria="vCam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.8l1.5-2h6.4l1.5 2h2.8A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.6"/></svg></button>
+      <button class="icon-btn" id="vSound" type="button" aria-pressed="false" data-i18n-aria="vSound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg></button>
     </div>
   </div>
   <div class="v-guide">
     <p class="v-lt" id="vLt"></p>
-    <p class="guide" id="vGuide">Buscando los sensores…</p>
+    <p class="guide" id="vGuide" data-i18n="searching"></p>
     <p class="guide-sub" id="vSub"></p>
   </div>
   <div class="v-bottom">
     <p class="morse-line" id="morseLine" aria-hidden="true"></p>
     <dl class="v-read">
       <div><dt id="rTargetK">Voyager 1</dt><dd class="gold" id="rTarget">—</dd></div>
-      <div><dt>Tu móvil</dt><dd id="rPhone">—</dd></div>
-      <div><dt>Desvío</dt><dd id="rSep">—</dd></div>
+      <div><dt data-i18n="rPhone"></dt><dd id="rPhone">—</dd></div>
+      <div><dt data-i18n="rSep"></dt><dd id="rSep">—</dd></div>
     </dl>
     <div class="v-actions">
-      <button class="ghost" id="vCalib" type="button">Calibrar</button>
-      <button class="beam-btn" id="vBeam" type="button"><span id="vBeamLabel">Enviar luz</span></button>
-      <button class="ghost" id="vMode" type="button">Luz fija</button>
+      <button class="ghost" id="vCalib" type="button" data-i18n="calib"></button>
+      <button class="beam-btn" id="vBeam" type="button"><span id="vBeamLabel"></span></button>
+      <button class="ghost" id="vMode" type="button"></button>
     </div>
   </div>
   <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true"></div>
@@ -286,13 +333,13 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 <div class="toast" id="toast" hidden role="status"></div>
 
 <script id="astro">
-/* ---------- Astronomía: Voyager 1 (JPL Horizons), Sol y Luna ---------- */
+/* ---------- Astronomy: Voyager 1 (JPL Horizons), Sun and Moon ---------- */
 const D2R=Math.PI/180,R2D=180/Math.PI,C_KMS=299792.458,LIGHT_DAY_KM=C_KMS*86400;
 const CROSSING=Date.UTC(2026,10,19,2,17,27); // JPL Horizons: 1-way light time = 1440 min
-const V_HELIO=16.88; // km/s, velocidad radial heliocéntrica de la Voyager 1
-/* Efemérides geocéntricas cada 5 días: AR y Dec aparentes (grados), distancia de luz (km) y su derivada (km/s) */
+const V_HELIO=16.88; // km/s, Voyager 1 radial speed relative to the Sun
+/* Geocentric ephemeris every 5 days: apparent RA and Dec (deg), light-time range (km) and its rate (km/s) */
 const EPH={"t0":1790812800000,"step":5,"ra":[258.95124,258.96284,258.97652,258.99256,259.01076,259.03079,259.0529,259.07662,259.10185,259.12861,259.15643,259.18527,259.21504,259.24516,259.27579,259.30654,259.33705,259.36747,259.39721,259.42615,259.45426,259.48103,259.50646,259.53047,259.55252,259.57284,259.59109,259.60703,259.62092,259.6323,259.64126,259.64784,259.65173,259.65317,259.65219,259.64852,259.64257,259.63418,259.62337,259.61056,259.5955,259.57851,259.55979,259.53924,259.51728,259.49405,259.4695,259.44417,259.418,259.39117,259.3642,259.33687,259.30967,259.28278,259.25617,259.23034,259.20537,259.18128,259.15856,259.1371,259.11711,259.09901,259.08253,259.06809,259.05575,259.0454,259.03744,259.0318,259.0284,259.02757,259.02903,259.03289,259.03935,259.04799,259.0591,259.07248,259.08789,259.10556,259.12516,259.14652,259.16975,259.19436,259.22034,259.24767,259.27578,259.30483,259.33445,259.36428,259.39444,259.42444,259.4541,259.48339,259.51178,259.53926,259.56574,259.59067,259.61425,259.63609,259.65595,259.67401,259.68986,259.70348,259.71491,259.72377,259.73026,259.7344,259.73588,259.73507,259.73172,259.72586,259.71785,259.70746,259.69492,259.68043,259.66381,259.64549,259.6256,259.60405,259.58139,259.55747,259.53253,259.50701,259.48077,259.45423,259.42759,259.4008,259.37436,259.34839,259.32289,259.29838,259.27474,259.2522,259.23118,259.21148,259.19351,259.17735,259.16291,259.15062,259.14046,259.13236,259.12672,259.12323,259.12206,259.12344,259.12704,259.13313,259.14155,259.15211,259.16504,259.18012,259.19715,259.21633,259.23713,259.25961,259.28376,259.3091,259.33576,259.36337,259.39163,259.42063,259.44995,259.47937,259.5089,259.53797,259.56657,259.5946,259.62153,259.64753,259.67218,259.69521,259.71676,259.73644,259.75415,259.76994,259.78336,259.79458,259.80358,259.81002,259.81423,259.81592,259.81508,259.81201,259.80649,259.79868,259.78875,259.7765,259.7623,259.74628,259.72833,259.70896,259.688,259.66566,259.64235,259.61799,259.5929,259.56735,259.54123,259.51503,259.48889,259.46282,259.43737,259.41237,259.38809,259.36492,259.34274,259.32193,259.30265,259.28476,259.26873,259.25457,259.24224,259.23218,259.22411,259.21822,259.21474,259.21342,259.21454,259.21801,259.22365,259.2317,259.24201,259.25442,259.26914,259.2857,259.30418,259.32457,259.34647,259.37002,259.39489,259.42078,259.44779,259.47554,259.50381,259.53267,259.56149,259.59029,259.61894,259.64697,259.67448,259.70109,259.72647,259.75074,259.77351,259.79463,259.81417,259.83161,259.84709,259.86053,259.8716,259.88056,259.88713,259.89122,259.89307,259.89247,259.88949,259.88435,259.87675,259.86703,259.85527,259.84138,259.82581,259.80839,259.78929,259.76887,259.74708,259.72418,259.70049,259.67582,259.65068,259.6252,259.59939,259.5738,259.54828,259.52308,259.49858,259.47471,259.45181,259.43014,259.40951,259.3904,259.37286,259.35688,259.34291,259.33074,259.32054,259.31255,259.3066,259.30295,259.30163,259.30242,259.30561,259.31107,259.3187,259.32873,259.34077,259.35488,259.37108,259.38904,259.40888,259.43039,259.45322,259.4775,259.50291,259.52921,259.55651,259.58421,259.61232,259.64068,259.66889,259.69699,259.72467],"dec":[12.15717,12.14113,12.12552,12.1105,12.09602,12.08236,12.06956,12.05761,12.0468,12.03706,12.02849,12.02129,12.01529,12.01069,12.00755,12.00574,12.00546,12.00663,12.00914,12.01319,12.01858,12.0253,12.03342,12.04266,12.05312,12.0647,12.0772,12.09069,12.10497,12.11985,12.13542,12.15137,12.16765,12.18424,12.20079,12.21737,12.23379,12.24986,12.26562,12.28082,12.29533,12.30921,12.32217,12.33421,12.34532,12.35521,12.36402,12.37161,12.37785,12.38288,12.38651,12.38874,12.38966,12.38912,12.38723,12.38404,12.37938,12.37353,12.36638,12.35799,12.34854,12.33795,12.32634,12.3139,12.30053,12.28649,12.27186,12.25658,12.24099,12.22506,12.2089,12.19277,12.1766,12.16059,12.14493,12.12958,12.1148,12.10066,12.08714,12.07455,12.06284,12.05211,12.04257,12.0341,12.02688,12.02101,12.01638,12.0132,12.01143,12.01098,12.01206,12.01449,12.0183,12.02357,12.03007,12.03789,12.04695,12.05709,12.06838,12.08066,12.09373,12.1077,12.12228,12.13744,12.15313,12.16905,12.18524,12.20153,12.21773,12.23386,12.24969,12.26506,12.28003,12.29431,12.3079,12.32073,12.33256,12.34346,12.35329,12.36193,12.36947,12.37572,12.38063,12.38433,12.38659,12.38753,12.38717,12.38534,12.38227,12.37786,12.37212,12.36524,12.35712,12.34784,12.33758,12.32625,12.31407,12.30111,12.28731,12.27299,12.25811,12.24278,12.22724,12.21143,12.19553,12.17974,12.16402,12.14862,12.13363,12.11903,12.10513,12.09189,12.07943,12.06795,12.05738,12.04788,12.03959,12.0324,12.02656,12.02203,12.01875,12.01694,12.01646,12.01737,12.01975,12.0234,12.02842,12.03479,12.04234,12.05116,12.06111,12.07203,12.08403,12.09683,12.11043,12.12477,12.13958,12.15488,12.17054,12.18635,12.20234,12.21829,12.23402,12.24959,12.26471,12.27937,12.29348,12.30682,12.3194,12.33112,12.34181,12.35154,12.36013,12.3675,12.37375,12.37865,12.38231,12.38469,12.38565,12.38534,12.3837,12.3807,12.3765,12.37098,12.36422,12.35638,12.34734,12.33732,12.32635,12.31439,12.30171,12.28829,12.27422,12.25971,12.24472,12.22941,12.21398,12.19838,12.18287,12.16752,12.15233,12.1376,12.1233,12.10957,12.0966,12.08434,12.07295,12.0626,12.05319,12.04498,12.03794,12.03205,12.02754,12.02429,12.02238,12.0219,12.0227,12.02488,12.02846,12.03327,12.03944,12.04684,12.05535,12.06506,12.07575,12.08741,12.09999,12.11327,12.12723,12.1418,12.15674,12.1721,12.18766,12.20325,12.21893,12.23439,12.24963,12.26456,12.27894,12.29277,12.30596,12.31831,12.32987,12.34047,12.34999,12.35852,12.36583,12.37199,12.37695,12.38056,12.38294,12.38403,12.38375,12.38225,12.37942,12.37528,12.37,12.36344,12.35578,12.34706,12.33723,12.3265,12.31489,12.30244,12.28936,12.27561,12.26132,12.24671,12.23169,12.21654,12.20131,12.18603,12.17095,12.1561,12.14156,12.12756,12.11406,12.10122,12.08921,12.07797,12.06773,12.05852,12.05032,12.04334,12.03755,12.03298,12.02978,12.02783,12.0272,12.02799,12.03002],"d":[25760666177,25777530850,25794004533,25810013149,25825488530,25840370014,25854603329,25868135110,25880911625,25892885411,25904018893,25914284202,25923659969,25932125594,25939665372,25946274179,25951958109,25956732711,25960617363,25963632981,25965809049,25967185869,25967813191,25967746343,25967040205,25965752347,25963948684,25961702761,25959092834,25956196142,25953086297,25949839789,25946538082,25943265426,25940104221,25937129813,25934413407,25932027745,25930046391,25928540613,25927573492,25927198893,25927467692,25928430189,25930134156,25932620331,25935917764,25940048327,25945031916,25950886088,25957623372,25965245572,25973743885,25983105987,25993317936,26004362466,26016215092,26028839646,26042194108,26056235826,26070920814,26086201218,26102020459,26118313493,26135014977,26152060780,26169386087,26186921798,26204591012,26222314892,26240018572,26257630058,26275077523,26292285142,26309174036,26325670351,26341707050,26357221745,26372152833,26386437074,26400015430,26412838716,26424866388,26436063555,26446396419,26455834320,26464356837,26471955063,26478628991,26484383117,26489223575,26493164489,26496231936,26498461974,26499897060,26500580703,26500559153,26499888255,26498632990,26496864043,26494653136,26492069295,26489185226,26486080625,26482839029,26479543742,26476272907,26473100525,26470103813,26467362157,26464953244,26462948527,26461410527,26460398814,26459974026,26460194453,26461112041,26462768269,26465196327,26468428149,26472493976,26477418567,26483216895,26489892864,26497445856,26505874425,26515173330,26525329844,26536319916,26548112020,26560673841,26573971685,26587967063,26602612798,26617852182,26633626870,26649879685,26666551757,26683579277,26700890089,26718408141,26736060819,26753777540,26771486595,26789111925,26806572552,26823791081,26840696507,26857220893,26873296351,26888852563,26903821021,26918142814,26931766779,26944646054,26956734995,26967989464,26978374431,26987866871,26996451713,27004118362,27010858304,27016669599,27021563154,27025560535,27028689647,27030980866,27032467496,27033192695,27033210733,27032582370,27031370654,27029637644,27027449324,27024880527,27022011619,27018923805,27015695037,27012399880,27009117129,27005929699,27002919696,27000164406,26997733350,26995693078,26994112828,26993060317,26992597396,26992776792,26993642497,26995237601,26997604653,27000780448,27004792637,27009658092,27015387902,27021993319,27029481735,27037852484,27047094258,27057186995,27068109249,27079838839,27092347758,27105599081,27119546148,27134138763,27149328136,27165063301,27181287126,27197934026,27214932940,27232215070,27249713623,27267359286,27285077529,27302788022,27320411997,27337876692,27355111395,27372044039,27388599454,27404702353,27420285976,27435290836,27449660269,27463338214,27476269042,27488404514,27499708589,27510152334,27519710576,27528360488,27536084402,27542877602,27548746792,27553704505,27557766592,27560952307,27563290190,27564821870,27565596200,27565664904,27565080671,27563900260,27562190539,27560026224,27557483533,27554637070,27551559662,27548328628,27545027757,27541741398,27538549897,27535527588,27532746225,27530281300,27528208533,27526598192,27525512426,27525005311,27525129902,27525940105,27527484421,27529802382,27532923447,27536870554,27541667289,27547333951,27553882244,27561313620,27569620334,27578792259,27588819421,27599685301,27611363950,27623819891,27637012390,27650902077,27665447483,27680599558,27696300690,27712486879,27729094611,27746062869,27763326883,27780815391,27798451099,27816156166,27833858028,27851485909,27868965803,27886219806,27903168763,27919740030,27935868184,27951489312,27966538660,27980951300,27994667896,28007640675,28019828671,28031193367,28041698237,28051311098,28060011815,28067792294,28074649784,28080584811,28085601819,28089713861],"dd":[39.43571,38.61732,37.62512,36.4667,35.15921,33.71976,32.15842,30.47116,28.66426,26.75859,24.77753,22.74189,20.65861,18.53002,16.37634,14.22411,12.09807,10.01552,7.9776,5.99573,4.09483,2.29902,0.6271,-0.91564,-2.33175,-3.60539,-4.7169,-5.65105,-6.4026,-6.98081,-7.38792,-7.61156,-7.6423,-7.47767,-7.12943,-6.61459,-5.9339,-5.083,-4.06266,-2.88452,-1.57271,-0.14208,1.40609,3.06874,4.83648,6.68516,8.58979,10.542,12.53832,14.57097,16.62264,18.66353,20.67793,22.66227,24.61138,26.51447,28.34752,30.08639,31.7269,33.26783,34.70379,36.02107,37.19466,38.21511,39.08625,39.80908,40.37877,40.77965,40.9962,41.03462,40.90378,40.60794,40.14268,39.49578,38.66947,37.68086,36.54339,35.26434,33.84027,32.27114,30.5763,28.77853,26.89507,24.93344,22.89439,20.79417,18.66083,16.51827,14.38327,12.25966,10.15643,8.09974,6.11622,4.22526,2.43577,0.74688,-0.82503,-2.25594,-3.52837,-4.63369,-5.57638,-6.35854,-6.96349,-7.37809,-7.5978,-7.62882,-7.48674,-7.17109,-6.6726,-5.9908,-5.13445,-4.12337,-2.9746,-1.68593,-0.25817,1.29898,2.96529,4.71525,6.53882,8.43596,10.3981,12.40811,14.43866,16.46993,18.49922,20.52221,22.52603,24.48803,26.3823,28.20145,29.94554,31.60729,33.17173,34.61403,35.92007,37.09308,38.13306,39.03237,39.77516,40.34226,40.73651,40.96633,41.03259,40.92919,40.64237,40.16853,39.52411,38.72005,37.75998,36.64038,35.35624,33.92356,32.36513,30.69439,28.91767,27.03537,25.05796,23.01463,20.92861,18.81434,16.67791,14.52617,12.38388,10.28121,8.23715,6.26205,4.3585,2.54105,0.83772,-0.73064,-2.15406,-3.43239,-4.56603,-5.53659,-6.32546,-6.92579,-7.34024,-7.58036,-7.64534,-7.52124,-7.20439,-6.70162,-6.02844,-5.20176,-4.21749,-3.07262,-1.7764,-0.34646,1.19352,2.8313,4.57049,6.40302,8.31134,10.27098,12.25942,14.27362,16.31171,18.35871,20.39253,22.38773,24.33226,26.22828,28.06771,29.83307,31.50078,33.05298,34.49063,35.81497,37.01517,38.07398,38.97148,39.70515,40.28366,40.70604,40.96279,41.03933,40.92773,40.64148,40.19098,39.57606,38.7912,37.82892,36.70018,35.4275,34.02156,32.48575,30.81987,29.02954,27.14278,25.18277,23.16097,21.08377,18.95707,16.80216,14.65242,12.52621,10.43361,8.38058,6.37967,4.46093,2.64955,0.95558,-0.61728,-2.06609,-3.37316,-4.51353,-5.47752,-6.26599,-6.88509,-7.33323,-7.59346,-7.6565,-7.52789,-7.21982,-6.74588,-6.10215,-5.28072,-4.28877,-3.14289,-1.86362,-0.46387,1.06183,2.70816,4.45715,6.28606,8.17247,10.11165,12.10472,14.13588,16.18254,18.22062,20.23445,22.22711,24.19123,26.10662,27.95041,29.70311,31.36179,32.93015,34.39457,35.73559,36.9339,37.98173,38.88709,39.64913,40.25388,40.68592,40.93511,41.00962,40.92098,40.6656,40.2343,39.61884,38.82495,37.87325,36.77374,35.52537,34.12621,32.57943,30.9088,29.13809,27.27612,25.32705,23.2965,21.20226,19.0783,16.94345,14.80616,12.67394,10.55886,8.49044]};
-/* Tramo horario 17–20 nov 2026 para afinar el cruce */
+/* Hourly segment, 17–20 Nov 2026, to pin down the crossing */
 const EPH_H={"t0":1794873600000,"d":[25897441408,25897534880,25897628292,25897721644,25897814938,25897908172,25898001347,25898094462,25898187518,25898280515,25898373452,25898466330,25898559148,25898651907,25898744607,25898837247,25898929827,25899022348,25899114809,25899207211,25899299553,25899391836,25899484059,25899576223,25899668326,25899760371,25899852355,25899944280,25900036145,25900127951,25900219696,25900311382,25900403009,25900494575,25900586082,25900677529,25900768916,25900860243,25900951511,25901042718,25901133866,25901224954,25901315982,25901406950,25901497858,25901588706,25901679494,25901770222,25901860890,25901951498,25902042047,25902132535,25902222963,25902313331,25902403639,25902493887,25902584074,25902674202,25902764270,25902854277,25902944224,25903034111,25903123938,25903213705,25903303411,25903393057,25903482643,25903572169,25903661635,25903751040,25903840385,25903929669,25904018893],"dd":[25.97395,25.95748,25.94101,25.92454,25.90806,25.89158,25.87509,25.8586,25.8421,25.8256,25.8091,25.79259,25.77607,25.75955,25.74303,25.7265,25.70997,25.69343,25.67689,25.66035,25.6438,25.62725,25.61069,25.59412,25.57756,25.56099,25.54441,25.52783,25.51125,25.49466,25.47807,25.46147,25.44487,25.42826,25.41165,25.39504,25.37842,25.3618,25.34518,25.32855,25.31191,25.29527,25.27863,25.26198,25.24533,25.22868,25.21202,25.19536,25.17869,25.16202,25.14535,25.12867,25.11199,25.0953,25.07861,25.06192,25.04522,25.02852,25.01181,24.9951,24.97839,24.96167,24.94495,24.92822,24.91149,24.89476,24.87802,24.86128,24.84454,24.82779,24.81104,24.79429,24.77753]};
 const wrap360=a=>((a%360)+360)%360;
 const wrap180=a=>{a=wrap360(a);return a>180?a-360:a;};
@@ -324,7 +371,7 @@ function altaz(ra,dec,ms,lat,lon){
 function sunRaDec(ms){const n=jdOf(ms)-2451545,L=280.460+0.9856474*n,g=(357.528+0.9856003*n)*D2R;
   const lam=(L+1.915*Math.sin(g)+0.020*Math.sin(2*g))*D2R,eps=(23.439-0.0000004*n)*D2R;
   return {ra:wrap360(Math.atan2(Math.cos(eps)*Math.sin(lam),Math.cos(lam))*R2D),dec:Math.asin(Math.sin(eps)*Math.sin(lam))*R2D};}
-/* Luna: series truncadas de Meeus (cap. 47), error ~0,05° */
+/* Moon: truncated Meeus series (ch. 47), error ~0.05° */
 const MLR=[[0,0,1,0,6288774,-20905355],[2,0,-1,0,1274027,-3699111],[2,0,0,0,658314,-2955968],[0,0,2,0,213618,-569925],[0,1,0,0,-185116,48888],[0,0,0,2,-114332,-3149],[2,0,-2,0,58793,246158],[2,-1,-1,0,57066,-152138],[2,0,1,0,53322,-170733],[2,-1,0,0,45758,-204586],[0,1,-1,0,-40923,-129620],[1,0,0,0,-34720,108743],[0,1,1,0,-30383,104755],[2,0,0,-2,15327,10321],[0,0,1,2,-12528,0],[0,0,1,-2,10980,79661],[4,0,-1,0,10675,-34782],[0,0,3,0,10034,-23210],[4,0,-2,0,8548,-21636],[2,1,-1,0,-7888,24208],[2,1,0,0,-6766,30824],[1,0,-1,0,-5163,-8379],[1,1,0,0,4987,-16675],[2,-1,1,0,4036,-12831],[2,0,2,0,3994,-10445],[4,0,0,0,3861,-11650],[2,0,-3,0,3665,14403],[0,1,-2,0,-2689,-7003],[2,0,-1,2,-2602,0],[2,-1,-2,0,2390,10056],[1,0,1,0,-2348,6322],[2,-2,0,0,2236,-9884]];
 const MB=[[0,0,0,1,5128122],[0,0,1,1,280602],[0,0,1,-1,277693],[2,0,0,-1,173237],[2,0,-1,1,55413],[2,0,-1,-1,46271],[2,0,0,1,32573],[0,0,2,1,17198],[2,0,1,-1,9266],[0,0,2,-1,8822],[2,-1,0,-1,8216],[2,0,-2,-1,4324],[2,0,1,1,4200],[2,1,0,-1,-3359],[2,-1,-1,1,2463],[2,-1,0,1,2211],[2,-1,-1,-1,2065],[0,1,-1,-1,-1870],[4,0,-1,-1,1828],[0,1,0,1,-1794],[0,0,0,3,-1749],[0,1,-1,1,-1565],[1,0,0,1,-1491],[0,1,1,1,-1475],[0,1,1,-1,-1410],[0,1,0,-1,-1344],[1,0,0,-1,-1335],[0,0,3,1,1107],[4,0,0,-1,1021],[4,0,-1,1,833]];
 function moonPos(ms){
@@ -349,31 +396,239 @@ function bodyAltAz(body,ms,lat,lon){
   a.alt-=p*Math.cos(a.alt*D2R);return a;
 }
 function enu(az,alt){const a=az*D2R,h=alt*D2R;return [Math.cos(h)*Math.sin(a),Math.cos(h)*Math.cos(a),Math.sin(h)];}
-/* Tiempo que tarda en alcanzar la nave una luz emitida en ms (la nave se aleja mientras la luz viaja) */
+/* Time for light sent at ms to reach the spacecraft (it keeps moving away while the light travels) */
 function upleg(ms){const v=voyager(ms);return v.lt*(1+2*V_HELIO/C_KMS);}
+</script>
+
+<script id="i18n">
+/* ---------- Texts: English (default) and Spanish ---------- */
+const half=n=>{const i=Math.floor(n),h=n-i>=.5;return (i===0&&h)?'½':(i+(h?'½':''));};
+const I18N={
+en:{
+  locale:'en-GB',title:'One Light-Day',
+  eyebrow:'Voyager 1 · live',h1:'One light-day',
+  intro:'On the night of <strong>18 to 19 November 2026</strong>, Voyager 1, launched in 1977, reaches <strong>one light-day</strong> from Earth: light will need a whole day to get there. Let’s celebrate the day of light by saying hello. Point your phone at Voyager 1, wherever it is in the sky, and send it a signal with your flashlight.',
+  ltK:'Light from Earth takes this long to reach Voyager 1',
+  ltMeta:'<span><span class="mono" id="kmNow"></span> km</span><span><span class="mono" id="auNow"></span> AU</span><span>moving away <span class="mono" id="rateNow"></span> km every second</span>',
+  crossK:'Reaches one light-day',crossKPast:'Reached one light-day',crossTz:'in your phone’s time ({tz})',
+  left:'{dur} to go',ago:'{dur} ago',
+  zones:[['UTC','UTC'],['Europe/London','London'],['Europe/Madrid','Madrid'],['America/New_York','New York'],['America/Mexico_City','Mexico City'],['America/Los_Angeles','Los Angeles']],
+  zonesNote:'In Europe it will already be the 19th; in the Americas, still the 18th.',
+  go:'Point at Voyager 1',goFine:'Uses your phone’s compass, location and flashlight. Nothing leaves your phone.',
+  whenH:'When to point',whenIntro:'Voyager 1 rises and sets like a star. Pick a day to see when it is above your horizon with a dark sky, the best time to send your light.',
+  today:'Today',
+  bestK:'Best time',bestDesc:'Voyager 1 is above your horizon and the sky is dark.',
+  look:'Look toward {dir}: at {time} it is {alt}° up, {fists} above the horizon with your arm outstretched.',
+  fists:n=>n<.5?'less than half a fist':n===.5?'about half a fist':n===1?'about one fist':`about ${half(n)} fists`,
+  dayOnlyK:'Only in daylight',dayOnlyDesc:'This day Voyager 1 is above your horizon only while the Sun is up. You can still point at it, but your beam won’t show.',
+  neverK:'Below the horizon all day',neverDesc:'From where you are, Voyager 1 doesn’t rise this day. You can still point at it, through the Earth.',
+  rises:'Rises',highest:'Highest',sets:'Sets',highestSub:'{alt}° · {dir}',
+  lgBelow:'Below the horizon',lgDay:'Up, daylight',lgBest:'Up, dark sky: best',
+  now:'now',ld:'1 light-day',
+  locDefault:'Calculated for Madrid (default)',locAt:'Calculated for {lat}, {lon}',N:'N',S:'S',E:'E',W:'W',useLoc:'Use my location',
+  locFail:'Couldn’t get your location. Check the browser permission.',
+  locK:'Watching from',locAsk:'Where will you watch from? Choose it so the times and directions are right for you.',locGps:'Use my location',locCity:'Choose a city',locChange:'Change',locMine:'My location',locNear:'Near {city}',
+  locSheetT:'Where will you watch from?',locSearch:'Search for a city or country',locNone:'No city found. Try another name, or use your location.',locTz:'Times are shown in your phone’s time zone.',locBusy:'Finding your location…',locDefaultName:'Madrid (default)',locFrom:'Calculated for {place}.',
+  crossBelow:'At the exact moment ({time}), Voyager 1 will be {alt}° below your horizon, toward {dir}: you would be pointing at the ground, through the Earth.',
+  crossTip:' To point at the sky instead, do it on {day} between {a} and {b}, when Voyager 1 is only {s} light-seconds short of one light-day.',
+  crossAbove:'At the exact moment ({time}), Voyager 1 will be {alt}° above your horizon, toward {dir}.',
+  rulerK:'How long light takes from Earth',ruler:[['Moon','1.3 s'],['Sun','8 min'],['Jupiter','44 min'],['Neptune','4 h'],['Voyager 1','1 day']],
+  rulerTitle:'Light-time on a log scale: Moon 1.3 s, Sun 8 min, Jupiter 44 min, Neptune 4 h, Voyager 1 one day',
+  beamsH:'Your light beams',arrives:'arrives {d}',travelled:'{km} km travelled · {pct} % · {dur} to go',reached:'Reached Voyager 1 after {km} km',
+  howH:'How to do it',
+  steps:'<li><div><strong>Wake up the compass.</strong><p>Wave your phone in a figure-eight. If you can see the Moon, tap Calibrate in the viewer and centre it: that fixes the compass error, usually 5 to 15°.</p></div></li><li><div><strong>Point with the back of the phone.</strong><p>Hold the phone with the screen facing you. The flashlight and camera do the pointing: move the phone until Voyager 1’s gold circle sits inside the central sight.</p></div></li><li><div><strong>Tap Send light.</strong><p>The flashlight switches on, steady or spelling your message once in Morse code. The page works out when your light will reach the spacecraft: just over 24 hours later.</p></div></li>',
+  factsH:'The spacecraft',
+  facts:'<div><dt>Launched</dt><dd>5 Sep 1977, Cape Canaveral</dd></div><div><dt>Interstellar space</dt><dd>since 25 Aug 2012</dd></div><div><dt>Speed</dt><dd><span class="mono">16.9</span> km/s relative to the Sun (about <span class="mono">61,000</span> km/h)</dd></div><div><dt>Where it is</dt><dd>Constellation Ophiuchus<br><span class="mono sub" id="radec"></span></dd></div>',
+  radec:'RA {h}h {m}m · Dec {dec}°',
+  foot:'<p>Position and distance: JPL Horizons ephemerides (NASA/JPL-Caltech) built into the page, valid from October 2026 to December 2030. Error in the computed position: under 0.001°. A phone compass is far less precise than that; calibrating with the Moon helps.</p><p>One light-day is measured from the centre of the Earth: <span class="mono">25,902,068,371</span> km.</p>',
+  /* viewer */
+  vClose:'Close the viewer',vCam:'Show the camera',vSound:'Sound guidance',searching:'Looking for sensors…',
+  ltLine:'Light-time {dur}',
+  pCompass:'Compass · ±10°',pCal:'Calibrated on {body}',pNoNorth:'No north',pFinding:'Finding north…',pDemo:'Test view · drag',pNone:'No sensors',
+  pGps:'GPS ±{m} m',pSaved:'Last location',pDefault:'Madrid (default)',
+  iosTilt:'Tilt the phone as if reading a message',iosTiltSub:'That lets the iPhone compass find north.',
+  beaming:'Your light is on its way to Voyager 1',aligned:'Aligned with Voyager 1',alignedBody:'Aligned with {body}',
+  subLock:'If the real {Body} is inside the circle, tap Lock.',subStill:'Hold the phone still.',subSend:'Tap Send light.',
+  right:'Turn {n}° right',leftT:'Turn {n}° left',up:'Raise {n}°',down:'Lower {n}°',almost:'Almost there…',
+  subCenter:'Centre the real {Body} in the circle and tap Lock.',subBack:'Point with the back of the phone, where the flashlight is.',
+  subBelow:'It’s {n}° below the horizon: you’re pointing through the Earth.',subRel:'This browser doesn’t give north: tap Calibrate and use the Moon or the Sun.',
+  rPhone:'Your phone',rSep:'Off by',calib:'Calibrate',send:'Send light',stop:'Stop',lock:'Lock',cancel:'Cancel',steady:'Steady',morse:'Morse',
+  cvBelow:'below the horizon',cvLd:'1 light-day',card:['NORTH','NE','EAST','SE','SOUTH','SW','WEST','NW'],
+  manualOn:'Flashlight switched on by hand',
+  demo:'No compass or gyroscope data. Test view: drag to look around. Open this page on a phone to point for real.',
+  camFail:'Couldn’t open the camera. Check the browser permission.',iosCam:'With the camera view on, the iPhone can’t use the flashlight. Turn it off before sending light.',
+  torchErr:'The browser wouldn’t switch the flashlight ({e}).',motionDenied:'Without motion permission you can’t point. Close the tab, reopen the page and allow it.',
+  copied:'Text copied',calRemoved:'Correction removed',calDone:'Compass corrected by {n}° using {body}',
+  manT:'Switch the flashlight on yourself',manIos:'This iPhone doesn’t let a web page switch on the flashlight.',manOther:'This browser doesn’t let the page switch on the flashlight.',
+  manHow:'Turn it on {where}, come back here and tap Send. You point the same way, with the back of the phone.',manWhereIos:'from Control Center (swipe down from the top-right corner)',manWhereOther:'from quick settings',
+  manCam:'The camera view will switch off to free the flashlight.',manGo:'It’s on: send',
+  sentT:'Light sent',sentBig:'It will reach Voyager 1 on <strong>{date} at {time}</strong>',
+  sentBody:'It left at {t} and lasted {d} s, {sep} off the spacecraft. It will take {dur}: {what} the {x} s the spacecraft moves away while your light travels.',
+  sentFull:'a full light-day, plus',sentAlmost:'almost a light-day, counting',
+  sentKm:'{km} km travelled of {total}',share:'Share',done:'Done',
+  shareText:'I said hello to Voyager 1 with a beam of light on {d1} at {t1}. It will arrive on {d2} at {t2}, after travelling one light-day.',
+  calT:'Calibrate the compass',calP:'A phone compass can be off by 5–15°. Point at the real Moon or Sun and lock its position: the page corrects the error, magnetic declination included.',
+  calWith:'Calibrate on {body}',calHigh:'Too high ({alt}°): wait for it to sink',calUp:'{alt}° high, toward {dir}',calDown:'Below the horizon right now',
+  calFine:'First, wave the phone in a figure-eight. With the Sun, never look at it directly: use the screen with the camera on.',calReset:'Remove correction',close:'Close',
+  modeT:'How to send',modeSteady:'Steady light',modeSteadyD:'The flashlight stays on until you tap Stop.',
+  modeMorse:'Morse message',modeMorseD:'The flashlight spells your message once, then stops. If the phone is slow to switch the flash, the Morse runs slower.',modeLabel:'Message (up to 24 letters)',
+  morseDefault:'HELLO VOYAGER',
+  bodies:{voyager:['Voyager 1','Voyager 1'],moon:['the Moon','Moon'],sun:['the Sun','Sun']},
+  dir16:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'],
+  dir8:['the north','the northeast','the east','the southeast','the south','the southwest','the west','the northwest']
+},
+es:{
+  locale:'es-ES',title:'Un día luz',
+  eyebrow:'Voyager 1 · en tiempo real',h1:'Un día luz',
+  intro:'La noche del <strong>18 al 19 de noviembre de 2026</strong>, la Voyager 1, lanzada en 1977, llega a <strong>un día luz</strong> de la Tierra: la luz tardará un día entero en alcanzarla. Celebremos el día de la luz saludándola. Apunta el móvil hacia la Voyager 1, esté donde esté en el cielo, y envíale una señal con la linterna.',
+  ltK:'La luz tarda en llegar hasta la Voyager 1',
+  ltMeta:'<span><span class="mono" id="kmNow"></span> km</span><span><span class="mono" id="auNow"></span> UA</span><span>se aleja <span class="mono" id="rateNow"></span> km cada segundo</span>',
+  crossK:'Alcanza un día luz',crossKPast:'Alcanzó un día luz',crossTz:'en la hora de tu móvil ({tz})',
+  left:'faltan {dur}',ago:'hace {dur}',
+  zones:[['UTC','UTC'],['Europe/London','Londres'],['Europe/Madrid','Madrid'],['America/New_York','Nueva York'],['America/Mexico_City','Ciudad de México'],['America/Los_Angeles','Los Ángeles']],
+  zonesNote:'En Europa ya será 19; en América, todavía 18.',
+  go:'Apuntar a la Voyager 1',goFine:'Usa la brújula, la ubicación y la linterna del móvil. Nada sale de tu teléfono.',
+  whenH:'Cuándo apuntar',whenIntro:'La Voyager 1 sale y se pone como una estrella. Elige un día para ver cuándo está sobre tu horizonte con el cielo oscuro, el mejor momento para enviarle tu luz.',
+  today:'Hoy',
+  bestK:'Mejor momento',bestDesc:'La Voyager 1 está sobre tu horizonte y ya es de noche.',
+  look:'Mira hacia {dir}: a las {time} está a {alt}° de altura, {fists} sobre el horizonte con el brazo estirado.',
+  fists:n=>n<.5?'menos de medio puño':n===.5?'medio puño':n===1?'un puño':`unos ${half(n)} puños`,
+  dayOnlyK:'Solo de día',dayOnlyDesc:'Este día la Voyager 1 solo está sobre tu horizonte con el Sol arriba. Puedes apuntarle igual, pero el haz no se verá.',
+  neverK:'Bajo el horizonte todo el día',neverDesc:'Desde donde estás, la Voyager 1 no sale este día. Puedes apuntarle igual, a través de la Tierra.',
+  rises:'Sale',highest:'Más alta',sets:'Se pone',highestSub:'{alt}° · {dir}',
+  lgBelow:'Bajo el horizonte',lgDay:'Arriba, de día',lgBest:'Arriba, de noche: lo mejor',
+  now:'ahora',ld:'1 día luz',
+  locDefault:'Calculado para Madrid (por defecto)',locAt:'Calculado para {lat}, {lon}',N:'N',S:'S',E:'E',W:'O',useLoc:'Usar mi ubicación',
+  locFail:'No se pudo obtener tu ubicación. Revisa el permiso del navegador.',
+  locK:'Mirarás desde',locAsk:'¿Desde dónde vas a mirar? Elígelo para que las horas y las direcciones sean las tuyas.',locGps:'Usar mi ubicación',locCity:'Elegir ciudad',locChange:'Cambiar',locMine:'Mi ubicación',locNear:'Cerca de {city}',
+  locSheetT:'¿Desde dónde vas a mirar?',locSearch:'Busca una ciudad o un país',locNone:'No encuentro esa ciudad. Prueba con otro nombre o usa tu ubicación.',locTz:'Las horas se muestran en la zona horaria de tu móvil.',locBusy:'Buscando tu ubicación…',locDefaultName:'Madrid (por defecto)',locFrom:'Calculado para {place}.',
+  crossBelow:'En el instante exacto ({time}) la Voyager 1 estará {alt}° por debajo de tu horizonte, hacia {dir}: apuntarás hacia el suelo, a través de la Tierra.',
+  crossTip:' Si prefieres apuntar al cielo, hazlo el {day} entre las {a} y las {b}: a la nave le faltarán solo {s} segundos-luz para el día luz.',
+  crossAbove:'En el instante exacto ({time}) la Voyager 1 estará {alt}° sobre tu horizonte, hacia {dir}.',
+  rulerK:'Cuánto tarda la luz desde la Tierra',ruler:[['Luna','1,3 s'],['Sol','8 min'],['Júpiter','44 min'],['Neptuno','4 h'],['Voyager 1','1 día']],
+  rulerTitle:'Escala logarítmica de tiempo-luz: Luna 1,3 s, Sol 8 min, Júpiter 44 min, Neptuno 4 h, Voyager 1 un día',
+  beamsH:'Tus haces de luz',arrives:'llega {d}',travelled:'{km} km recorridos · {pct} % · faltan {dur}',reached:'Ha alcanzado la Voyager 1 tras {km} km',
+  howH:'Cómo hacerlo',
+  steps:'<li><div><strong>Despierta la brújula.</strong><p>Haz un ocho en el aire con el móvil. Si ves la Luna, pulsa Calibrar en el visor y céntrala: corrige el error de la brújula, que suele ser de 5 a 15°.</p></div></li><li><div><strong>Apunta con la parte de atrás.</strong><p>Sujeta el móvil con la pantalla hacia ti. La linterna y la cámara son las que apuntan: mueve el móvil hasta que el círculo dorado de la Voyager 1 entre en la mira central.</p></div></li><li><div><strong>Pulsa Enviar luz.</strong><p>La linterna se enciende fija o deletrea tu mensaje una vez en Morse. La web calcula cuándo llegará tu luz a la nave: algo más de 24 horas después.</p></div></li>',
+  factsH:'La nave',
+  facts:'<div><dt>Lanzamiento</dt><dd>5 sep 1977, Cabo Cañaveral</dd></div><div><dt>Espacio interestelar</dt><dd>desde el 25 ago 2012</dd></div><div><dt>Velocidad</dt><dd><span class="mono">16,9</span> km/s respecto al Sol (unos <span class="mono">61.000</span> km/h)</dd></div><div><dt>Dónde está</dt><dd>Constelación de Ofiuco<br><span class="mono sub" id="radec"></span></dd></div>',
+  radec:'AR {h}h {m}m · Dec {dec}°',
+  foot:'<p>Posición y distancia: efemérides de JPL Horizons (NASA/JPL-Caltech) incluidas en la página, válidas de octubre de 2026 a diciembre de 2030. Error de la posición calculada: menos de 0,001°. La brújula de un móvil es mucho menos precisa que eso; calibrar con la Luna ayuda.</p><p>El día luz se mide desde el centro de la Tierra: <span class="mono">25.902.068.371</span> km.</p>',
+  vClose:'Cerrar el visor',vCam:'Ver la cámara',vSound:'Guía por sonido',searching:'Buscando los sensores…',
+  ltLine:'Tiempo-luz {dur}',
+  pCompass:'Brújula · ±10°',pCal:'Calibrada con {body}',pNoNorth:'Sin norte',pFinding:'Orientando brújula…',pDemo:'Vista de prueba · arrastra',pNone:'Sin sensores',
+  pGps:'GPS ±{m} m',pSaved:'Última ubicación',pDefault:'Madrid (por defecto)',
+  iosTilt:'Inclina el móvil como si leyeras un mensaje',iosTiltSub:'Así la brújula del iPhone encuentra el norte.',
+  beaming:'Tu luz va hacia la Voyager 1',aligned:'Alineado con la Voyager 1',alignedBody:'Alineado con {body}',
+  subLock:'Si {body} real está dentro del círculo, pulsa Fijar.',subStill:'Mantén el móvil quieto.',subSend:'Pulsa Enviar luz.',
+  right:'Gira {n}° a la derecha',leftT:'Gira {n}° a la izquierda',up:'Sube {n}°',down:'Baja {n}°',almost:'Casi…',
+  subCenter:'Centra {body} real en el círculo y pulsa Fijar.',subBack:'Apunta con la parte de atrás del móvil, donde está la linterna.',
+  subBelow:'Está {n}° bajo el horizonte: apuntas a través de la Tierra.',subRel:'Este navegador no da el norte: pulsa Calibrar con la Luna o el Sol.',
+  rPhone:'Tu móvil',rSep:'Desvío',calib:'Calibrar',send:'Enviar luz',stop:'Detener',lock:'Fijar',cancel:'Cancelar',steady:'Luz fija',morse:'Morse',
+  cvBelow:'bajo el horizonte',cvLd:'1 día luz',card:['NORTE','NE','ESTE','SE','SUR','SO','OESTE','NO'],
+  manualOn:'Linterna encendida a mano',
+  demo:'No llegan datos de brújula ni giroscopio. Vista de prueba: arrastra para mirar. Ábrela en un móvil para apuntar de verdad.',
+  camFail:'No se pudo abrir la cámara. Revisa el permiso del navegador.',iosCam:'Con la cámara abierta, el iPhone no deja usar la linterna. Apágala antes de enviar luz.',
+  torchErr:'El navegador no dejó cambiar la linterna ({e}).',motionDenied:'Sin permiso de movimiento no se puede apuntar. Cierra la pestaña, vuelve a abrir la web y acepta el permiso.',
+  copied:'Texto copiado',calRemoved:'Corrección eliminada',calDone:'Brújula corregida {n}° con {body}',
+  manT:'Enciende la linterna a mano',manIos:'Esta versión del iPhone no deja que una web encienda la linterna.',manOther:'Este navegador no deja que la web encienda la linterna.',
+  manHow:'Enciéndela tú {where}, vuelve aquí y pulsa Emitir. Apuntarás igual con la parte de atrás del móvil.',manWhereIos:'desde el Centro de Control (desliza desde la esquina superior derecha)',manWhereOther:'desde los ajustes rápidos',
+  manCam:'La vista de cámara se apagará para dejar libre la linterna.',manGo:'Ya está encendida: emitir',
+  sentT:'Luz enviada',sentBig:'Llegará a la Voyager 1 el <strong>{date} a las {time}</strong>',
+  sentBody:'Salió a las {t} y duró {d} s, con un desvío de {sep} respecto a la nave. Tardará {dur}: {what} los {x} s que la nave se aleja mientras tu luz viaja.',
+  sentFull:'un día luz completo, más',sentAlmost:'casi un día luz, contando',
+  sentKm:'{km} km recorridos de {total}',share:'Compartir',done:'Hecho',
+  shareText:'He saludado a la Voyager 1 con un haz de luz el {d1} a las {t1}. Llegará el {d2} a las {t2}, tras viajar un día luz.',
+  calT:'Calibrar la brújula',calP:'La brújula del móvil puede desviarse 5–15°. Apunta a la Luna o al Sol de verdad y fija su posición: la web corregirá el error, incluida la declinación magnética.',
+  calWith:'Calibrar con {body}',calHigh:'Demasiado alta ({alt}°): espera a que baje',calUp:'{alt}° de altura, hacia {dir}',calDown:'Bajo el horizonte ahora',
+  calFine:'Antes, haz un ocho en el aire con el móvil. Con el Sol, no lo mires directamente: guíate por la pantalla con la cámara activada.',calReset:'Quitar corrección',close:'Cerrar',
+  modeT:'Cómo emitir',modeSteady:'Luz fija',modeSteadyD:'La linterna queda encendida hasta que pulses Detener.',
+  modeMorse:'Mensaje en Morse',modeMorseD:'La linterna deletrea tu mensaje una vez y se apaga. Si el móvil tarda en encender y apagar el flash, el Morse irá más despacio.',modeLabel:'Mensaje (hasta 24 letras)',
+  morseDefault:'HOLA VOYAGER',
+  bodies:{voyager:['la Voyager 1','Voyager 1'],moon:['la Luna','Luna'],sun:['el Sol','Sol']},
+  dir16:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'],
+  dir8:['el norte','el noreste','el este','el sureste','el sur','el suroeste','el oeste','el noroeste']
+}};
 </script>
 
 <script>
 (()=>{'use strict';
 const $=s=>document.querySelector(s);
-const nf=(d)=>new Intl.NumberFormat('es-ES',{minimumFractionDigits:d,maximumFractionDigits:d});
-const nf0=nf(0),nf1=nf(1),nf2=nf(2);
-const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
-const fTime=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-const fHM=new Intl.DateTimeFormat('es-ES',{hour:'2-digit',minute:'2-digit'});
-const fDay=new Intl.DateTimeFormat('es-ES',{weekday:'long',day:'numeric',month:'short'});
-const fDayS=new Intl.DateTimeFormat('es-ES',{weekday:'short',day:'numeric',month:'short'});
-const fDateKey=new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'});
-const pad=(n)=>String(n).padStart(2,'0');
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
-const DIR16=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'];
-const DIR8W=['el norte','el noreste','el este','el sureste','el sur','el suroeste','el oeste','el noroeste'];
-const dir16=az=>DIR16[Math.round(wrap360(az)/22.5)%16];
-const dir8w=az=>DIR8W[Math.round(wrap360(az)/45)%8];
-const sgn=v=>(v>=0?'+':'−')+nf0.format(Math.abs(Math.round(v)));
-const BODY_NAME={voyager:'Voyager 1',moon:'la Luna',sun:'el Sol'};
+const tz=Intl.DateTimeFormat().resolvedOptions().timeZone;
+const fDateKey=new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'});
+const pad=n=>String(n).padStart(2,'0');
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const dayKey=ms=>fDateKey.format(new Date(ms));
+
+/* idioma: inglés por defecto; ?lang=es o la última elección */
+const qLang=new URLSearchParams(location.search).get('lang');
+let LANG=(qLang==='es'||qLang==='en')?qLang:(store.get('udl-lang',null)||'en');
+let L,F;
+function t(key,p){let s=L[key];if(s==null)return key;if(p)s=s.replace(/\{(\w+)\}/g,(m,k)=>p[k]!=null?p[k]:m);return s;}
+let regionNames=null;
+function makeFmt(){const loc=L.locale,nf=d=>new Intl.NumberFormat(loc,{minimumFractionDigits:d,maximumFractionDigits:d});
+  try{regionNames=new Intl.DisplayNames([loc],{type:'region'});}catch(e){regionNames=null;}
+  const df=o=>new Intl.DateTimeFormat(loc,o);
+  F={n0:nf(0),n1:nf(1),n2:nf(2),time:df({hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}),hm:df({hour:'2-digit',minute:'2-digit',hour12:false}),
+     day:df({weekday:'long',day:'numeric',month:'short'}),dayS:df({weekday:'short',day:'numeric',month:'short'}),dm:df({day:'numeric',month:'long'})};}
+const dir16=az=>L.dir16[Math.round(wrap360(az)/22.5)%16];
+const dir8=az=>L.dir8[Math.round(wrap360(az)/45)%8];
+const sgn=v=>(v>=0?'+':'−')+F.n0.format(Math.abs(Math.round(v)));
+const bodyThe=b=>L.bodies[b][0],bodyBare=b=>L.bodies[b][1];
+const morseText=()=>store.get('udl-morse-'+LANG,null)||L.morseDefault;
 
 const DEFAULT_LOC={lat:40.4168,lon:-3.7038,src:'default'};
+/* Ciudades para elegir sin GPS: [nombre en inglés, nombre en español si cambia, país, latitud, longitud] */
+const CITIES=[
+['Madrid','','ES',40.42,-3.70],['Barcelona','','ES',41.39,2.17],['Valencia','','ES',39.47,-0.38],['Seville','Sevilla','ES',37.39,-5.98],['Zaragoza','','ES',41.65,-0.89],['Málaga','','ES',36.72,-4.42],
+['Murcia','','ES',37.99,-1.13],['Palma','','ES',39.57,2.65],['Las Palmas de Gran Canaria','','ES',28.12,-15.43],['Santa Cruz de Tenerife','','ES',28.47,-16.25],['Bilbao','','ES',43.26,-2.93],['Alicante','','ES',38.35,-0.48],
+['Córdoba','','ES',37.89,-4.78],['Valladolid','','ES',41.65,-4.72],['Vigo','','ES',42.24,-8.72],['Gijón','','ES',43.54,-5.66],['A Coruña','','ES',43.36,-8.41],['Granada','','ES',37.18,-3.60],
+['Vitoria-Gasteiz','','ES',42.85,-2.67],['Pamplona','','ES',42.82,-1.64],['Oviedo','','ES',43.36,-5.85],['Santander','','ES',43.46,-3.81],['San Sebastián','','ES',43.32,-1.98],['Salamanca','','ES',40.97,-5.66],
+['Toledo','','ES',39.86,-4.02],['Cádiz','','ES',36.53,-6.29],['Almería','','ES',36.84,-2.46],['Badajoz','','ES',38.88,-6.97],['Cáceres','','ES',39.47,-6.37],['León','','ES',42.60,-5.57],
+['Burgos','','ES',42.34,-3.70],['Logroño','','ES',42.47,-2.45],['Huelva','','ES',37.26,-6.95],['Jaén','','ES',37.77,-3.79],['Castellón de la Plana','','ES',39.99,-0.05],['Tarragona','','ES',41.12,1.25],
+['Lleida','','ES',41.62,0.62],['Girona','','ES',41.98,2.82],['Santiago de Compostela','','ES',42.88,-8.54],['Albacete','','ES',38.99,-1.86],['Cartagena','','ES',37.60,-0.98],['Ibiza','','ES',38.91,1.43],
+['Segovia','','ES',40.95,-4.12],['Ourense','','ES',42.34,-7.86],['Huesca','','ES',42.14,-0.41],['Teruel','','ES',40.34,-1.11],['Cuenca','','ES',40.07,-2.13],['Ciudad Real','','ES',38.99,-3.93],
+['Guadalajara','','ES',40.63,-3.17],['Ceuta','','ES',35.89,-5.32],['Melilla','','ES',35.29,-2.94],
+['Lisbon','Lisboa','PT',38.72,-9.14],['Porto','Oporto','PT',41.15,-8.61],['Andorra la Vella','','AD',42.51,1.52],
+['London','Londres','GB',51.51,-0.13],['Manchester','','GB',53.48,-2.24],['Edinburgh','Edimburgo','GB',55.95,-3.19],['Dublin','Dublín','IE',53.35,-6.26],
+['Paris','París','FR',48.86,2.35],['Marseille','Marsella','FR',43.30,5.37],['Lyon','','FR',45.76,4.84],['Toulouse','','FR',43.60,1.44],['Bordeaux','Burdeos','FR',44.84,-0.58],
+['Berlin','Berlín','DE',52.52,13.40],['Munich','Múnich','DE',48.14,11.58],['Frankfurt','Fráncfort','DE',50.11,8.68],['Hamburg','Hamburgo','DE',53.55,9.99],
+['Rome','Roma','IT',41.90,12.50],['Milan','Milán','IT',45.46,9.19],['Naples','Nápoles','IT',40.85,14.27],['Amsterdam','Ámsterdam','NL',52.37,4.90],['Brussels','Bruselas','BE',50.85,4.35],
+['Zurich','Zúrich','CH',47.38,8.54],['Geneva','Ginebra','CH',46.20,6.14],['Vienna','Viena','AT',48.21,16.37],['Copenhagen','Copenhague','DK',55.68,12.57],['Stockholm','Estocolmo','SE',59.33,18.07],
+['Oslo','','NO',59.91,10.75],['Helsinki','','FI',60.17,24.94],['Reykjavík','Reikiavik','IS',64.15,-21.94],['Warsaw','Varsovia','PL',52.23,21.01],['Prague','Praga','CZ',50.08,14.44],
+['Budapest','','HU',47.50,19.04],['Athens','Atenas','GR',37.98,23.73],['Istanbul','Estambul','TR',41.01,28.98],['Bucharest','Bucarest','RO',44.43,26.10],['Kyiv','Kiev','UA',50.45,30.52],['Moscow','Moscú','RU',55.76,37.62],
+['New York','Nueva York','US',40.71,-74.01],['Washington, D.C.','Washington D. C.','US',38.91,-77.04],['Boston','','US',42.36,-71.06],['Chicago','','US',41.88,-87.63],['Houston','','US',29.76,-95.37],
+['Dallas','','US',32.78,-96.80],['Miami','','US',25.76,-80.19],['Atlanta','','US',33.75,-84.39],['Los Angeles','Los Ángeles','US',34.05,-118.24],['Pasadena','','US',34.15,-118.14],['San Francisco','','US',37.77,-122.42],
+['San Diego','','US',32.72,-117.16],['Seattle','','US',47.61,-122.33],['Denver','','US',39.74,-104.99],['Phoenix','','US',33.45,-112.07],['Honolulu','','US',21.31,-157.86],
+['Toronto','','CA',43.65,-79.38],['Montreal','','CA',45.50,-73.57],['Vancouver','','CA',49.28,-123.12],
+['Mexico City','Ciudad de México','MX',19.43,-99.13],['Guadalajara','','MX',20.67,-103.35],['Monterrey','','MX',25.69,-100.32],['Puebla','','MX',19.04,-98.21],['Tijuana','','MX',32.51,-117.04],
+['Cancún','','MX',21.16,-86.85],['Mérida','','MX',20.97,-89.62],['Guatemala City','Ciudad de Guatemala','GT',14.63,-90.51],['San Salvador','','SV',13.69,-89.22],['Tegucigalpa','','HN',14.07,-87.19],
+['Managua','','NI',12.11,-86.24],['San José','','CR',9.93,-84.08],['Panama City','Ciudad de Panamá','PA',8.98,-79.52],['Havana','La Habana','CU',23.11,-82.37],['Santo Domingo','','DO',18.49,-69.93],
+['San Juan','','PR',18.47,-66.11],['Bogotá','','CO',4.71,-74.07],['Medellín','','CO',6.24,-75.58],['Cali','','CO',3.45,-76.53],['Barranquilla','','CO',10.96,-74.80],['Caracas','','VE',10.48,-66.90],
+['Quito','','EC',-0.18,-78.47],['Guayaquil','','EC',-2.17,-79.92],['Lima','','PE',-12.05,-77.04],['Cusco','Cuzco','PE',-13.53,-71.97],['La Paz','','BO',-16.50,-68.15],['Santa Cruz de la Sierra','','BO',-17.78,-63.18],
+['Santiago','Santiago de Chile','CL',-33.45,-70.67],['Antofagasta','','CL',-23.65,-70.40],['La Serena','','CL',-29.90,-71.25],['Buenos Aires','','AR',-34.60,-58.38],['Córdoba','','AR',-31.42,-64.18],
+['Rosario','','AR',-32.95,-60.65],['Mendoza','','AR',-32.89,-68.84],['Montevideo','','UY',-34.90,-56.16],['Asunción','','PY',-25.26,-57.58],
+['São Paulo','','BR',-23.55,-46.63],['Rio de Janeiro','Río de Janeiro','BR',-22.91,-43.17],['Brasília','Brasilia','BR',-15.79,-47.88],
+['Rabat','','MA',34.02,-6.84],['Casablanca','','MA',33.57,-7.59],['Marrakesh','Marrakech','MA',31.63,-7.98],['Tangier','Tánger','MA',35.76,-5.83],['Algiers','Argel','DZ',36.75,3.06],['Tunis','Túnez','TN',36.81,10.18],
+['Cairo','El Cairo','EG',30.04,31.24],['Lagos','','NG',6.52,3.38],['Nairobi','','KE',-1.29,36.82],['Johannesburg','Johannesburgo','ZA',-26.20,28.05],['Cape Town','Ciudad del Cabo','ZA',-33.92,18.42],
+['Dakar','','SN',14.72,-17.47],['Malabo','','GQ',3.75,8.78],['Dubai','Dubái','AE',25.20,55.27],['Tel Aviv','','IL',32.09,34.78],['New Delhi','Nueva Delhi','IN',28.61,77.21],['Mumbai','Bombay','IN',19.08,72.88],
+['Bangkok','','TH',13.76,100.50],['Singapore','Singapur','SG',1.35,103.82],['Beijing','Pekín','CN',39.90,116.41],['Shanghai','Shanghái','CN',31.23,121.47],['Hong Kong','','HK',22.32,114.17],
+['Seoul','Seúl','KR',37.57,126.98],['Tokyo','Tokio','JP',35.68,139.69],['Manila','','PH',14.60,120.98],['Jakarta','Yakarta','ID',-6.21,106.85],
+['Sydney','Sídney','AU',-33.87,151.21],['Melbourne','','AU',-37.81,144.96],['Perth','','AU',-31.95,115.86],['Auckland','','NZ',-36.85,174.76]];
+const normTxt=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const cityId=c=>c[0]+'|'+c[2];
+const findCity=id=>CITIES.find(c=>cityId(c)===id);
+function cityName(c){return (LANG==='es'&&c[1])?c[1]:c[0];}
+function countryName(cc){try{return regionNames.of(cc)||cc;}catch(e){return cc;}}
+function distKm(a1,o1,a2,o2){const r=D2R,x=Math.sin((a2-a1)*r/2)**2+Math.cos(a1*r)*Math.cos(a2*r)*Math.sin((o2-o1)*r/2)**2;return 12742*Math.asin(Math.sqrt(x));}
+function nearestCity(lat,lon){let best=null,bd=1e9;for(const c of CITIES){const d=distKm(lat,lon,c[3],c[4]);if(d<bd){bd=d;best=c;}}return bd<60?best:null;}
+function coordsText(lat,lon){return `${F.n2.format(Math.abs(lat))}° ${lat>=0?L.N:L.S}, ${F.n2.format(Math.abs(lon))}° ${lon>=0?L.E:L.W}`;}
+function placeName(){const lc=st.loc;
+  if(lc.src==='default')return L.locDefaultName;
+  if(lc.src==='city'){const c=findCity(lc.city);if(c)return `${cityName(c)}, ${countryName(c[2])}`;}
+  const n=nearestCity(lc.lat,lc.lon);
+  return n?t('locNear',{city:`${cityName(n)}, ${countryName(n[2])}`}):`${L.locMine} · ${coordsText(lc.lat,lc.lon)}`;}
 const st={
   loc:store.get('udl-loc',null)||DEFAULT_LOC,
   mode:null,Rraw:null,Rs:null,lastEvt:0,
@@ -381,70 +636,64 @@ const st={
   userOff:0,calibratedWith:null,calibBody:null,
   demoYaw:250,demoPitch:20,
   cam:false,sound:false,
-  beam:null,lightMode:'steady',morseText:store.get('udl-morse','HOLA VOYAGER'),
+  beam:null,lightMode:'steady',
   noTorch:false,manualAck:false,
   dayIdx:0
 };
 
-/* ---------- utilidades de tiempo ---------- */
+/* ---------- tiempos ---------- */
 function split(sec){sec=Math.max(0,sec);const d=Math.floor(sec/86400);sec-=d*86400;const h=Math.floor(sec/3600);sec-=h*3600;const m=Math.floor(sec/60);return {d,h,m,s:sec-m*60};}
-function durText(sec,withTenths){const p=split(sec);const s=withTenths?nf1.format(Math.floor(p.s*10)/10):nf0.format(Math.floor(p.s));
+function durText(sec,withTenths){const p=split(sec);const s=withTenths?F.n1.format(Math.floor(p.s*10)/10):F.n0.format(Math.floor(p.s));
   const parts=[];if(p.d)parts.push(p.d+' d');if(p.d||p.h)parts.push(p.h+' h');parts.push(pad(p.m)+' min');parts.push(s+' s');return parts.join(' ');}
-function ltHTML(sec){const p=split(sec);const si=Math.floor(p.s),dec=String(Math.floor((p.s-si)*1e4)).padStart(4,'0');
+function ltHTML(sec){const p=split(sec);const si=Math.floor(p.s),dec=String(Math.floor((p.s-si)*1e4)).padStart(4,'0'),sep=F.n1.format(1.5).charAt(1);
   let h='';if(p.d)h+=`<span>${p.d}</span><span class="u">d</span>`;
-  h+=`<span>${p.d?p.h:pad(p.h)}</span><span class="u">h</span><span>${pad(p.m)}</span><span class="u">min</span><span>${pad(si)}<span class="dec">,${dec}</span></span><span class="u">s</span>`;return h;}
-const dayKey=ms=>fDateKey.format(new Date(ms));
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+  h+=`<span>${p.d?p.h:pad(p.h)}</span><span class="u">h</span><span>${pad(p.m)}</span><span class="u">min</span><span>${pad(si)}<span class="dec">${sep}${dec}</span></span><span class="u">s</span>`;return h;}
 
-/* ---------- portada: contador ---------- */
+/* ---------- portada ---------- */
 function tickHome(){
   const now=Date.now(),v=voyager(now);
   $('#ltBig').innerHTML=ltHTML(v.lt);
-  $('#kmNow').textContent=nf0.format(v.d);
-  $('#auNow').textContent=nf2.format(v.d/149597870.7);
-  $('#rateNow').textContent=nf1.format(v.dd);
+  const km=$('#kmNow');if(km){km.textContent=F.n0.format(v.d);$('#auNow').textContent=F.n2.format(v.d/149597870.7);$('#rateNow').textContent=F.n1.format(v.dd);}
   const left=(CROSSING-now)/1000;
-  if(left>0){$('#crossK').textContent='Alcanza un día luz';$('#crossLeft').textContent='faltan '+durText(left,false);}
-  else{$('#crossK').textContent='Alcanzó un día luz';$('#crossLeft').textContent='hace '+durText(-left,false);}
-  const h=Math.floor(v.ra/15),m=Math.floor((v.ra/15-h)*60);
-  $('#radec').textContent=`AR ${h}h ${pad(m)}m · Dec ${v.dec>=0?'+':'−'}${nf1.format(Math.abs(v.dec))}°`;
+  $('#crossK').textContent=left>0?L.crossK:L.crossKPast;
+  $('#crossLeft').textContent=left>0?t('left',{dur:durText(left,false)}):t('ago',{dur:durText(-left,false)});
+  const h=Math.floor(v.ra/15),m=Math.floor((v.ra/15-h)*60),rd=$('#radec');
+  if(rd)rd.textContent=t('radec',{h,m:pad(m),dec:(v.dec>=0?'+':'−')+F.n1.format(Math.abs(v.dec))});
   tickBeams(now);
 }
 function initCross(){
   const d=new Date(CROSSING);
-  $('#crossWhen').textContent=`${cap(fDay.format(d))} · ${fTime.format(d)}`;
-  const z=(tzn,label)=>{const fd=new Intl.DateTimeFormat('es-ES',{timeZone:tzn,weekday:'short',day:'numeric',month:'short'}),ft=new Intl.DateTimeFormat('es-ES',{timeZone:tzn,hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    return `<dt>${label}</dt><dd>${fd.format(d)}</dd><dd class="mono">${ft.format(d)}</dd>`;};
-  $('#crossTz').textContent='en la hora de tu móvil ('+tz.replace(/_/g,' ')+')';
-  $('#crossZones').innerHTML=[z('UTC','UTC'),z('Europe/Madrid','Madrid'),z('America/Mexico_City','Ciudad de México'),z('America/New_York','Nueva York'),z('America/Los_Angeles','Los Ángeles')].join('');
-  $('#lede').innerHTML=`En ese instante, la luz que salga de tu móvil tardará exactamente <strong>un día</strong> en alcanzar la nave más lejana construida por la humanidad. En Europa ya será 19 de noviembre; en América, todavía 18. Esta web te dice hacia dónde apuntar y enciende la linterna por ti.`;
+  $('#crossWhen').textContent=`${cap(F.day.format(d))} · ${F.time.format(d)}`;
+  $('#crossTz').textContent=t('crossTz',{tz:tz.replace(/_/g,' ')});
+  $('#crossZones').innerHTML=L.zones.map(([tzn,label])=>{
+    const fd=new Intl.DateTimeFormat(L.locale,{timeZone:tzn,weekday:'short',day:'numeric',month:'short'}),ft=new Intl.DateTimeFormat(L.locale,{timeZone:tzn,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    return `<dt>${label}</dt><dd>${fd.format(d)}</dd><dd class="mono">${ft.format(d)}</dd>`;}).join('');
 }
-
-/* ---------- regla de tiempo-luz (logarítmica) ---------- */
 function drawRuler(){
-  const items=[['Luna','1,3 s',1.32,'up'],['Sol','8 min',493,'down'],['Júpiter','44 min',2613,'up'],['Neptuno','4 h',14613,'down'],['Voyager 1','1 día',86400,'up']];
+  const items=L.ruler.map((r,i)=>[r[0],r[1],[1.32,493,2613,14613,86400][i],i%2?'down':'up']);
   const x0=6,x1=334,y=46,lx=s=>x0+(x1-x0)*Math.log10(s)/Math.log10(86400);
-  let g=`<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="var(--line)" stroke-width="2"/>`;
+  let g=`<title>${L.rulerTitle}</title><defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#dcb65e" stop-opacity="0"/><stop offset="1" stop-color="#dcb65e" stop-opacity=".9"/></linearGradient></defs>`;
+  g+=`<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="var(--line)" stroke-width="2"/>`;
   for(const e of [1,10,60,600,3600,36000]){const x=lx(e);g+=`<line x1="${x}" y1="${y-3}" x2="${x}" y2="${y+3}" stroke="var(--line)" stroke-width="1.5"/>`;}
   g+=`<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="url(#rg)" stroke-width="2"/>`;
-  items.forEach(([n,t,s,pos],i)=>{const x=lx(s),last=i===items.length-1,first=i===0;
+  items.forEach(([n,tt,s,pos],i)=>{const x=lx(s),last=i===items.length-1,first=i===0;
     const anchor=last?'end':first?'start':'middle',ty=pos==='up'?y-24:y+24;
     g+=`<circle cx="${x}" cy="${y}" r="${last?5.5:3.5}" fill="${last?'var(--gold)':'var(--star)'}"/>`;
     g+=`<text x="${x}" y="${ty}" text-anchor="${anchor}" fill="${last?'var(--gold-hi)':'var(--star)'}" font-family="Jost,system-ui,sans-serif" font-size="11" font-weight="500" letter-spacing=".08em">${n.toUpperCase()}</text>`;
-    g+=`<text x="${x}" y="${ty+13}" text-anchor="${anchor}" fill="var(--dim)" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="10.5">${t}</text>`;});
-  $('#ruler').insertAdjacentHTML('beforeend',`<defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#dcb65e" stop-opacity="0"/><stop offset="1" stop-color="#dcb65e" stop-opacity=".9"/></linearGradient></defs>${g}`);
+    g+=`<text x="${x}" y="${ty+13}" text-anchor="${anchor}" fill="var(--dim)" font-family="IBM Plex Mono,ui-monospace,monospace" font-size="10.5">${tt}</text>`;});
+  $('#ruler').innerHTML=g;
 }
 
-/* ---------- visibilidad por día ---------- */
+/* ---------- cuándo apuntar ---------- */
+let DAYS=[];
 function buildDays(){
-  const now=new Date();const list=[];
-  const add=(y,m,d,label)=>{const s=new Date(y,m,d).getTime(),e=new Date(y,m,d+1).getTime();const k=dayKey(s+3600e3);if(!list.some(x=>x.key===k))list.push({start:s,end:e,key:k,label});};
-  add(now.getFullYear(),now.getMonth(),now.getDate(),'Hoy');
-  add(2026,10,18,null);add(2026,10,19,null);
-  list.forEach(x=>{if(!x.label)x.label=fDayS.format(new Date(x.start+3600e3));});
+  const now=new Date(),list=[];
+  const add=(y,m,d)=>{const s=new Date(y,m,d).getTime(),e=new Date(y,m,d+1).getTime(),k=dayKey(s+3600e3);if(!list.some(x=>x.key===k))list.push({start:s,end:e,key:k});};
+  add(now.getFullYear(),now.getMonth(),now.getDate());add(2026,10,18);add(2026,10,19);
+  const todayKey=dayKey(Date.now());
+  list.forEach(x=>{x.label=x.key===todayKey?L.today:F.dayS.format(new Date(x.start+3600e3));});
   return list;
 }
-let DAYS=[];
 function intervals(pts,f,thr){const out=[];let cur=null;
   const cross=(a,b)=>{const va=f(a)-thr,vb=f(b)-thr;return a.t+(b.t-a.t)*(va/(va-vb));};
   for(let i=0;i<pts.length;i++){const v=f(pts[i])-thr;
@@ -452,53 +701,56 @@ function intervals(pts,f,thr){const out=[];let cur=null;
     else if(v<=0&&cur){cur.b=cross(pts[i-1],pts[i]);out.push(cur);cur=null;}}
   if(cur){cur.b=pts[pts.length-1].t;cur.openB=true;out.push(cur);}return out;}
 function intersect(A,B){const out=[];for(const a of A)for(const b of B){const s=Math.max(a.a,b.a),e=Math.min(a.b,b.b);if(e-s>60000)out.push({a:s,b:e});}return out;}
-const ivText=iv=>iv.map(x=>`${fHM.format(x.a)} → ${fHM.format(x.b)}`).join(', ');
-function renderDay(){
-  const day=DAYS[st.dayIdx],{lat,lon}=st.loc,N=144,pts=[];
-  for(let k=0;k<=N;k++){const t=day.start+(day.end-day.start)*k/N;const v=bodyAltAz('voyager',t,lat,lon),s=bodyAltAz('sun',t,lat,lon);pts.push({t,a:v.alt,z:v.az,s:s.alt});}
-  const up=intervals(pts,p=>p.a,0),dark=intervals(pts,p=>-p.s,6),ideal=intersect(up,dark.map(d=>({a:d.a,b:d.b})));
-  /* SVG */
-  const W=340,H=176,L=30,R=6,T=10,B=22,iw=W-L-R,ih=H-T-B;
-  const X=t=>L+iw*(t-day.start)/(day.end-day.start),Y=a=>T+ih*(90-a)/180;
-  let g='';
-  // bandas de cielo según el Sol
-  let runStart=0,cat=null;const catOf=s=>s>0?'day':s>-12?'twi':'night';
-  for(let i=0;i<=N;i++){const c=i<N?catOf((pts[i].s+pts[i+1].s)/2):null;if(c!==cat){if(cat&&cat!=='night'){g+=`<rect x="${X(pts[runStart].t)}" y="${T}" width="${X(pts[i].t)-X(pts[runStart].t)}" height="${ih}" fill="var(--sky-${cat})"/>`;}cat=c;runStart=i;}}
-  for(const iv of ideal){g+=`<rect x="${X(iv.a)}" y="${T}" width="${X(iv.b)-X(iv.a)}" height="${ih}" fill="#dcb65e" fill-opacity=".16"/><line x1="${X(iv.a)}" x2="${X(iv.b)}" y1="${T+1}" y2="${T+1}" stroke="var(--gold)" stroke-width="2"/>`;}
-  for(const a of [60,30,-30,-60]){g+=`<line x1="${L}" x2="${W-R}" y1="${Y(a)}" y2="${Y(a)}" stroke="var(--line)" stroke-width="1" stroke-dasharray="2 4"/><text x="${L-5}" y="${Y(a)+3.5}" text-anchor="end" font-size="9.5" fill="var(--dim)" font-family="IBM Plex Mono,monospace">${a>0?a:'−'+(-a)}°</text>`;}
-  g+=`<line x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}" stroke="var(--dim)" stroke-width="1"/><text x="${L-5}" y="${Y(0)+3.5}" text-anchor="end" font-size="9.5" fill="var(--star)" font-family="IBM Plex Mono,monospace">0°</text>`;
-  const ds=new Date(day.start);
-  for(let h=0;h<=24;h+=3){const t=new Date(ds.getFullYear(),ds.getMonth(),ds.getDate(),h).getTime();const x=X(t);
-    g+=`<line x1="${x}" x2="${x}" y1="${T+ih}" y2="${T+ih+4}" stroke="var(--dim)"/><text x="${x}" y="${H-5}" text-anchor="${h===0?'start':h===24?'end':'middle'}" font-size="9.5" fill="var(--dim)" font-family="IBM Plex Mono,monospace">${pad(h)}</text>`;}
-  // curva de la Voyager
-  let above='',below='';
-  for(let i=0;i<N;i++){const p=pts[i],q=pts[i+1],seg=`M${X(p.t).toFixed(1)} ${Y(p.a).toFixed(1)}L${X(q.t).toFixed(1)} ${Y(q.a).toFixed(1)}`;if((p.a+q.a)/2>=0)above+=seg;else below+=seg;}
-  g+=`<path d="${below}" stroke="var(--dim)" stroke-width="1.5" fill="none" stroke-dasharray="3 3" opacity=".8"/><path d="${above}" stroke="var(--gold)" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
-  const now=Date.now();
-  if(CROSSING>=day.start&&CROSSING<day.end){const x=X(CROSSING);g+=`<line x1="${x}" x2="${x}" y1="${T}" y2="${T+ih}" stroke="var(--gold-hi)" stroke-dasharray="4 3"/><text x="${x+(x>W-80?-4:4)}" y="${T+ih-6}" text-anchor="${x>W-80?'end':'start'}" font-size="10" fill="var(--gold-hi)" font-family="Jost,system-ui,sans-serif" font-weight="500">1 día luz</text>`;}
-  if(now>=day.start&&now<day.end){const x=X(now),a=bodyAltAz('voyager',now,lat,lon).alt;g+=`<line x1="${x}" x2="${x}" y1="${T}" y2="${T+ih}" stroke="var(--star)" stroke-opacity=".7"/><circle cx="${x}" cy="${Y(a)}" r="4.5" fill="var(--gold-hi)" stroke="var(--void)" stroke-width="2"/><text x="${x+(x>W-60?-5:5)}" y="${T+11}" text-anchor="${x>W-60?'end':'start'}" font-size="10" fill="var(--star)" font-family="Jost,system-ui,sans-serif">ahora</text>`;}
-  $('#chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Altura de la Voyager 1 sobre el horizonte a lo largo del día">${g}</svg>`;
-  /* resumen */
+const ivText=iv=>iv.map(x=>`${F.hm.format(x.a)} – ${F.hm.format(x.b)}`).join(', ');
+function dayData(day,lat,lon){
+  const N=288,pts=[];
+  for(let k=0;k<=N;k++){const tt=day.start+(day.end-day.start)*k/N;const v=bodyAltAz('voyager',tt,lat,lon),s=bodyAltAz('sun',tt,lat,lon);pts.push({t:tt,a:v.alt,z:v.az,s:s.alt});}
+  const up=intervals(pts,p=>p.a,0),dark=intervals(pts,p=>-p.s,6),ideal=intersect(up,dark);
   let max=pts[0];for(const p of pts)if(p.a>max.a)max=p;
-  const rows=[];
-  rows.push(['Sobre el horizonte',up.length?ivText(up):'No sale este día','']);
-  rows.push(['De noche y visible',ideal.length?ivText(ideal):'No coincide con la noche','ideal']);
-  if(max.a>0)rows.push(['Más alta',`${nf0.format(max.a)}° a las ${fHM.format(max.t)}, hacia ${dir8w(max.z)}`,'']);
-  if(ideal.length){const mid=(ideal[0].a+ideal[0].b)/2,p=bodyAltAz('voyager',mid,lat,lon);rows.push(['Dónde mirar',`a ${fHM.format(mid)}: ${nf0.format(p.alt)}° de altura hacia ${dir8w(p.az)}`,'']);}
-  $('#visSum').innerHTML=rows.map(([k,v,c])=>`<div class="vis-row"><dt>${k}</dt><dd class="${c}">${v}</dd></div>`).join('');
-  const L2=st.loc;
-  $('#locText').textContent=L2.src==='default'?'Calculado para Madrid (por defecto)':`Calculado para ${nf2.format(Math.abs(L2.lat))}° ${L2.lat>=0?'N':'S'}, ${nf2.format(Math.abs(L2.lon))}° ${L2.lon>=0?'E':'O'}`;
-  $('#useLoc').hidden=L2.src==='gps';
-  /* nota del instante exacto */
+  return {pts,up,dark,ideal,max};
+}
+function renderDay(){
+  const day=DAYS[st.dayIdx],{lat,lon}=st.loc,D=dayData(day,lat,lon);
+  /* respuesta */
+  let html,muted=false;
+  if(D.ideal.length){
+    const iv=D.ideal[0],a=Math.min(iv.b,iv.a+15*60e3),b=Math.max(a,iv.b-15*60e3);
+    let tt=bodyAltAz('voyager',a,lat,lon).alt>=bodyAltAz('voyager',b,lat,lon).alt?a:b;tt=Math.round(tt/300000)*300000;
+    const p=bodyAltAz('voyager',tt,lat,lon);
+    html=`<p class="k">${L.bestK}</p><p class="big">${ivText(D.ideal)}</p><p class="desc">${L.bestDesc}</p><p class="look">${t('look',{dir:dir8(p.az),time:F.hm.format(tt),alt:F.n0.format(Math.max(0,p.alt)),fists:L.fists(Math.round(Math.max(0,p.alt)/5)/2)})}</p>`;
+  }else if(D.up.length){muted=true;html=`<p class="k">${L.dayOnlyK}</p><p class="big">${ivText(D.up)}</p><p class="desc">${L.dayOnlyDesc}</p>`;}
+  else{muted=true;html=`<p class="k">${L.neverK}</p><p class="desc">${L.neverDesc}</p>`;}
+  const ans=$('#answer');ans.innerHTML=html;ans.classList.toggle('muted',muted);
+  /* barra de 24 h */
+  const W=340,x0=2,x1=338,by=24,bh=18,N=D.pts.length-1,X=tt=>x0+(x1-x0)*(tt-day.start)/(day.end-day.start);
+  const stOf=(p,q)=>{const a=(p.a+q.a)/2,s=(p.s+q.s)/2;return a<0?'below':s>-6?'day':'best';};
+  const fill={below:'var(--tl-below)',day:'var(--tl-day)',best:'var(--gold)'};
+  let g=`<defs><clipPath id="tlc"><rect x="${x0}" y="${by}" width="${x1-x0}" height="${bh}" rx="9"/></clipPath></defs><g clip-path="url(#tlc)">`;
+  let run=0,cur=null;
+  for(let i=0;i<=N;i++){const c=i<N?stOf(D.pts[i],D.pts[i+1]):null;if(c!==cur){if(cur)g+=`<rect x="${X(D.pts[run].t).toFixed(2)}" y="${by}" width="${(X(D.pts[i].t)-X(D.pts[run].t)+.4).toFixed(2)}" height="${bh}" fill="${fill[cur]}"/>`;cur=c;run=i;}}
+  g+=`</g><rect x="${x0}" y="${by}" width="${x1-x0}" height="${bh}" rx="9" fill="none" stroke="var(--line)"/>`;
+  const ds=new Date(day.start);
+  for(let h=0;h<=24;h+=3){const x=X(new Date(ds.getFullYear(),ds.getMonth(),ds.getDate(),h).getTime());
+    g+=`<line x1="${x}" x2="${x}" y1="${by+bh+3}" y2="${by+bh+(h%6?6:8)}" stroke="var(--dim)"/>`;
+    if(h%6===0)g+=`<text x="${x}" y="${by+bh+21}" text-anchor="${h===0?'start':h===24?'end':'middle'}" font-size="10.5" fill="var(--dim)" font-family="IBM Plex Mono,monospace">${pad(h)}:00</text>`;}
+  const now=Date.now(),lbl=(x,y,txt,col,w)=>`<text x="${x<30?x-4:x>W-30?x+4:x}" y="${y}" text-anchor="${x<30?'start':x>W-30?'end':'middle'}" font-size="11" fill="${col}" font-family="Jost,system-ui,sans-serif" font-weight="${w}">${txt}</text>`;
+  if(now>=day.start&&now<day.end){const x=X(now);g+=`<line x1="${x}" x2="${x}" y1="${by-5}" y2="${by+bh+5}" stroke="var(--star)" stroke-width="2"/>`+lbl(x,by-9,L.now,'var(--star)',500);}
+  if(CROSSING>=day.start&&CROSSING<day.end){const x=X(CROSSING);g+=`<line x1="${x}" x2="${x}" y1="${by-5}" y2="${by+bh+5}" stroke="var(--gold-hi)" stroke-width="2" stroke-dasharray="3 2"/>`+lbl(x,by+bh+36,L.ld+' · '+F.hm.format(CROSSING),'var(--gold-hi)',500);}
+  $('#timeline').innerHTML=`<svg viewBox="0 0 ${W} ${by+bh+42}" role="img" aria-label="${L.lgBest}: ${D.ideal.length?ivText(D.ideal):'—'}">${g}</svg>`;
+  /* sale / más alta / se pone */
+  const rise=D.up.find(x=>!x.openA),set=D.up.find(x=>!x.openB);
+  $('#rst').innerHTML=`<div><dt>${L.rises}</dt><dd>${rise?F.hm.format(rise.a):'—'}</dd></div>`+
+    `<div><dt>${L.highest}</dt><dd>${D.max.a>0?F.hm.format(D.max.t)+`<small>${t('highestSub',{alt:F.n0.format(D.max.a),dir:dir16(D.max.z)})}</small>`:'—'}</dd></div>`+
+    `<div><dt>${L.sets}</dt><dd>${set?F.hm.format(set.b):'—'}</dd></div>`;
+  $('#locText').textContent=t('locFrom',{place:placeName()})+' '+L.locTz;
+  /* el instante exacto */
   const c=bodyAltAz('voyager',CROSSING,lat,lon),n=$('#crossNote');n.hidden=false;
   if(c.alt<0){
-    const d18=DAYS.find(x=>x.key==='2026-11-18')||DAYS[0];
-    let tip='';
-    const pts18=[];for(let k=0;k<=144;k++){const t=d18.start+(d18.end-d18.start)*k/144;pts18.push({t,a:bodyAltAz('voyager',t,lat,lon).alt,s:bodyAltAz('sun',t,lat,lon).alt});}
-    const id18=intersect(intervals(pts18,p=>p.a,0),intervals(pts18,p=>-p.s,6));
-    if(id18.length){const sAt=voyager(id18[0].a).lt;tip=` Si prefieres apuntar al cielo, hazlo el 18 entre las ${ivText(id18).replace(' → ',' y las ')}: a la nave le faltarán solo ${nf0.format(Math.max(1,86400-sAt))} segundos-luz para el día luz.`;}
-    n.className='note warn';n.textContent=`En el instante exacto (${fHM.format(CROSSING)}) la Voyager 1 estará ${nf0.format(-c.alt)}° por debajo de tu horizonte, hacia ${dir8w(c.az)}: apuntarás hacia el suelo, a través de la Tierra.${tip}`;
-  }else{n.className='note';n.textContent=`En el instante exacto (${fHM.format(CROSSING)}) la Voyager 1 estará ${nf0.format(c.alt)}° sobre tu horizonte, hacia ${dir8w(c.az)}.`;}
+    let tip='';const d18=DAYS.find(x=>x.key==='2026-11-18');
+    if(d18){const D18=dayData(d18,lat,lon);if(D18.ideal.length){const iv=D18.ideal[0],sAt=voyager(iv.a).lt;
+      tip=t('crossTip',{day:F.dm.format(new Date(2026,10,18,12)),a:F.hm.format(iv.a),b:F.hm.format(iv.b),s:F.n0.format(Math.max(1,86400-sAt))});}}
+    n.className='note warn';n.textContent=t('crossBelow',{time:F.hm.format(CROSSING),alt:F.n0.format(-c.alt),dir:dir8(c.az)})+tip;
+  }else{n.className='note';n.textContent=t('crossAbove',{time:F.hm.format(CROSSING),alt:F.n0.format(c.alt),dir:dir8(c.az)});}
 }
 function renderChips(){
   $('#dayChips').innerHTML=DAYS.map((d,i)=>`<button class="chip" type="button" data-i="${i}" aria-pressed="${i===st.dayIdx}">${d.label}</button>`).join('');
@@ -511,10 +763,44 @@ function requestLocation(cb){
   navigator.geolocation.getCurrentPosition(p=>{
     st.loc={lat:p.coords.latitude,lon:p.coords.longitude,acc:p.coords.accuracy,src:'gps'};
     store.set('udl-loc',{lat:+st.loc.lat.toFixed(3),lon:+st.loc.lon.toFixed(3),src:'saved'});
-    renderDay();cb&&cb(true);
+    locChanged();cb&&cb(true);
   },()=>{cb&&cb(false);},{enableHighAccuracy:false,timeout:15000,maximumAge:600000});
 }
-$('#useLoc').addEventListener('click',()=>requestLocation(ok=>{if(!ok)toast('No se pudo obtener tu ubicación. Revisa el permiso del navegador.');}));
+function locChanged(){posCache.t=0;renderLocbar();renderDay();}
+function setCity(c){if(!c)return;st.loc={lat:c[3],lon:c[4],src:'city',city:cityId(c)};store.set('udl-loc',st.loc);locChanged();closeLocSheet();}
+function useGps(btn){
+  if(btn){btn.disabled=true;btn.lastElementChild?btn.lastElementChild.textContent=L.locBusy:btn.textContent=L.locBusy;}
+  requestLocation(ok=>{if(btn){btn.disabled=false;}if(ok){closeLocSheet();}else{toast(L.locFail);renderLocbar();const g=$('#locGpsBtn span');if(g)g.textContent=L.locGps;}});
+}
+const PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+function renderLocbar(){
+  const el=$('#locbar'),ask=st.loc.src==='default';
+  el.classList.toggle('ask',ask);
+  el.innerHTML=ask?`${PIN}<p class="ask-text">${L.locAsk}</p><div class="ask-actions"><button class="primary" type="button" data-a="gps">${L.locGps}</button><button class="secondary" type="button" data-a="city">${L.locCity}</button></div>`
+    :`${PIN}<div class="locbar-text"><span class="k">${L.locK}</span><strong>${placeName()}</strong></div><button class="ghost" type="button" data-a="open">${L.locChange}</button>`;
+}
+$('#locbar').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.a==='gps')useGps(b);else openLocSheet();});
+$('#locLink').addEventListener('click',openLocSheet);
+/* hoja para elegir ubicación */
+const locSheet=$('#locSheet'),locBd=$('#locBackdrop'),citySearch=$('#citySearch');
+const myCC=((navigator.language||'').split('-')[1]||'').toUpperCase();
+function renderCities(q){
+  const n=normTxt(q.trim());let list;
+  if(!n){list=CITIES.filter(c=>c[2]===myCC);if(list.length<8)list=list.concat(CITIES.filter(c=>c[2]!==myCC).slice(0,12-list.length));}
+  else{const scored=[];for(const c of CITIES){const a=normTxt(c[0]),b=normTxt(c[1]||''),k=normTxt(countryName(c[2]));
+      const sc=(a.startsWith(n)||(b&&b.startsWith(n)))?0:(a.includes(n)||(b&&b.includes(n)))?1:k.startsWith(n)?2:-1;if(sc>=0)scored.push([sc,c]);}
+    scored.sort((x,y)=>x[0]-y[0]);list=scored.map(x=>x[1]);}
+  $('#cityList').innerHTML=list.length?list.slice(0,40).map(c=>`<li><button type="button" data-id="${cityId(c)}"><span>${cityName(c)}</span><small>${countryName(c[2])}</small></button></li>`).join(''):`<li><p class="fine">${L.locNone}</p></li>`;
+}
+function openLocSheet(){locSheet.hidden=false;locBd.hidden=false;citySearch.value='';renderCities('');$('#locGpsBtn span').textContent=L.locGps;
+  document.body.style.overflow='hidden';if(matchMedia('(pointer:fine)').matches)setTimeout(()=>citySearch.focus({preventScroll:true}),50);else $('#locGpsBtn').focus({preventScroll:true});}
+function closeLocSheet(){if(locSheet.hidden)return;locSheet.hidden=true;locBd.hidden=true;if(!V.open)document.body.style.overflow='';}
+citySearch.addEventListener('input',()=>renderCities(citySearch.value));
+citySearch.addEventListener('keydown',e=>{if(e.key==='Enter'){const f=$('#cityList button');if(f){e.preventDefault();setCity(findCity(f.dataset.id));}}});
+$('#cityList').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setCity(findCity(b.dataset.id));});
+$('#locGpsBtn').addEventListener('click',e=>useGps(e.currentTarget));
+$('#locClose').addEventListener('click',closeLocSheet);locBd.addEventListener('click',closeLocSheet);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLocSheet();});
 
 /* ---------- haces enviados ---------- */
 function getBeams(){return store.get('udl-beams',[]);}
@@ -522,29 +808,29 @@ function saveBeam(b){const l=getBeams();l.unshift(b);store.set('udl-beams',l.sli
 function renderBeams(){
   const l=getBeams();$('#beamsSec').hidden=!l.length;
   $('#beamsList').innerHTML=l.map((b,i)=>`<li class="beam-item" data-i="${i}">
-    <div class="top"><span>${cap(fDayS.format(new Date(b.t)))} · <span class="mono">${fTime.format(new Date(b.t))}</span></span><span>llega <span class="mono">${fDayS.format(new Date(b.arr))} ${fTime.format(new Date(b.arr))}</span></span></div>
+    <div class="top"><span>${cap(F.dayS.format(new Date(b.t)))} · <span class="mono">${F.time.format(new Date(b.t))}</span></span><span>${t('arrives',{d:`<span class="mono">${F.dayS.format(new Date(b.arr))} ${F.time.format(new Date(b.arr))}</span>`})}</span></div>
     <div class="bar"><i></i></div><div class="sub"></div></li>`).join('');
   tickBeams(Date.now());
 }
 function tickBeams(now){
   const l=getBeams();if(!l.length)return;
   document.querySelectorAll('.beam-item').forEach(el=>{const b=l[+el.dataset.i];if(!b)return;
-    const frac=Math.min(1,(now-b.t)/(b.arr-b.t)),km=Math.min(1,frac)*b.up*C_KMS;
+    const frac=Math.min(1,(now-b.t)/(b.arr-b.t)),km=frac*b.up*C_KMS;
     el.querySelector('.bar i').style.width=(frac*100).toFixed(3)+'%';
-    el.querySelector('.sub').textContent=frac>=1?`Ha alcanzado la Voyager 1 tras ${nf0.format(b.up*C_KMS)} km`:`${nf0.format(km)} km recorridos · ${nf2.format(frac*100)} % · faltan ${durText((b.arr-now)/1000,false)}`;});
+    el.querySelector('.sub').textContent=frac>=1?t('reached',{km:F.n0.format(b.up*C_KMS)}):t('travelled',{km:F.n0.format(km),pct:F.n2.format(frac*100),dur:durText((b.arr-now)/1000,false)});});
 }
 
 /* ---------- toast ---------- */
 let toastT=0;
-function toast(msg,ms=3600){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,ms);}
+function toast(msg,ms=3600){const el=$('#toast');el.textContent=msg;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,ms);}
 
 /* =====================================================================
    VISOR
    ===================================================================== */
-const V={el:$('#visor'),cv:$('#sky'),video:$('#cam'),ctx:null,raf:0,w:0,h:0,f:600,th:0,dpr:1,open:false,openedAt:0,aligned:false,lastHud:0,lastSep:null,lastPhone:null,lastTarget:null};
+const V={el:$('#visor'),cv:$('#sky'),video:$('#cam'),ctx:null,raf:0,w:0,h:0,f:600,th:0,dpr:1,open:false,openedAt:0,aligned:false,lastHud:0,lastSep:null,lastB:null};
 V.ctx=V.cv.getContext('2d');
 
-/* matrices: R en orden de filas, columnas = ejes del móvil (x derecha, y arriba, z hacia ti) en el marco Este-Norte-Arriba */
+/* R por filas; columnas = ejes del móvil (x derecha, y arriba, z hacia ti) en Este-Norte-Arriba */
 function rotMat(a,b,g){a*=D2R;b*=D2R;g*=D2R;const cA=Math.cos(a),sA=Math.sin(a),cB=Math.cos(b),sB=Math.sin(b),cG=Math.cos(g),sG=Math.sin(g);
   return [cA*cG-sA*sB*sG,-cB*sA,cG*sA*sB+cA*sG, cG*sA+cA*sB*sG,cA*cB,sA*sG-cA*cG*sB, -cB*sG,sB,cB*cG];}
 const col=(R,i)=>[R[i],R[3+i],R[6+i]];
@@ -566,10 +852,10 @@ function onOrient(e,absEvt){
   if(typeof e.webkitCompassHeading==='number'&&!isNaN(e.webkitCompassHeading)){mode='ios';iosSample(R,e.webkitCompassHeading,e.webkitCompassAccuracy);}
   else if(absEvt||e.absolute===true)mode='abs';else mode='rel';
   if(st.mode==='abs'&&mode==='rel')return;
-  if(st.mode==='demo'){V.cv.style.cursor='';}
+  if(st.mode==='demo')V.cv.style.cursor='';
   st.mode=mode;st.Rraw=R;st.lastEvt=performance.now();
 }
-/* iOS: alpha no apunta al norte; se fija con webkitCompassHeading cuando la parte de arriba y la de atrás del móvil miran al mismo rumbo */
+/* iOS: alpha no apunta al norte; se fija con webkitCompassHeading cuando la parte de arriba y la de atrás miran al mismo rumbo */
 function iosSample(R,heading,acc){
   if(typeof acc==='number'&&(acc<0||acc>50))return;
   if(screenAngle()!==0)return;
@@ -585,7 +871,6 @@ let sensorsOn=false;
 function startSensors(){if(sensorsOn)return;sensorsOn=true;
   window.addEventListener('deviceorientationabsolute',e=>onOrient(e,true));
   window.addEventListener('deviceorientation',e=>onOrient(e,false));}
-
 function currentR(){
   let R;
   if(st.mode==='demo')R=demoR(st.demoYaw,st.demoPitch);
@@ -595,8 +880,7 @@ function currentR(){
   const yaw=(st.mode==='ios'?(st.iosOff||0):0)+st.userOff;
   return yaw?yawRot(R,yaw):R;
 }
-
-/* proyección sobre la pantalla (cámara trasera = −z) */
+/* proyección (cámara trasera = −z) */
 function project(R,v){
   const dx=R[0]*v[0]+R[3]*v[1]+R[6]*v[2],dy=R[1]*v[0]+R[4]*v[1]+R[7]*v[2],dz=R[2]*v[0]+R[5]*v[1]+R[8]*v[2];
   const c=Math.cos(V.th),s=Math.sin(V.th),sr=dx*c-dy*s,su=dx*s+dy*c,fw=-dz;
@@ -608,8 +892,6 @@ function sizeCanvas(){
   V.f=(Math.max(V.w,V.h)/2)/Math.tan(33*D2R);
 }
 window.addEventListener('resize',()=>{if(V.open)sizeCanvas();});
-
-/* posiciones (se recalculan cada 500 ms) */
 let posCache={t:0};
 function positions(){
   const now=Date.now();if(now-posCache.t<500)return posCache;
@@ -628,34 +910,27 @@ function drawFrame(R,P,target,sep){
   const ctx=V.ctx,w=V.w,h=V.h,cam=st.cam;
   ctx.setTransform(V.dpr,0,0,V.dpr,0,0);ctx.clearRect(0,0,w,h);
   if(!cam){const gr=ctx.createRadialGradient(w/2,h*0.45,0,w/2,h*0.45,Math.max(w,h)*0.8);gr.addColorStop(0,'#0d1430');gr.addColorStop(1,'#05070e');ctx.fillStyle=gr;ctx.fillRect(0,0,w,h);}
-  // rejilla
-  ctx.lineWidth=1;
-  ctx.strokeStyle=cam?'rgba(236,230,214,.18)':'rgba(149,155,180,.14)';
+  ctx.lineWidth=1;ctx.strokeStyle=cam?'rgba(236,230,214,.18)':'rgba(149,155,180,.14)';
   for(const l of GRID.mer)polyline(ctx,R,l);
   for(const a of [-60,-30,30,60]){ctx.setLineDash(a<0?[3,5]:[]);polyline(ctx,R,GRID.alts[a]);}
   ctx.setLineDash([]);ctx.lineWidth=2;ctx.strokeStyle=cam?'rgba(255,228,166,.55)':'rgba(236,230,214,.45)';polyline(ctx,R,GRID.alts[0]);
-  // puntos cardinales
-  ctx.font='500 13px Jost, system-ui, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-  const CARD=['NORTE','NE','ESTE','SE','SUR','SO','OESTE','NO'];
+  ctx.textAlign='center';ctx.textBaseline='middle';
   for(let i=0;i<8;i++){const p=project(R,enu(i*45,0));if(p.fw<0.2||p.x<-40||p.x>w+40||p.y<-20||p.y>h+20)continue;
     const main=i%2===0;ctx.fillStyle=main?'rgba(236,230,214,.95)':'rgba(149,155,180,.9)';ctx.font=(main?'600 13px':'500 12px')+' Jost, system-ui, sans-serif';
-    ctx.fillText(CARD[i],p.x,p.y-14);ctx.fillRect(p.x-.75,p.y-5,1.5,10);}
-  // horizonte: rótulo bajo tierra
-  // Sol y Luna
-  drawBody(R,P.vS,'Sol','#ffd27a',9,target==='sun');
-  drawBody(R,P.vM,'Luna','#d9dbe6',8,target==='moon');
-  // Voyager
+    ctx.fillText(L.card[i],p.x,p.y-14);ctx.fillRect(p.x-.75,p.y-5,1.5,10);}
+  drawBody(R,P.vS,bodyBare('sun'),'#ffd27a',9,target==='sun');
+  drawBody(R,P.vM,bodyBare('moon'),'#d9dbe6',8,target==='moon');
   const vt=project(R,P.vV),tgtV=target==='voyager';
   const onScreen=vt.fw>0&&vt.x>24&&vt.x<w-24&&vt.y>90&&vt.y<h-210;
-  if(st.beam&&st.beam.lightOn&&onScreen){drawBeamPath(vt);}
+  if(st.beam&&st.beam.lightOn&&onScreen)drawBeamPath(vt);
   if(onScreen){
     ctx.strokeStyle=tgtV?'#ffe4a6':'rgba(220,182,94,.6)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(vt.x,vt.y,16,0,Math.PI*2);ctx.stroke();
     ctx.fillStyle='#dcb65e';ctx.beginPath();ctx.arc(vt.x,vt.y,4,0,Math.PI*2);ctx.fill();
-    ctx.font='600 12px Jost, system-ui, sans-serif';ctx.fillStyle='#ffe4a6';ctx.textAlign='left';ctx.fillText('VOYAGER 1',vt.x+22,vt.y-6);
-    ctx.font='400 11px "IBM Plex Mono", monospace';ctx.fillStyle='rgba(236,230,214,.75)';ctx.fillText(P.voyager.alt<0?'bajo el horizonte':'1 día luz',vt.x+22,vt.y+9);
+    const lft=vt.x>w-150,lx=lft?vt.x-22:vt.x+22;ctx.textAlign=lft?'right':'left';
+    ctx.font='600 12px Jost, system-ui, sans-serif';ctx.fillStyle='#ffe4a6';ctx.fillText('VOYAGER 1',lx,vt.y-6);
+    ctx.font='400 11px "IBM Plex Mono", monospace';ctx.fillStyle='rgba(236,230,214,.75)';ctx.fillText(P.voyager.alt<0?L.cvBelow:L.cvLd,lx,vt.y+9);
   }else if(tgtV)drawEdgeArrow(vt,'VOYAGER 1');
-  if(!tgtV){const bp=project(R,target==='moon'?P.vM:P.vS);const vis=bp.fw>0&&bp.x>24&&bp.x<w-24&&bp.y>90&&bp.y<h-210;if(!vis)drawEdgeArrow(bp,target==='moon'?'LUNA':'SOL');}
-  // mira central
+  if(!tgtV){const bp=project(R,target==='moon'?P.vM:P.vS);const vis=bp.fw>0&&bp.x>24&&bp.x<w-24&&bp.y>90&&bp.y<h-210;if(!vis)drawEdgeArrow(bp,bodyBare(target).toUpperCase());}
   const r3=Math.max(22,V.f*Math.tan(3*D2R)),al=sep!=null&&sep<3;
   ctx.strokeStyle=al?'#ffe4a6':'rgba(236,230,214,.85)';ctx.lineWidth=al?2.5:1.5;
   ctx.beginPath();ctx.arc(w/2,h/2,r3,0,Math.PI*2);ctx.stroke();
@@ -670,46 +945,47 @@ function drawBody(R,v,label,color,rad,isTarget){
   ctx.globalAlpha=1;ctx.font='500 12px Jost, system-ui, sans-serif';ctx.fillStyle='rgba(236,230,214,.85)';ctx.textAlign='left';ctx.fillText(label,p.x+rad+8,p.y);
 }
 function drawEdgeArrow(p,label){
-  const ctx=V.ctx,w=V.w,h=V.h;let dx=p.sr,dy=-p.su;const L=Math.hypot(dx,dy);if(L<1e-6){dx=0;dy=1;}else{dx/=L;dy/=L;}
+  const ctx=V.ctx,w=V.w,h=V.h;let dx=p.sr,dy=-p.su;const Ln=Math.hypot(dx,dy);if(Ln<1e-6){dx=0;dy=1;}else{dx/=Ln;dy/=Ln;}
   const top=100,bot=h-220,left=36,right=w-36,cx=w/2,cy=(top+bot)/2;
-  const tx=dx>0?(right-cx)/dx:dx<0?(left-cx)/dx:Infinity,ty=dy>0?(bot-cy)/dy:dy<0?(top-cy)/dy:Infinity,t=Math.min(tx,ty);
-  const x=cx+dx*t,y=cy+dy*t,ang=Math.atan2(dy,dx);
+  const tx=dx>0?(right-cx)/dx:dx<0?(left-cx)/dx:Infinity,ty=dy>0?(bot-cy)/dy:dy<0?(top-cy)/dy:Infinity,tt=Math.min(tx,ty);
+  const x=cx+dx*tt,y=cy+dy*tt,ang=Math.atan2(dy,dx);
   ctx.save();ctx.translate(x,y);ctx.rotate(ang);ctx.fillStyle='#dcb65e';ctx.beginPath();ctx.moveTo(14,0);ctx.lineTo(-8,-10);ctx.lineTo(-3,0);ctx.lineTo(-8,10);ctx.closePath();ctx.fill();ctx.restore();
   ctx.font='600 11px Jost, system-ui, sans-serif';ctx.fillStyle='#ffe4a6';ctx.textAlign=x>w/2?'right':'left';ctx.fillText(label,x+(x>w/2?-20:20),y+(y>h/2?-16:16));
 }
-function drawBeamPath(vt){const ctx=V.ctx,w=V.w,h=V.h,t=performance.now()/1000;
+function drawBeamPath(vt){const ctx=V.ctx,w=V.w,h=V.h,tt=performance.now()/1000;
   ctx.strokeStyle='rgba(255,228,166,.35)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(w/2,h/2);ctx.lineTo(vt.x,vt.y);ctx.stroke();
-  for(let k=0;k<3;k++){const f=((t*0.9+k/3)%1);ctx.fillStyle=`rgba(255,244,214,${1-f})`;ctx.beginPath();ctx.arc(w/2+(vt.x-w/2)*f,h/2+(vt.y-h/2)*f,3,0,Math.PI*2);ctx.fill();}}
+  for(let k=0;k<3;k++){const f=((tt*0.9+k/3)%1);ctx.fillStyle=`rgba(255,244,214,${1-f})`;ctx.beginPath();ctx.arc(w/2+(vt.x-w/2)*f,h/2+(vt.y-h/2)*f,3,0,Math.PI*2);ctx.fill();}}
 
 /* HUD */
 function hud(R,P,target,sep,B){
   const tgt=P[target],pAz=azOf(B),pAlt=altOf(B);
-  $('#rTargetK').textContent=target==='voyager'?'Voyager 1':target==='moon'?'Luna':'Sol';
-  $('#rTarget').textContent=`${nf0.format(tgt.az)}° ${dir16(tgt.az)} · ${sgn(tgt.alt)}°`;
-  $('#rPhone').textContent=`${nf0.format(pAz)}° · ${sgn(pAlt)}°`;
-  $('#rSep').textContent=nf1.format(sep)+'°';
+  $('#rTargetK').textContent=bodyBare(target);
+  $('#rTarget').textContent=`${F.n0.format(tgt.az)}° ${dir16(tgt.az)} · ${sgn(tgt.alt)}°`;
+  $('#rPhone').textContent=`${F.n0.format(pAz)}° · ${sgn(pAlt)}°`;
+  $('#rSep').textContent=F.n1.format(sep)+'°';
   const g=$('#vGuide'),sub=$('#vSub');let main='',s='',ok=false,warn=false;
-  const dAz=wrap180(tgt.az-pAz),dAlt=tgt.alt-pAlt;
-  if(st.mode==='ios'&&st.iosOff==null){main='Inclina el móvil como si leyeras un mensaje';s='Así la brújula del iPhone encuentra el norte.';}
-  else if(sep<3){ok=true;main=target==='voyager'?(st.beam?'Tu luz va hacia la Voyager 1':'Alineado con la Voyager 1'):`Alineado con ${BODY_NAME[target]}`;
-    s=st.calibBody?'Si el astro real está dentro del círculo, pulsa Fijar.':st.beam?'Mantén el móvil quieto.':'Pulsa Enviar luz.';}
-  else{const parts=[];if(Math.abs(dAz)>=2&&Math.abs(pAlt)<80)parts.push(`Gira ${nf0.format(Math.abs(dAz))}° a la ${dAz>0?'derecha':'izquierda'}`);
-    if(Math.abs(dAlt)>=2)parts.push(`${dAlt>0?'Sube':'Baja'} ${nf0.format(Math.abs(dAlt))}°`);main=parts.join(' · ')||'Casi…';
-    s=st.calibBody?`Centra ${BODY_NAME[target]} real en el círculo y pulsa Fijar.`:'Apunta con la parte de atrás del móvil, donde está la linterna.';}
-  if(target==='voyager'&&tgt.alt<0&&!(st.mode==='ios'&&st.iosOff==null)){warn=true;s=`Está ${nf0.format(-tgt.alt)}° bajo el horizonte: apuntas a través de la Tierra.`;}
-  if(st.mode==='rel'&&!st.calibratedWith){warn=true;s='Este navegador no da el norte: pulsa Calibrar con la Luna o el Sol.';}
+  const dAz=wrap180(tgt.az-pAz),dAlt=tgt.alt-pAlt,iosWait=st.mode==='ios'&&st.iosOff==null;
+  if(iosWait){main=L.iosTilt;s=L.iosTiltSub;}
+  else if(sep<3){ok=true;main=target==='voyager'?(st.beam?L.beaming:L.aligned):t('alignedBody',{body:bodyThe(target)});
+    s=st.calibBody?t('subLock',{Body:bodyBare(target),body:bodyThe(target)}):st.beam?L.subStill:L.subSend;}
+  else{const parts=[];if(Math.abs(dAz)>=2&&Math.abs(pAlt)<80)parts.push(t(dAz>0?'right':'leftT',{n:F.n0.format(Math.abs(dAz))}));
+    if(Math.abs(dAlt)>=2)parts.push(t(dAlt>0?'up':'down',{n:F.n0.format(Math.abs(dAlt))}));main=parts.join(' · ')||L.almost;
+    s=st.calibBody?t('subCenter',{Body:bodyBare(target),body:bodyThe(target)}):L.subBack;}
+  if(target==='voyager'&&tgt.alt<0&&!iosWait){warn=true;s=t('subBelow',{n:F.n0.format(-tgt.alt)});}
+  if(st.mode==='rel'&&!st.calibratedWith){warn=true;s=L.subRel;}
   g.textContent=main;g.classList.toggle('ok',ok);sub.textContent=s;sub.classList.toggle('warn',warn);
-  const lt=voyager(Date.now()).lt;$('#vLt').textContent='Tiempo-luz '+durText(lt,true);
+  $('#vLt').textContent=t('ltLine',{dur:durText(voyager(Date.now()).lt,true)});
   const pc=$('#pCompass');
-  if(st.mode==='demo'){pc.textContent='Vista de prueba · arrastra';pc.className='pill warn';}
-  else if(st.calibratedWith){pc.textContent='Calibrada con '+(st.calibratedWith==='moon'?'la Luna':'el Sol');pc.className='pill good';}
-  else if(st.mode==='rel'){pc.textContent='Sin norte';pc.className='pill warn';}
-  else if(st.mode==='ios'&&st.iosOff==null){pc.textContent='Orientando brújula…';pc.className='pill';}
-  else if(st.mode){pc.textContent='Brújula · ±10°';pc.className='pill';}
-  else{pc.textContent='Sin sensores';pc.className='pill warn';}
-  const pl=$('#pLoc');pl.textContent=st.loc.src==='gps'?`GPS ±${nf0.format(Math.min(st.loc.acc||0,99999))} m`:st.loc.src==='saved'?'Última ubicación':'Madrid (por defecto)';pl.className='pill'+(st.loc.src==='default'?' warn':'');
-  const bb=$('#vBeam');bb.classList.toggle('aligned',ok&&!st.beam&&!st.calibBody);
-  if(st.beam){$('#vBeamLabel').innerHTML=`Detener<span class="t">${durText((Date.now()-st.beam.t)/1000,false).replace(/^00 min /,'')}</span>`;}
+  if(st.mode==='demo'){pc.textContent=L.pDemo;pc.className='pill warn';}
+  else if(st.calibratedWith){pc.textContent=t('pCal',{body:bodyThe(st.calibratedWith)});pc.className='pill good';}
+  else if(st.mode==='rel'){pc.textContent=L.pNoNorth;pc.className='pill warn';}
+  else if(iosWait){pc.textContent=L.pFinding;pc.className='pill';}
+  else if(st.mode){pc.textContent=L.pCompass;pc.className='pill';}
+  else{pc.textContent=L.pNone;pc.className='pill warn';}
+  const lc=st.loc,pl=$('#pLoc'),cc=lc.src==='city'?findCity(lc.city):null;
+  pl.textContent=lc.src==='gps'?t('pGps',{m:F.n0.format(Math.min(lc.acc||0,99999))}):cc?cityName(cc):lc.src==='default'?L.pDefault:L.pSaved;pl.className='pill'+(lc.src==='default'?' warn':'');
+  $('#vBeam').classList.toggle('aligned',ok&&!st.beam&&!st.calibBody);
+  if(st.beam)$('#vBeamLabel').innerHTML=`${L.stop}<span class="t">${durText((Date.now()-st.beam.t)/1000,false).replace(/^00 min /,'')}</span>`;
 }
 
 /* bucle */
@@ -724,12 +1000,11 @@ function frame(){
   const B=[-R[2],-R[5],-R[8]],sep=Math.acos(Math.max(-1,Math.min(1,dot(B,T))))*R2D;
   V.lastSep=sep;V.lastB=B;
   drawFrame(R,P,target,sep);
-  const al=sep<3;if(al&&!V.aligned&&navigator.vibrate)try{navigator.vibrate([25,40,25]);}catch(e){}V.aligned=al;
+  const al=sep<3;if(al&&!V.aligned&&navigator.vibrate&&navigator.userActivation&&navigator.userActivation.hasBeenActive)try{navigator.vibrate([25,40,25]);}catch(e){}V.aligned=al;
   sonar(now,sep);
   if(now-V.lastHud>120){V.lastHud=now;hud(R,P,target,sep,B);}
 }
-function enterDemo(){st.mode='demo';const P=positions();st.demoYaw=wrap360(P.voyager.az+35);st.demoPitch=Math.max(-30,Math.min(60,P.voyager.alt+12));V.cv.style.cursor='grab';
-  toast('No llegan datos de brújula ni giroscopio. Vista de prueba: arrastra para mirar. Ábrela en un móvil para apuntar de verdad.',6000);}
+function enterDemo(){st.mode='demo';const P=positions();st.demoYaw=wrap360(P.voyager.az+35);st.demoPitch=Math.max(-30,Math.min(60,P.voyager.alt+12));V.cv.style.cursor='grab';toast(L.demo,6000);}
 let drag=null;
 V.cv.addEventListener('pointerdown',e=>{if(st.mode!=='demo')return;drag={x:e.clientX,y:e.clientY,yaw:st.demoYaw,pitch:st.demoPitch};V.cv.setPointerCapture(e.pointerId);});
 V.cv.addEventListener('pointermove',e=>{if(!drag)return;const k=1/V.f*R2D;st.demoYaw=wrap360(drag.yaw-(e.clientX-drag.x)*k);st.demoPitch=Math.max(-89,Math.min(89,drag.pitch+(e.clientY-drag.y)*k));});
@@ -737,7 +1012,7 @@ V.cv.addEventListener('pointerup',()=>{drag=null;});V.cv.addEventListener('point
 
 /* sonido guía */
 let actx=null,nextPing=0;
-function beep(freq,dur,vol=.2){if(!actx)return;const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+dur+.03);}
+function beep(freq,dur,vol=.2){if(!actx)return;const o=actx.createOscillator(),g=actx.createGain(),tt=actx.currentTime;o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,tt);g.gain.exponentialRampToValueAtTime(vol,tt+.01);g.gain.exponentialRampToValueAtTime(.0001,tt+dur);o.connect(g);g.connect(actx.destination);o.start(tt);o.stop(tt+dur+.03);}
 function sonar(now,sep){if(!st.sound||!actx||now<nextPing)return;const s=Math.min(sep,60);
   if(sep<3){nextPing=now+420;beep(1320,.09,.18);setTimeout(()=>beep(1760,.09,.15),110);}else{nextPing=now+140+s*24;beep(320+(60-s)*14,.06);}}
 $('#vSound').addEventListener('click',()=>{st.sound=!st.sound;$('#vSound').setAttribute('aria-pressed',st.sound);
@@ -745,10 +1020,11 @@ $('#vSound').addEventListener('click',()=>{st.sound=!st.sound;$('#vSound').setAt
 
 /* cámara y linterna */
 const cam={stream:null,track:null,torch:null};
-function hasTorch(t){try{const c=t.getCapabilities&&t.getCapabilities();return !!(c&&c.torch);}catch(e){return false;}}
+function hasTorch(tr){try{const c=tr.getCapabilities&&tr.getCapabilities();return !!(c&&c.torch);}catch(e){return false;}}
 async function openStream(constraints){return navigator.mediaDevices.getUserMedia({video:constraints,audio:false});}
 function attach(s){cam.stream=s;cam.track=s.getVideoTracks()[0];V.video.srcObject=s;const p=V.video.play();if(p)p.catch(()=>{});}
-function releaseCam(){if(cam.stream)cam.stream.getTracks().forEach(t=>t.stop());cam.stream=null;cam.track=null;V.video.srcObject=null;}
+function releaseCam(){if(cam.stream)cam.stream.getTracks().forEach(tr=>tr.stop());cam.stream=null;cam.track=null;V.video.srcObject=null;}
+function isIOS(){return /iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);}
 async function ensureCam(){
   if(cam.stream)return true;
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return false;
@@ -766,7 +1042,7 @@ async function findTorchCamera(){
     if(!devs.length)return;
     releaseCam();
     for(const d of devs){let s;try{s=await openStream({deviceId:{exact:d.deviceId}});}catch(e){continue;}
-      const t=s.getVideoTracks()[0];if(hasTorch(t)){attach(s);cam.torch=true;return;}s.getTracks().forEach(x=>x.stop());}
+      const tr=s.getVideoTracks()[0];if(hasTorch(tr)){attach(s);cam.torch=true;return;}s.getTracks().forEach(x=>x.stop());}
     attach(await openStream({facingMode:{ideal:'environment'}}));cam.torch=false;
   }catch(e){}
 }
@@ -777,25 +1053,24 @@ function setTorch(on){
   const track=cam.track;
   torchChain=torchChain.then(async()=>{const t0=performance.now();let ok=true;
     try{await track.applyConstraints({advanced:[{torch:on}]});}
-    catch(e){try{await track.applyConstraints({torch:on});}catch(e2){ok=false;if(!torchErr){torchErr=true;toast('El navegador no dejó cambiar la linterna ('+((e2&&e2.name)||'error')+').',5000);}}}
+    catch(e){try{await track.applyConstraints({torch:on});}catch(e2){ok=false;if(!torchErr){torchErr=true;toast(t('torchErr',{e:(e2&&e2.name)||'error'}),5000);}}}
     const dt=performance.now()-t0;torchLat=torchLat?torchLat*.6+dt*.4:dt;return ok;});
   return torchChain;
 }
-function isIOS(){return /iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);}
 $('#vCam').addEventListener('click',async()=>{
   if(st.cam){st.cam=false;V.video.classList.remove('on');if(!st.beam&&!(cam.torch&&!isIOS()))releaseCam();}
-  else{const ok=await ensureCam();if(!ok){toast('No se pudo abrir la cámara. Revisa el permiso del navegador.');return;}st.cam=true;V.video.classList.add('on');
-    if(isIOS()&&!cam.torch)toast('Con la cámara abierta, el iPhone no deja usar la linterna. Apágala antes de enviar luz.',5000);}
+  else{const ok=await ensureCam();if(!ok){toast(L.camFail);return;}st.cam=true;V.video.classList.add('on');
+    if(isIOS()&&!cam.torch)toast(L.iosCam,5000);}
   $('#vCam').setAttribute('aria-pressed',st.cam);
 });
 
 /* emisión */
 const MORSE={A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',Ñ:'--.--',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.'};
-const cleanMorse=t=>t.toUpperCase().replace(/[ÁÀÄÂ]/g,'A').replace(/[ÉÈËÊ]/g,'E').replace(/[ÍÌÏÎ]/g,'I').replace(/[ÓÒÖÔ]/g,'O').replace(/[ÚÙÜÛ]/g,'U').replace(/[^A-ZÑ0-9 ]/g,'').replace(/\s+/g,' ').trim().slice(0,24);
-function morseSeq(text,u){const seq=[];const chars=[...cleanMorse(text)];
-  chars.forEach((ch,i)=>{if(ch===' '){if(seq.length)seq[seq.length-1][1]=7*u;return;}const code=MORSE[ch];if(!code)return;
-    [...code].forEach(sym=>{seq.push([true,sym==='.'?u:3*u,i]);seq.push([false,u,i]);});seq[seq.length-1][1]=3*u;});
-  if(seq.length)seq[seq.length-1][1]=7*u;return {seq,chars};}
+const cleanMorse=s=>s.toUpperCase().replace(/[ÁÀÄÂ]/g,'A').replace(/[ÉÈËÊ]/g,'E').replace(/[ÍÌÏÎ]/g,'I').replace(/[ÓÒÖÔ]/g,'O').replace(/[ÚÙÜÛ]/g,'U').replace(/[^A-ZÑ0-9 ]/g,'').replace(/\s+/g,' ').trim().slice(0,24);
+function morseSeq(text){const seq=[];const chars=[...cleanMorse(text)];
+  chars.forEach((ch,i)=>{if(ch===' '){if(seq.length)seq[seq.length-1][1]=7;return;}const code=MORSE[ch];if(!code)return;
+    [...code].forEach(sym=>{seq.push([true,sym==='.'?1:3,i]);seq.push([false,1,i]);});seq[seq.length-1][1]=3;});
+  return {seq,chars};}
 /* Enciende o apaga el flash y, cuando ya ha cambiado, el brillo de la pantalla */
 async function setLight(beam,on){
   if(beam.torch)await setTorch(on);
@@ -803,18 +1078,20 @@ async function setLight(beam,on){
   beam.lightOn=on;$('#flash').classList.toggle('on',on);
 }
 const MORSE_UNIT=300,sleep=ms=>new Promise(r=>setTimeout(r,ms));
-/* Cada punto o raya cuenta su duración desde que el flash ha cambiado de verdad; si el móvil es lento, el Morse va más despacio */
+/* El mensaje se deletrea una sola vez. Cada punto o raya cuenta desde que el flash ha cambiado de verdad; si el móvil es lento, va más despacio */
 async function runMorse(beam){
-  const {seq,chars}=morseSeq(st.morseText,1);
+  const {seq,chars}=morseSeq(morseText());
   if(!seq.length){setLight(beam,true);return;}
-  for(let i=0;st.beam===beam;i++){
-    const [on,units,ci]=seq[i%seq.length];
-    $('#morseLine').innerHTML=chars.map((c,k)=>k===ci?`<b>${c}</b>`:c).join('');
+  for(let i=0;i<seq.length&&st.beam===beam;i++){
+    const [on,units,ci]=seq[i];
+    $('#morseLine').innerHTML=chars.map((c,k)=>k===ci?`<b>${c}</b>`:k<ci?`<span class="sent">${c}</span>`:c).join('');
     await setLight(beam,on);
     if(st.beam!==beam)return;
+    if(i===seq.length-1)break; // tras el último símbolo no hace falta esperar
     beam.unit=Math.max(MORSE_UNIT,Math.round(torchLat*1.25));
     await sleep(Math.max(0,units*beam.unit-torchLat)); // el siguiente cambio tarda torchLat en verse
   }
+  if(st.beam===beam){$('#morseLine').innerHTML=`<span class="sent">${chars.join('')}</span>`;stopBeam();}
 }
 async function beamPress(){
   if(st.calibBody){fixCalibration();return;}
@@ -828,13 +1105,14 @@ function startBeam(torch){
   const P=positions();
   st.beam={t:Date.now(),torch,lightOn:false,sep:V.lastSep,az:P.voyager.az,alt:P.voyager.alt,mode:st.lightMode};
   $('#vBeam').classList.add('on');$('#vBeam').classList.remove('aligned');
-  if(st.lightMode==='morse'&&torch)runMorse(st.beam);else{setLight(st.beam,true);$('#morseLine').textContent=torch?'':'Linterna encendida a mano';}
+  if(st.lightMode==='morse'&&torch)runMorse(st.beam);else{setLight(st.beam,true);$('#morseLine').textContent=torch?'':L.manualOn;}
   try{navigator.vibrate&&navigator.vibrate(60);}catch(e){}
   if(st.sound)beep(880,.25,.2);
 }
 function stopBeam(){
   const b=st.beam;if(!b)return;st.beam=null;b.lightOn=false;if(b.torch)setTorch(false);
-  $('#vBeam').classList.remove('on');$('#vBeamLabel').textContent='Enviar luz';$('#morseLine').textContent='';$('#flash').classList.remove('on');
+  $('#vBeam').classList.remove('on');$('#vBeamLabel').textContent=L.send;$('#flash').classList.remove('on');
+  if(b.mode!=='morse')$('#morseLine').textContent='';
   const up=upleg(b.t),rec={t:b.t,end:Date.now(),up,arr:b.t+up*1000,sep:b.sep,alt:b.alt,az:b.az,mode:b.mode,torch:b.torch};
   saveBeam(rec);sentSheet(rec);
 }
@@ -842,61 +1120,63 @@ function stopBeam(){
 /* hojas */
 const sheet=$('#sheet');
 function openSheet(html,bind){sheet.innerHTML=html;sheet.hidden=false;bind&&bind(sheet);const f=sheet.querySelector('button,input');f&&f.focus({preventScroll:true});}
-function closeSheet(){sheet.hidden=true;sheet.innerHTML='';}
+function closeSheet(){sheet.hidden=true;sheet.innerHTML='';if(!st.beam)$('#morseLine').textContent='';}
 function manualTorchSheet(){
   const ios=isIOS();
-  openSheet(`<h3>Enciende la linterna a mano</h3>
-    <p>${ios?'Esta versión del iPhone no deja que una web encienda la linterna.':'Este navegador no deja que la web encienda la linterna.'} Enciéndela tú ${ios?'desde el Centro de Control (desliza desde la esquina superior derecha)':'desde los ajustes rápidos'}, vuelve aquí y pulsa Emitir. Apuntarás igual con la parte de atrás del móvil.</p>
-    ${st.cam?'<p>La vista de cámara se apagará para dejar libre la linterna.</p>':''}
-    <div class="row"><button class="secondary" data-a="x" type="button">Cancelar</button><button class="primary" data-a="go" type="button">Ya está encendida: emitir</button></div>`,s=>{
+  openSheet(`<h3>${L.manT}</h3>
+    <p>${ios?L.manIos:L.manOther} ${t('manHow',{where:ios?L.manWhereIos:L.manWhereOther})}</p>
+    ${st.cam?`<p>${L.manCam}</p>`:''}
+    <div class="row"><button class="secondary" data-a="x" type="button">${L.cancel}</button><button class="primary" data-a="go" type="button">${L.manGo}</button></div>`,s=>{
     s.querySelector('[data-a=x]').onclick=closeSheet;
     s.querySelector('[data-a=go]').onclick=()=>{if(st.cam){st.cam=false;V.video.classList.remove('on');$('#vCam').setAttribute('aria-pressed','false');}releaseCam();st.manualAck=true;closeSheet();startBeam(false);};});
 }
 function sentSheet(r){
   const arr=new Date(r.arr),dur=Math.max(1,Math.round((r.end-r.t)/1000));
-  openSheet(`<h3>Luz enviada</h3>
-    <p class="big">Llegará a la Voyager 1 el <strong>${fDay.format(arr)} a las ${fTime.format(arr)}</strong></p>
-    <p>Salió a las ${fTime.format(new Date(r.t))} y duró ${dur} s, con un desvío de ${r.sep!=null?nf1.format(r.sep)+'°':'—'} respecto a la nave. Tardará ${durText(r.up,true)}: ${r.up>=86400?'un día luz completo, más':'casi un día luz, contando'} los ${nf1.format(r.up-voyager(r.t).lt)} s que la nave se aleja mientras tu luz viaja.</p>
+  openSheet(`<h3>${L.sentT}</h3>
+    <p class="big">${t('sentBig',{date:F.day.format(arr),time:F.time.format(arr)})}</p>
+    <p>${t('sentBody',{t:F.time.format(new Date(r.t)),d:dur,sep:r.sep!=null?F.n1.format(r.sep)+'°':'—',dur:durText(r.up,true),what:r.up>=86400?L.sentFull:L.sentAlmost,x:F.n1.format(r.up-voyager(r.t).lt)})}</p>
     <div class="bar"><i id="sentBar"></i></div><p class="mono" id="sentKm" style="font-size:.85rem"></p>
-    <div class="row"><button class="secondary" data-a="share" type="button">Compartir</button><button class="primary" data-a="x" type="button">Hecho</button></div>`,s=>{
+    <div class="row"><button class="secondary" data-a="share" type="button">${L.share}</button><button class="primary" data-a="x" type="button">${L.done}</button></div>`,s=>{
     s.querySelector('[data-a=x]').onclick=closeSheet;
     s.querySelector('[data-a=share]').onclick=()=>shareBeam(r);
-    const upd=()=>{if(sheet.hidden||!s.querySelector('#sentKm'))return;const now=Date.now(),f=Math.min(1,(now-r.t)/(r.arr-r.t));s.querySelector('#sentBar').style.width=(f*100).toFixed(4)+'%';s.querySelector('#sentKm').textContent=`${nf0.format(f*r.up*C_KMS)} km recorridos de ${nf0.format(r.up*C_KMS)}`;requestAnimationFrame(upd);};upd();});
+    const upd=()=>{if(sheet.hidden||!s.querySelector('#sentKm'))return;const now=Date.now(),f=Math.min(1,(now-r.t)/(r.arr-r.t));s.querySelector('#sentBar').style.width=(f*100).toFixed(4)+'%';s.querySelector('#sentKm').textContent=t('sentKm',{km:F.n0.format(f*r.up*C_KMS),total:F.n0.format(r.up*C_KMS)});requestAnimationFrame(upd);};upd();});
 }
 async function shareBeam(r){
-  const t=new Date(r.t),a=new Date(r.arr);
-  const text=`He enviado luz a la Voyager 1 el ${fDay.format(t)} a las ${fTime.format(t)}. Llegará el ${fDay.format(a)} a las ${fTime.format(a)}, tras viajar un día luz.`;
+  const a=new Date(r.t),b=new Date(r.arr);
+  const text=t('shareText',{d1:F.day.format(a),t1:F.time.format(a),d2:F.day.format(b),t2:F.time.format(b)});
   const url=location.protocol.startsWith('http')?location.href.split('#')[0]:'';
-  try{if(navigator.share){await navigator.share({title:'Un día luz',text,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
-  try{await navigator.clipboard.writeText(text+(url?' '+url:''));toast('Texto copiado');}catch(e){toast(text,8000);}
+  try{if(navigator.share){await navigator.share({title:L.title,text,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  try{await navigator.clipboard.writeText(text+(url?' '+url:''));toast(L.copied);}catch(e){toast(text,8000);}
 }
 function calibSheet(){
-  const P=positions(),opt=(b,label,p)=>{const ok=p.alt>3,high=p.alt>75;
-    return `<button class="opt" data-b="${b}" type="button" ${ok&&!high?'':'disabled'}><span>Calibrar con ${label}</span><small>${ok?(high?'Demasiado alta ('+nf0.format(p.alt)+'°): espera a que baje':`${nf0.format(p.alt)}° de altura, hacia ${dir8w(p.az)}`):'Bajo el horizonte ahora'}</small></button>`;};
-  openSheet(`<h3>Calibrar la brújula</h3>
-    <p>La brújula del móvil puede desviarse 5–15°. Apunta a la Luna o al Sol de verdad y fija su posición: la web corregirá el error, incluida la declinación magnética.</p>
-    ${opt('moon','la Luna',P.moon)}${opt('sun','el Sol',P.sun)}
-    <p style="font-size:.85rem">Antes, haz un ocho en el aire con el móvil. Con el Sol, no lo mires directamente: guíate por la pantalla con la cámara activada.</p>
-    <div class="row">${st.calibratedWith?'<button class="secondary" data-a="reset" type="button">Quitar corrección</button>':''}<button class="secondary" data-a="x" type="button">Cerrar</button></div>`,s=>{
+  const P=positions(),opt=(b,p)=>{const ok=p.alt>3,high=p.alt>75;
+    return `<button class="opt" data-b="${b}" type="button" ${ok&&!high?'':'disabled'}><span>${t('calWith',{body:bodyThe(b)})}</span><small>${ok?(high?t('calHigh',{alt:F.n0.format(p.alt)}):t('calUp',{alt:F.n0.format(p.alt),dir:dir8(p.az)})):L.calDown}</small></button>`;};
+  openSheet(`<h3>${L.calT}</h3><p>${L.calP}</p>${opt('moon',P.moon)}${opt('sun',P.sun)}
+    <p style="font-size:.85rem">${L.calFine}</p>
+    <div class="row">${st.calibratedWith?`<button class="secondary" data-a="reset" type="button">${L.calReset}</button>`:''}<button class="secondary" data-a="x" type="button">${L.close}</button></div>`,s=>{
     s.querySelector('[data-a=x]').onclick=closeSheet;
-    const rs=s.querySelector('[data-a=reset]');if(rs)rs.onclick=()=>{st.userOff=0;st.calibratedWith=null;closeSheet();toast('Corrección eliminada');};
-    s.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{st.calibBody=b.dataset.b;closeSheet();$('#vBeamLabel').textContent='Fijar';$('#vMode').textContent='Cancelar';$('#vCalib').classList.add('gold');});});
+    const rs=s.querySelector('[data-a=reset]');if(rs)rs.onclick=()=>{st.userOff=0;st.calibratedWith=null;closeSheet();toast(L.calRemoved);};
+    s.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{st.calibBody=b.dataset.b;closeSheet();syncButtons();$('#vCalib').classList.add('gold');});});
 }
 function fixCalibration(){
   const P=positions(),body=P[st.calibBody],B=V.lastB;if(!B)return;
   const d=wrap180(body.az-azOf(B));st.userOff=wrap180(st.userOff+d);st.calibratedWith=st.calibBody;
-  endCalibration();toast(`Brújula corregida ${nf1.format(Math.abs(d))}° con ${BODY_NAME[st.calibratedWith]}`);
+  endCalibration();toast(t('calDone',{n:F.n1.format(Math.abs(d)),body:bodyThe(st.calibratedWith)}));
 }
-function endCalibration(){st.calibBody=null;$('#vBeamLabel').textContent='Enviar luz';$('#vMode').textContent=st.lightMode==='morse'?'Morse':'Luz fija';$('#vCalib').classList.remove('gold');}
+function endCalibration(){st.calibBody=null;syncButtons();$('#vCalib').classList.remove('gold');}
+function syncButtons(){
+  if(!st.beam)$('#vBeamLabel').textContent=st.calibBody?L.lock:L.send;
+  $('#vMode').textContent=st.calibBody?L.cancel:(st.lightMode==='morse'?L.morse:L.steady);
+}
 function modeSheet(){
-  openSheet(`<h3>Cómo emitir</h3>
-    <button class="opt" data-m="steady" type="button"><span>Luz fija</span><small>La linterna queda encendida hasta que pulses Detener.</small></button>
-    <button class="opt" data-m="morse" type="button"><span>Mensaje en Morse</span><small>La linterna parpadea tu mensaje en bucle. Si el móvil tarda en encender y apagar el flash, el Morse irá más despacio.</small></button>
-    <label for="morseText">Mensaje (hasta 24 letras)<input type="text" id="morseText" maxlength="24" autocomplete="off" value="${cleanMorse(st.morseText)}"></label>
-    <div class="row"><button class="secondary" data-a="x" type="button">Cerrar</button></div>`,s=>{
+  openSheet(`<h3>${L.modeT}</h3>
+    <button class="opt${st.lightMode==='steady'?' sel':''}" data-m="steady" type="button"><span>${L.modeSteady}</span><small>${L.modeSteadyD}</small></button>
+    <button class="opt${st.lightMode==='morse'?' sel':''}" data-m="morse" type="button"><span>${L.modeMorse}</span><small>${L.modeMorseD}</small></button>
+    <label for="morseText">${L.modeLabel}<input type="text" id="morseText" maxlength="24" autocomplete="off" value="${cleanMorse(morseText())}"></label>
+    <div class="row"><button class="secondary" data-a="x" type="button">${L.close}</button></div>`,s=>{
     const inp=s.querySelector('#morseText');
-    const save=()=>{const v=cleanMorse(inp.value)||'HOLA VOYAGER';st.morseText=v;store.set('udl-morse',v);};
-    s.querySelectorAll('[data-m]').forEach(b=>{b.style.borderColor=b.dataset.m===st.lightMode?'var(--gold)':'';b.onclick=()=>{save();st.lightMode=b.dataset.m;$('#vMode').textContent=st.lightMode==='morse'?'Morse':'Luz fija';closeSheet();};});
+    const save=()=>{const v=cleanMorse(inp.value);if(v&&v!==L.morseDefault)store.set('udl-morse-'+LANG,v);else store.set('udl-morse-'+LANG,null);};
+    s.querySelectorAll('[data-m]').forEach(b=>{b.onclick=()=>{save();st.lightMode=b.dataset.m;syncButtons();closeSheet();};});
     s.querySelector('[data-a=x]').onclick=()=>{save();closeSheet();};});
 }
 $('#vBeam').addEventListener('click',beamPress);
@@ -911,14 +1191,14 @@ function openVisor(){
   let perm=Promise.resolve('granted');
   try{if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function')perm=DeviceOrientationEvent.requestPermission();}catch(e){}
   startSensors();
-  if(st.loc.src!=='gps')requestLocation();
+  if(st.loc.src==='default'||st.loc.src==='saved')requestLocation(); // si eligió ciudad, se respeta
   V.el.hidden=false;V.open=true;document.body.classList.add('visor-open');sizeCanvas();V.openedAt=performance.now();
   history.pushState({visor:1},'','#visor');
   wake();cancelAnimationFrame(V.raf);loop();
-  Promise.resolve(perm).then(r=>{if(r!=='granted')setTimeout(()=>{if(!st.Rraw)toast('Sin permiso de movimiento no se puede apuntar. Cierra la pestaña, vuelve a abrir la web y acepta el permiso.',7000);},1800);}).catch(()=>{});
+  Promise.resolve(perm).then(r=>{if(r!=='granted')setTimeout(()=>{if(!st.Rraw)toast(L.motionDenied,7000);},1800);}).catch(()=>{});
 }
 function closeVisor(fromPop){
-  if(st.beam)stopBeam();closeSheet();endCalibration();
+  if(st.beam)stopBeam();closeSheet();endCalibration();$('#morseLine').textContent='';
   cancelAnimationFrame(V.raf);V.open=false;V.el.hidden=true;document.body.classList.remove('visor-open');
   st.cam=false;V.video.classList.remove('on');$('#vCam').setAttribute('aria-pressed','false');releaseCam();
   try{wl&&wl.release();}catch(e){}wl=null;
@@ -929,12 +1209,31 @@ $('#go').addEventListener('click',openVisor);
 $('#vClose').addEventListener('click',()=>closeVisor(false));
 window.addEventListener('popstate',()=>{if(V.open)closeVisor(true);});
 
+/* ---------- idioma ---------- */
+function applyI18n(){
+  document.documentElement.lang=LANG;document.title=L.title;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=L[el.dataset.i18n];});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=L[el.dataset.i18nHtml];});
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',L[el.dataset.i18nAria]);});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=L[el.dataset.i18nPh];});
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===LANG));
+  $('#dayChips').setAttribute('aria-label',L.whenH);
+  syncButtons();
+}
+function setLang(lang,save){
+  LANG=lang;L=I18N[lang];makeFmt();if(save)store.set('udl-lang',lang);
+  applyI18n();renderLocbar();initCross();drawRuler();DAYS=buildDays();if(st.dayIdx>=DAYS.length)st.dayIdx=0;renderChips();renderDay();renderBeams();tickHome();
+  if(!locSheet.hidden)renderCities(citySearch.value);
+  if(!sheet.hidden)closeSheet();V.lastHud=0;
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.lang!==LANG)setLang(b.dataset.lang,true);}));
+
 /* arranque */
-initCross();drawRuler();DAYS=buildDays();renderChips();renderDay();renderBeams();tickHome();
+setLang(LANG,false);
 setInterval(()=>{if(!V.open)tickHome();},100);
-setInterval(()=>{if(!V.open){const k=dayKey(Date.now());if(DAYS[0].key!==k){DAYS=buildDays();st.dayIdx=0;renderChips();}renderDay();}},60000);
+setInterval(()=>{if(!V.open){const k=dayKey(Date.now());if(!DAYS.some(d=>d.key===k&&d.label===L.today)){DAYS=buildDays();st.dayIdx=0;renderChips();}renderDay();}},60000);
 if(location.hash==='#visor')history.replaceState(null,'',location.pathname+location.search);
-window.__udl={st,voyager,bodyAltAz,cam};
+window.__udl={st,voyager,bodyAltAz,cam,setLang};
 })();
 </script>
 </body>
