@@ -650,7 +650,7 @@ const st={
   userOff:0,calibratedWith:null,calibBody:null,
   demoYaw:250,demoPitch:20,
   cam:false,sound:false,
-  beam:null,lightMode:'steady',
+  beam:null,lightMode:store.get('udl-mode','morse')==='steady'?'steady':'morse', // Morse por defecto en los dos idiomas
   noTorch:false,manualAck:false,
   dayIdx:0
 };
@@ -1202,7 +1202,7 @@ function modeSheet(){
     <div class="row"><button class="secondary" data-a="x" type="button">${L.close}</button></div>`,s=>{
     const inp=s.querySelector('#morseText');
     const save=()=>{const v=cleanMorse(inp.value);if(v&&v!==L.morseDefault)store.set('udl-morse-'+LANG,v);else store.set('udl-morse-'+LANG,null);};
-    s.querySelectorAll('[data-m]').forEach(b=>{b.onclick=()=>{save();st.lightMode=b.dataset.m;syncButtons();closeSheet();};});
+    s.querySelectorAll('[data-m]').forEach(b=>{b.onclick=()=>{save();st.lightMode=b.dataset.m;store.set('udl-mode',st.lightMode);syncButtons();closeSheet();};});
     s.querySelector('[data-a=x]').onclick=()=>{save();closeSheet();};});
 }
 $('#vBeam').addEventListener('click',beamPress);
