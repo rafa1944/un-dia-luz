@@ -173,7 +173,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .date-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(220,182,94,.18)}
 .hero-card .display{position:relative}
 .hero-text{position:relative;color:#bcc0d3;font-size:1rem;line-height:1.55;max-width:27em}
-.hero-card .btn-main{position:relative;justify-self:start;width:auto;padding:0 22px;min-height:54px;font-size:1.05rem;margin-top:4px}
+.hero-card .btn-main{position:relative;justify-self:start;width:auto;padding:0 22px;min-height:54px;font-size:1.05rem}
+.hero-actions{position:relative;display:flex;align-items:center;gap:10px;margin-top:4px}
+.hero-actions .btn-main{flex:1 1 auto;min-width:0;justify-content:center;gap:10px;padding:0 16px;font-size:1rem;white-space:nowrap}
+.share-round{flex:none;width:54px;height:54px;border-radius:50%;border:1px solid var(--gold);background:rgba(220,182,94,.08);color:var(--gold-hi);display:grid;place-items:center;padding:0}
+.share-round svg{width:22px;height:22px}
+.share-round:active{transform:translateY(1px)}
 
 /* key numbers */
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);border-radius:18px;background:var(--ink);overflow:hidden}
@@ -436,7 +441,10 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
       <p class="date-pill mono" id="datePill"></p>
       <h1 class="display" id="heroT" data-i18n-html="h1html">A light for<br><em>Voyager 1</em></h1>
       <p class="hero-text" data-i18n="heroText"></p>
-      <button class="btn-main" id="go2" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5"/></svg><span data-i18n="go">Point at Voyager 1</span></button>
+      <div class="hero-actions">
+        <button class="btn-main" id="go2" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12H5M19 12h3.5"/></svg><span data-i18n="go">Point at Voyager 1</span></button>
+        <button class="share-round" id="shareHome" type="button" data-i18n-aria="sharePage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button>
+      </div>
     </section>
 
     <div class="stats" aria-live="off">
@@ -1274,9 +1282,10 @@ function openAbout(){$('#aboutVer').textContent=t('aboutVersion',{v:APP_VERSION}
 function closeAbout(){if(aboutSheet.hidden)return;aboutSheet.hidden=true;locBd.hidden=true;if(!V.open&&!TR.open)document.body.style.overflow='';}
 $('#aboutBtn').addEventListener('click',openAbout);
 $('#legalLink').addEventListener('click',()=>{openAbout();const d=$('#legalD');d.open=true;setTimeout(()=>d.scrollIntoView({block:'start'}),60);});$('#aboutLink').addEventListener('click',openAbout);$('#aboutClose').addEventListener('click',closeAbout);
-$('#aboutShare').addEventListener('click',async()=>{const url=location.protocol.startsWith('http')?location.origin+location.pathname:'';
+async function shareSite(){const url=SITE_URL+'?lang='+LANG;
   try{if(navigator.share){await navigator.share({title:L.title,text:L.shareInvite,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
-  try{await navigator.clipboard.writeText(L.shareInvite+(url?' '+url:''));toast(L.copied);}catch(e){toast(L.shareInvite,8000);}});
+  try{await navigator.clipboard.writeText(L.shareInvite+' '+url);toast(L.copied);}catch(e){toast(L.shareInvite+' '+url,8000);}}
+$('#aboutShare').addEventListener('click',shareSite);$('#shareHome').addEventListener('click',shareSite);
 
 /* ---------- haces enviados ---------- */
 function getBeams(){return store.get('udl-beams',[]);}
@@ -1854,6 +1863,7 @@ function applyI18n(){
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',L[el.dataset.i18nAria]);});
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=L[el.dataset.i18nPh];});
   document.querySelectorAll('a[data-story]').forEach(a=>{a.href='history.html?lang='+LANG;a.hidden=!HAS_STORY;});
+  $('#shareHome').title=L.sharePage;
   $('#brandHome').href='./?lang='+LANG;$('#brandHome').setAttribute('aria-label',L.title+' · '+L.tabHome);
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===LANG));
   $('#dayChips').setAttribute('aria-label',L.whenH);
