@@ -5,6 +5,6 @@ Web para el móvil que apunta en tiempo real hacia la sonda Voyager 1 y envía u
 - Posición y distancia: efemérides de JPL Horizons (NASA/JPL-Caltech) incluidas en `index.html`, válidas de octubre de 2026 a diciembre de 2030.
 - Sol y Luna: fórmulas de baja precisión (Meeus), con error menor de 0,02°.
 - Usa la brújula, la ubicación y la cámara del móvil; necesita HTTPS.
-- En Android con Chrome, la web enciende la linterna. En iPhone hay que encenderla desde el Centro de Control.
+- La web enciende la linterna (fija o en Morse) si el navegador lo permite, como Chrome en Android y Safari en iPhone recientes. Si no, pide encenderla a mano.
 
 Es un único archivo HTML, sin dependencias ni servidor.
