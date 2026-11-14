@@ -165,7 +165,7 @@ noscript p{color:var(--warn)}
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="back" href="./" data-i18n="back">← Back to One Light-Day</a>
+    <a class="back" href="./" data-i18n="back" data-home>← Back to One Light-Day</a>
     <div class="lang" role="group" aria-label="Language · Idioma">
       <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
       <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
@@ -235,7 +235,7 @@ noscript p{color:var(--warn)}
   </main>
 
   <footer class="foot">
-    <a class="btn-back" href="./" data-i18n="back">← Back to One Light-Day</a>
+    <a class="btn-back" href="./" data-i18n="back" data-home>← Back to One Light-Day</a>
     <p data-i18n="checked"></p>
     <p data-i18n="legalLine"></p>
   </footer>
@@ -640,6 +640,7 @@ function setLang(lang,save){
     try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',lang);history.replaceState(history.state,'',u.toString());}}catch(e){}
   }
   applyI18n();
+  document.querySelectorAll('a[data-home]').forEach(x=>{x.href='./?lang='+lang;});
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.lang!==LANG)setLang(b.dataset.lang,true);}));
 
