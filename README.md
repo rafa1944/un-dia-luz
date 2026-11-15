@@ -55,6 +55,8 @@ Other useful facts:
 
 The app has an **app bar** (name, EN/ES switch, About) and a **tab bar** at the bottom: Home, When, a large central **Point** button, My beams and Story.
 
+Until 19 November 2026 a dismissible **banner** above every tab invites people to NASA's wave of light on Tuesday 17 November after sunset (#ShineBrightForVoyager). It stops showing from 20 November, and closing it is remembered (`udl-wave-x`).
+
 ### Home
 
 - **Illustrated hero**: an original gold line drawing of Voyager 1 (high-gain antenna with ribs and subreflector, bus with the Golden Record, RTG boom, science boom and magnetometer boom), the date, the headline "A light for *Voyager 1*", a short explanation and the main button.
@@ -77,7 +79,7 @@ The app has an **app bar** (name, EN/ES switch, About) and a **tab bar** at the 
 - Text guidance ("Turn 12° right · Lower 15°", "Aligned with Voyager 1"), a 3° central sight, vibration on alignment (Android) and optional **sound guidance**.
 - Readouts: azimuth and altitude of the spacecraft and the phone, and the offset in degrees. Warns when the spacecraft is below the horizon.
 - **Calibrate** with the Moon or the Sun (see [§5](#5-pointing-with-the-phone)).
-- **Send light**: flashlight in **Morse** mode (default "HELLO VOYAGER" / "HOLA VOYAGER", spelled once) or **steady** mode (until you tap Stop). Mode and message are remembered.
+- **Send light**: flashlight in **Morse** mode (default message **"VGR"**, `···– ––· ·–·`, spelled once; preset "HELLO VOYAGER" / "HOLA VOYAGER" or your own text, with its Morse shown as you type) or **steady** mode (until you tap Stop). Mode and message are remembered.
 - When it ends, a **"Light sent"** sheet shows when the light will reach Voyager 1, how far off you pointed, the duration and the progress, with Share and See its journey.
 - Keeps the screen awake (Wake Lock); the phone's Back button closes it.
 
@@ -94,7 +96,8 @@ The app has an **app bar** (name, EN/ES switch, About) and a **tab bar** at the 
 ### Sharing
 
 - **Share card**: after sending light, the phone draws a 1080×1350 image (4:5, good for WhatsApp, Instagram and other apps) with the gold Voyager 1 drawing, "I sent light to Voyager 1", the time sent and the city, the arrival time and the distance. It is shared together with the text and the follow link through the system share sheet (Web Share with files); where that isn't available the image is saved and the text copied. "Save image" downloads it.
-- **Follow link**: `https://rafa1944.github.io/un-dia-luz/?lang=es&beam=<sent time in base 36>.<travel time in ms, base 36>&from=<city>`. Opening it shows that light's journey live ("Shared light · Sent from Madrid") with a "Send your own light" button. No server is involved: everything needed is in the link. Only the city name is shared, never coordinates; with no chosen city or nearby city, `from` is left out.
+- **Share texts** end with `#UnDíaLuz #Voyager1 #ShineBrightForVoyager`. Spanish shares link to `?lang=es`; English shares leave the language out, so the recipient's browser decides.
+- **Follow link**: `https://rafa1944.github.io/un-dia-luz/?lang=es&beam=<sent time in base 36>.<travel time in ms, base 36>&from=<city>` (`lang=es` only when shared in Spanish). Opening it shows that light's journey live ("Shared light · Sent from Madrid") with a "Send your own light" button. No server is involved: everything needed is in the link. Only the city name is shared, never coordinates; with no chosen city or nearby city, `from` is left out.
 - **Link preview**: Open Graph and Twitter Card tags with `og.png` (1200×630), so pasting the link in WhatsApp, Telegram, X or Slack shows the image, title and a bilingual description. `og.png` was rendered from an HTML layout with headless Chrome.
 
 ### About
@@ -183,7 +186,7 @@ A "Add a reminder to my calendar" button (Home light-day card and When tab) offe
 
 ## 8. Languages
 
-- English by default; Spanish via the EN/ES switch or `?lang=es`. The choice is stored and shared with `history.html`.
+- Language order: `?lang=en|es` in the URL, then the language the user picked with the EN/ES switch (stored), then the **browser language** (`navigator.languages[0]` or `navigator.language`): Spanish if it starts with "es", English otherwise. `history.html` follows the same rules.
 - Strings live in the `I18N` dictionary; the HTML uses `data-i18n` (text), `data-i18n-html` (markup), `data-i18n-aria` and `data-i18n-ph`. Dates and numbers use `Intl` (`en-GB` and `es-ES`, 24-hour clock); country names use `Intl.DisplayNames`.
 - To add a language: copy `I18N.en`, translate every key (including `dir16`, `dir8`, `card`, `planets`, `bodies`, `zones`, `ruler`) and add a button to the switch.
 
@@ -197,7 +200,8 @@ Everything is stored in the phone's `localStorage`; there is no server, no cooki
 | `udl-loc` | Location: chosen city, or GPS coordinates rounded to 0.001° |
 | `udl-beams` | Last 40 beams sent (time, arrival, offset, spacecraft position) |
 | `udl-mode` | Light mode (`morse` or `steady`) |
-| `udl-morse-en`, `udl-morse-es` | Custom Morse message |
+| `udl-morse-en`, `udl-morse-es` | Custom Morse message (empty means the default, VGR) |
+| `udl-wave-x` | The wave-of-light banner was closed |
 
 External requests: Google Fonts (typefaces) and, only when the user taps them, links to NASA, JPL, GitHub and Google Calendar.
 
@@ -299,6 +303,7 @@ Developed by Rafa Alcántara. Released under the [MIT License](LICENSE).
 - MIT licence.
 - Share card image, follow-my-light links and link previews.
 - Header logo reloads the app on Home.
+- Browser-language detection, wave-of-light banner, VGR as the default Morse message, hashtags in shared texts.
 - Viewer to point at Voyager 1 with compass, Moon/Sun calibration, camera and sound guidance.
 - Automatic flashlight with adaptive Morse (sent once) or steady light.
 - English and Spanish; location by GPS or city.

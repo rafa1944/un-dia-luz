@@ -153,6 +153,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .go-circle svg{width:27px;height:27px}
 .tab-go:active .go-circle{transform:scale(.96)}
 .view{display:grid;gap:18px;align-content:start}
+.wave{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;padding:11px 8px 11px 15px;border:1px solid rgba(220,182,94,.55);border-radius:14px;background:rgba(220,182,94,.1);color:var(--star);font-size:.92rem;line-height:1.45}
+.wave .tag{color:var(--gold-hi);font-weight:500;overflow-wrap:anywhere}
+.wave-x{width:36px;height:36px;margin:-6px 0 -6px;border:0;border-radius:50%;background:transparent;color:var(--dim);display:grid;place-items:center;padding:0}
+.wave-x svg{width:18px;height:18px}
 .view-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px 14px;flex-wrap:wrap;margin-top:4px}
 .loc-pill{display:inline-flex;align-items:center;gap:6px;max-width:100%;border:1px solid var(--line);border-radius:999px;background:var(--ink);color:var(--star);padding:7px 12px;font-size:.86rem;min-height:36px}
 .loc-pill svg{width:16px;height:16px;color:var(--gold);flex:none}
@@ -380,6 +384,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 .morse-line{font:400 .9rem/1.3 var(--f-mono);letter-spacing:.2em;color:var(--dim);text-align:center;min-height:1.3em}
 .morse-line b{color:var(--gold-hi);font-weight:500}
 .morse-line .sent{color:var(--gold)}
+.sheet .morse-code{color:var(--gold);font-size:.95rem;letter-spacing:.08em;min-height:1.3em}
 
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:5;background:var(--ink);border-top:1px solid var(--line);border-radius:22px 22px 0 0;padding:22px max(18px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 20px) max(18px,env(safe-area-inset-left,0px));display:grid;gap:14px;max-height:85%;overflow:auto;box-shadow:0 -20px 60px rgba(0,0,0,.6)}
 .sheet p{color:var(--dim);font-size:.95rem}
@@ -415,6 +420,7 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 </header>
 
 <main class="wrap" id="home">
+  <aside class="wave" id="wave" hidden><p data-i18n-html="waveText"></p><button class="wave-x" id="waveX" type="button" data-i18n-aria="waveClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg></button></aside>
   <!-- Inicio -->
   <div class="view" data-view="home">
     <section class="hero-card" aria-labelledby="heroT">
@@ -829,8 +835,9 @@ en:{
   calWith:'Calibrate on {body}',calHigh:'Too high ({alt}°): wait for it to sink',calUp:'{alt}° high, toward {dir}',calDown:'Below the horizon right now',
   calFine:'First, wave the phone in a figure-eight. With the Sun, never look at it directly: use the screen with the camera on.',calReset:'Remove correction',close:'Close',
   modeT:'How to send',modeSteady:'Steady light',modeSteadyD:'The flashlight stays on until you tap Stop.',
-  modeMorse:'Morse message',modeMorseD:'The flashlight spells your message once, then stops. If the phone is slow to switch the flash, the Morse runs slower.',modeLabel:'Message (up to 24 letters)',
-  morseDefault:'HELLO VOYAGER',
+  modeMorse:'Morse message',modeMorseD:'The flashlight spells your message once, then stops. If the phone is slow to switch the flash, the Morse runs slower.',modeLabel:'Or write your own (up to 24 letters)',
+  morseDefault:'VGR',morseHello:'HELLO VOYAGER',presetsK:'Messages',morseCode:'In Morse: {c}',
+  waveText:'Tuesday 17, after sunset: join NASA’s wave of light for Voyager 1 🔦 <span class="tag">#ShineBrightForVoyager</span>',waveClose:'Close notice',
   bodies:{voyager:['Voyager 1','Voyager 1'],moon:['the Moon','Moon'],sun:['the Sun','Sun']},
   dir16:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'],
   dir8:['the north','the northeast','the east','the southeast','the south','the southwest','the west','the northwest']
@@ -938,8 +945,9 @@ es:{
   calWith:'Calibrar con {body}',calHigh:'Demasiado alta ({alt}°): espera a que baje',calUp:'{alt}° de altura, hacia {dir}',calDown:'Bajo el horizonte ahora',
   calFine:'Antes, haz un ocho en el aire con el móvil. Con el Sol, no lo mires directamente: guíate por la pantalla con la cámara activada.',calReset:'Quitar corrección',close:'Cerrar',
   modeT:'Cómo emitir',modeSteady:'Luz fija',modeSteadyD:'La linterna queda encendida hasta que pulses Detener.',
-  modeMorse:'Mensaje en Morse',modeMorseD:'La linterna deletrea tu mensaje una vez y se apaga. Si el móvil tarda en encender y apagar el flash, el Morse irá más despacio.',modeLabel:'Mensaje (hasta 24 letras)',
-  morseDefault:'HOLA VOYAGER',
+  modeMorse:'Mensaje en Morse',modeMorseD:'La linterna deletrea tu mensaje una vez y se apaga. Si el móvil tarda en encender y apagar el flash, el Morse irá más despacio.',modeLabel:'O escribe el tuyo (hasta 24 letras)',
+  morseDefault:'VGR',morseHello:'HOLA VOYAGER',presetsK:'Mensajes',morseCode:'En Morse: {c}',
+  waveText:'Martes 17, tras la puesta de sol: únete a la ola de luz de la NASA por la Voyager 1 🔦 <span class="tag">#ShineBrightForVoyager</span>',waveClose:'Cerrar aviso',
   bodies:{voyager:['la Voyager 1','Voyager 1'],moon:['la Luna','Luna'],sun:['el Sol','Sol']},
   dir16:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'],
   dir8:['el norte','el noreste','el este','el sureste','el sur','el suroeste','el oeste','el noroeste']
@@ -958,7 +966,10 @@ const dayKey=ms=>fDateKey.format(new Date(ms));
 
 /* idioma: inglés por defecto; ?lang=es o la última elección */
 const qLang=new URLSearchParams(location.search).get('lang');
-let LANG=(qLang==='es'||qLang==='en')?qLang:(store.get('udl-lang',null)||'en');
+const savedLang=(v=>v==='es'||v==='en'?v:null)(store.get('udl-lang',null));
+/* sin ?lang ni preferencia guardada, manda el idioma del navegador: español si empieza por "es", inglés en otro caso */
+const navLang=()=>{const ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];return String(ls[0]||'').toLowerCase().startsWith('es')?'es':'en';};
+let LANG=(qLang==='es'||qLang==='en')?qLang:(savedLang||navLang());
 let L,F;
 function t(key,p){let s=L[key];if(s==null)return key;if(p)s=s.replace(/\{(\w+)\}/g,(m,k)=>p[k]!=null?p[k]:m);return s;}
 let regionNames=null;
@@ -1282,9 +1293,11 @@ function openAbout(){$('#aboutVer').textContent=t('aboutVersion',{v:APP_VERSION}
 function closeAbout(){if(aboutSheet.hidden)return;aboutSheet.hidden=true;locBd.hidden=true;if(!V.open&&!TR.open)document.body.style.overflow='';}
 $('#aboutBtn').addEventListener('click',openAbout);
 $('#legalLink').addEventListener('click',()=>{openAbout();const d=$('#legalD');d.open=true;setTimeout(()=>d.scrollIntoView({block:'start'}),60);});$('#aboutLink').addEventListener('click',openAbout);$('#aboutClose').addEventListener('click',closeAbout);
-async function shareSite(){const url=SITE_URL+'?lang='+LANG;
-  try{if(navigator.share){await navigator.share({title:L.title,text:L.shareInvite,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
-  try{await navigator.clipboard.writeText(L.shareInvite+' '+url);toast(L.copied);}catch(e){toast(L.shareInvite+' '+url,8000);}}
+const HASHTAGS='#UnDíaLuz #Voyager1 #ShineBrightForVoyager';
+const langQ=()=>LANG==='es'?'?lang=es':'';
+async function shareSite(){const url=SITE_URL+langQ(),text=`${L.shareInvite} ${url}\n${HASHTAGS}`;
+  try{if(navigator.share){await navigator.share({title:L.title,text});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  try{await navigator.clipboard.writeText(text);toast(L.copied);}catch(e){toast(text,8000);}}
 $('#aboutShare').addEventListener('click',shareSite);$('#shareHome').addEventListener('click',shareSite);
 
 /* ---------- haces enviados ---------- */
@@ -1566,6 +1579,7 @@ $('#vCam').addEventListener('click',async()=>{
 /* emisión */
 const MORSE={A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',Ñ:'--.--',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.'};
 const cleanMorse=s=>s.toUpperCase().replace(/[ÁÀÄÂ]/g,'A').replace(/[ÉÈËÊ]/g,'E').replace(/[ÍÌÏÎ]/g,'I').replace(/[ÓÒÖÔ]/g,'O').replace(/[ÚÙÜÛ]/g,'U').replace(/[^A-ZÑ0-9 ]/g,'').replace(/\s+/g,' ').trim().slice(0,24);
+function morseCodeStr(text){return [...cleanMorse(text)].map(ch=>ch===' '?'/':(MORSE[ch]||'')).filter(Boolean).join(' ').replace(/\./g,'·').replace(/-/g,'–');}
 function morseSeq(text){const seq=[];const chars=[...cleanMorse(text)];
   chars.forEach((ch,i)=>{if(ch===' '){if(seq.length)seq[seq.length-1][1]=7;return;}const code=MORSE[ch];if(!code)return;
     [...code].forEach(sym=>{seq.push([true,sym==='.'?1:3,i]);seq.push([false,1,i]);});seq[seq.length-1][1]=3;});
@@ -1647,7 +1661,7 @@ function sentSheet(r){
 }
 /* ---------- compartir: tarjeta-imagen, enlace para seguir el haz ---------- */
 function sharePlace(){const lc=st.loc;if(lc.src==='city'){const c=findCity(lc.city);return c?cityName(c):'';}if(lc.src==='gps'||lc.src==='saved'){const n=nearestCity(lc.lat,lc.lon);return n?cityName(n):'';}return '';}
-function beamUrl(r){const u=new URL(SITE_URL);u.searchParams.set('lang',LANG);u.searchParams.set('beam',Math.round(r.t).toString(36)+'.'+Math.round(r.up*1000).toString(36));if(r.place)u.searchParams.set('from',r.place);return u.toString();}
+function beamUrl(r){const u=new URL(SITE_URL);if(LANG==='es')u.searchParams.set('lang','es');u.searchParams.set('beam',Math.round(r.t).toString(36)+'.'+Math.round(r.up*1000).toString(36));if(r.place)u.searchParams.set('from',r.place);return u.toString();}
 function svgImg(node,w){const c=node.cloneNode(true);c.removeAttribute('class');c.setAttribute('xmlns','http://www.w3.org/2000/svg');c.setAttribute('width',w);c.setAttribute('height',Math.round(w*214/260));
   const src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(c));
   return new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=src;});}
@@ -1682,12 +1696,12 @@ async function beamCard(r){
 function saveCard(blob){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='voyager-1-light.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);}
 async function shareBeam(r){
   const url=beamUrl(r),a=new Date(r.t),b=new Date(r.arr);
-  const text=t('shareText',{d1:F.day.format(a),t1:F.time.format(a),d2:F.day.format(b),t2:F.time.format(b)})+' '+L.shareFollow;
+  const text=`${t('shareText',{d1:F.day.format(a),t1:F.time.format(a),d2:F.day.format(b),t2:F.time.format(b)})} ${L.shareFollow} ${url}\n${HASHTAGS}`;
   let file=null;try{file=new File([await beamCard(r)],'voyager-1-light.png',{type:'image/png'});}catch(e){}
-  try{if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:L.title,text:text+' '+url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
-  try{if(navigator.share){await navigator.share({title:L.title,text,url});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  try{if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:L.title,text});return;}}catch(e){if(e&&e.name==='AbortError')return;}
+  try{if(navigator.share){await navigator.share({title:L.title,text});return;}}catch(e){if(e&&e.name==='AbortError')return;}
   if(file)saveCard(file);
-  try{await navigator.clipboard.writeText(text+' '+url);toast(L.copied);}catch(e){toast(text+' '+url,8000);}
+  try{await navigator.clipboard.writeText(text);toast(L.copied);}catch(e){toast(text,8000);}
 }
 function calibSheet(){
   const P=positions(),opt=(b,p)=>{const ok=p.alt>3,high=p.alt>75;
@@ -1713,9 +1727,15 @@ function modeSheet(){
   openSheet(`<h3>${L.modeT}</h3>
     <button class="opt${st.lightMode==='steady'?' sel':''}" data-m="steady" type="button"><span>${L.modeSteady}</span><small>${L.modeSteadyD}</small></button>
     <button class="opt${st.lightMode==='morse'?' sel':''}" data-m="morse" type="button"><span>${L.modeMorse}</span><small>${L.modeMorseD}</small></button>
+    <p class="k" style="margin-top:4px">${L.presetsK}</p>
+    <div class="chips" id="mPresets" role="group" aria-label="${L.presetsK}">${[L.morseDefault,L.morseHello].map(p=>`<button class="chip" type="button" data-p="${p}">${p}</button>`).join('')}</div>
     <label for="morseText">${L.modeLabel}<input type="text" id="morseText" maxlength="24" autocomplete="off" value="${cleanMorse(morseText())}"></label>
+    <p class="mono morse-code" id="morseCode"></p>
     <div class="row"><button class="secondary" data-a="x" type="button">${L.close}</button></div>`,s=>{
     const inp=s.querySelector('#morseText');
+    const sync=()=>{const v=cleanMorse(inp.value);s.querySelectorAll('[data-p]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.p===v));s.querySelector('#morseCode').textContent=v?t('morseCode',{c:morseCodeStr(v)}):'';};
+    s.querySelectorAll('[data-p]').forEach(b=>{b.onclick=()=>{inp.value=b.dataset.p;sync();};});
+    inp.addEventListener('input',sync);sync();
     const save=()=>{const v=cleanMorse(inp.value);if(v&&v!==L.morseDefault)store.set('udl-morse-'+LANG,v);else store.set('udl-morse-'+LANG,null);};
     s.querySelectorAll('[data-m]').forEach(b=>{b.onclick=()=>{save();st.lightMode=b.dataset.m;store.set('udl-mode',st.lightMode);syncButtons();closeSheet();};});
     s.querySelector('[data-a=x]').onclick=()=>{save();closeSheet();};});
@@ -1877,6 +1897,10 @@ function setLang(lang,save){
 }
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.lang!==LANG)setLang(b.dataset.lang,true);}));
 
+/* aviso de la ola de luz: se puede cerrar y deja de salir a partir del 20 de noviembre de 2026 */
+const WAVE_END=new Date(2026,10,20).getTime();
+$('#wave').hidden=!(Date.now()<WAVE_END&&!store.get('udl-wave-x',false));
+$('#waveX').addEventListener('click',()=>{$('#wave').hidden=true;store.set('udl-wave-x',true);});
 /* arranque */
 setLang(LANG,false);
 setInterval(()=>{if(!V.open)tickHome();},100);

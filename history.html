@@ -539,7 +539,8 @@ function readStored(){try{const v=localStorage.getItem('udl-lang');if(!v)return 
 function saveLang(l){try{localStorage.setItem('udl-lang',JSON.stringify(l));}catch(e){}}
 let qLang=null;
 try{qLang=new URLSearchParams(location.search).get('lang');}catch(e){}
-let LANG=(qLang==='en'||qLang==='es')?qLang:(readStored()||'en');
+const navLang=()=>{const ls=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];return String(ls[0]||'').toLowerCase().startsWith('es')?'es':'en';};
+let LANG=(qLang==='en'||qLang==='es')?qLang:(readStored()||navLang());
 let L=I18N[LANG];
 
 /* ---------- helpers ---------- */
