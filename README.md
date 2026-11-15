@@ -6,7 +6,7 @@ A phone web app to point at **Voyager 1** in real time and say hello with a beam
 
 Single HTML file, no build step, no server, no tracking.
 
-Author: **Rafa Alcántara** · rafa.alcantara@gmail.com · Issues: https://github.com/rafa1944/un-dia-luz/issues · Licence: [MIT](LICENSE)
+Author: **Rafa Alcántara** · [@rafa1944](https://x.com/rafa1944) on X · Issues: https://github.com/rafa1944/un-dia-luz/issues · Licence: [MIT](LICENSE)
 
 > **Resumen en español.** Web para el móvil que apunta en tiempo real hacia la Voyager 1 y la saluda con un haz de luz el día que llega a un día luz de la Tierra: el 18 de noviembre de 2026 a las 10:16:07 UTC (11:16:07 en Madrid), la misma hora que da la NASA. Te dice cuándo y hacia dónde mirar desde tu ubicación, guía el móvil con la brújula, enciende la linterna (luz fija o un mensaje en Morse) y te enseña el viaje de tu luz por el sistema solar. Está en inglés y español, no tiene publicidad ni seguimiento y es un proyecto educativo sin ánimo de lucro, sin relación con la NASA.
 
