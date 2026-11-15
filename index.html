@@ -406,9 +406,14 @@ footer.foot{color:var(--dim);font-size:.82rem;display:grid;gap:6px;border-top:1p
 @media (prefers-reduced-motion:reduce){.beam-btn.aligned,.voy-beam{animation:none}*{transition:none!important}}
 @media (min-width:700px){.wrap{padding-block:28px calc(120px + env(safe-area-inset-bottom,0px))}}
 </style>
-<!-- Anonymous visit count (GoatCounter): no cookies; only the page path is sent, never the query or hash -->
-<script>window.goatcounter={path:function(){return location.pathname}};</script>
-<script data-goatcounter="https://undialuz.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<!-- Anonymous visit count (GoatCounter). No cookies and no third-party script: only on the live site, and only the page path,
+     the screen width and the origin of another site that linked here are sent. Never the query (?beam, from, lang) or the hash. -->
+<script>(function(){
+  if (location.hostname !== 'rafa1944.github.io') return;
+  var u = 'https://undialuz.goatcounter.com/count?p=' + encodeURIComponent(location.pathname) + '&s=' + screen.width + '&rnd=' + Math.random().toString(36).slice(2, 7);
+  try { var r = document.referrer && new URL(document.referrer); if (r && r.host !== location.host) u += '&r=' + encodeURIComponent(r.origin); } catch (e) {}
+  if (!(navigator.sendBeacon && navigator.sendBeacon(u))) (new Image()).src = u;
+})();</script>
 </head>
 <body>
 <header class="appbar">
@@ -793,7 +798,7 @@ en:{
   aboutBtn:'About',aboutVersion:'Version {v}',aboutDev:'Developer',aboutCode:'Source code on GitHub (MIT License)',aboutSources:'Data sources',aboutLinks:'Links',
   aboutText:'I built this page so that anyone can take part in a small moment of history: the day Voyager 1, launched in 1977, reaches one light-day from Earth. It tells you where to point your phone and switches on your flashlight so you can say hello to the most distant spacecraft ever built, with no astronomy knowledge needed. It is free, has no ads and collects no personal data: it only counts visits anonymously.',
   aboutSrcList:'<li><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL Horizons</a> (NASA/JPL-Caltech): position and distance of Voyager 1</li><li><a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener">JPL approximate planet positions</a>: the planets in the journey view</li><li>Jean Meeus, <em>Astronomical Algorithms</em>: positions of the Sun and the Moon</li>',
-  privacyT:'Privacy',privacyText:'Your location, your light beams and your settings are saved only on this phone. The page has no cookies or ads. It only counts visits anonymously with GoatCounter: no cookies, your IP is not stored and nothing about your beams is sent. The typefaces load from Google Fonts.',
+  privacyT:'Privacy',privacyText:'Your location, your light beams and your settings are saved only on this phone. The page has no cookies or ads. It counts visits anonymously with GoatCounter: only the page you visit is sent, nothing about your beams, and your IP is not stored. The typefaces load from Google Fonts.',
   support:'Report a problem or suggest an idea',sharePage:'Share this page',
   shareInvite:'On 18 November 2026 Voyager 1 reaches one light-day from Earth. Point your phone at it and say hello with a beam of light.',
   seeTrip:'See its journey ›',tripBack:'Back',tripK:'Your light beam',tripTitle:'Sent {d}',tripCvLabel:'The solar system seen from above, with your beam of light travelling from Earth to Voyager 1',
@@ -904,7 +909,7 @@ es:{
   aboutBtn:'Acerca de',aboutVersion:'Versión {v}',aboutDev:'Programador',aboutCode:'Código fuente en GitHub (licencia MIT)',aboutSources:'Fuentes de datos',aboutLinks:'Enlaces',
   aboutText:'He creado esta web para que cualquiera pueda participar en un pequeño momento histórico: el día en que la Voyager 1, lanzada en 1977, llega a un día luz de la Tierra. Te dice hacia dónde apuntar el móvil y enciende la linterna para que saludes a la nave más lejana jamás construida, sin necesidad de saber astronomía. Es gratuita, no tiene publicidad y no recoge datos personales: solo cuenta las visitas de forma anónima.',
   aboutSrcList:'<li><a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">JPL Horizons</a> (NASA/JPL-Caltech): posición y distancia de la Voyager 1</li><li><a href="https://ssd.jpl.nasa.gov/planets/approx_pos.html" target="_blank" rel="noopener">Posiciones aproximadas de los planetas de JPL</a>: los planetas de la vista del viaje</li><li>Jean Meeus, <em>Astronomical Algorithms</em>: posiciones del Sol y de la Luna</li>',
-  privacyT:'Privacidad',privacyText:'Tu ubicación, tus haces de luz y tus ajustes se guardan solo en este móvil. La web no tiene cookies ni publicidad. Solo cuenta las visitas de forma anónima con GoatCounter: sin cookies, sin guardar tu IP y sin enviar nada de tus haces. Las tipografías se cargan desde Google Fonts.',
+  privacyT:'Privacidad',privacyText:'Tu ubicación, tus haces de luz y tus ajustes se guardan solo en este móvil. La web no tiene cookies ni publicidad. Cuenta las visitas de forma anónima con GoatCounter: solo se envía la página que visitas, nada de tus haces, y tu IP no se guarda. Las tipografías se cargan desde Google Fonts.',
   support:'Avisar de un problema o proponer una idea',sharePage:'Compartir esta web',
   shareInvite:'El 18 de noviembre de 2026 la Voyager 1 llega a un día luz de la Tierra. Apunta el móvil hacia ella y salúdala con un haz de luz.',
   seeTrip:'Ver su viaje ›',tripBack:'Volver',tripK:'Tu haz de luz',tripTitle:'Enviado el {d}',tripCvLabel:'El sistema solar visto desde arriba, con tu haz de luz viajando de la Tierra a la Voyager 1',

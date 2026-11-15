@@ -203,9 +203,9 @@ Everything is stored in the phone's `localStorage`; there is no server of our ow
 | `udl-morse-en`, `udl-morse-es` | Custom Morse message (empty means the default, VGR) |
 | `udl-wave-x` | The wave-of-light banner was closed |
 
-External requests: Google Fonts (typefaces), GoatCounter (visit count) and, only when the user taps them, links to NASA, JPL, GitHub and Google Calendar.
+External requests: Google Fonts (typefaces), GoatCounter (one visit-count request per page load) and, only when the user taps them, links to NASA, JPL, GitHub and Google Calendar.
 
-**Anonymous visit count.** `index.html` and `history.html` load GoatCounter's `count.js` (`https://undialuz.goatcounter.com/count`). It sets no cookies and stores nothing on the phone. Before the script loads, `window.goatcounter.path` returns `location.pathname` only, so the query (`?beam=…&from=…&lang=…`) and the hash (`#when`, `#visor`…) are never sent. GoatCounter does not count `localhost`. The dashboard (visits per day, pages, referrers, country, device) is private to the site owner.
+**Anonymous visit count.** `index.html` and `history.html` send one request per page load to GoatCounter (`https://undialuz.goatcounter.com/count`) from a few inline lines in `<head>`; GoatCounter's own `count.js` is not used, because it also sends `location.search`, which would leak a shared beam's data and city. The request carries only `p` (`location.pathname`), `s` (screen width), `r` (the origin of another site that linked here, if any) and a cache-busting `rnd`: never the query (`?beam=…&from=…&lang=…`), the hash (`#when`, `#visor`…) or the page title. It runs only on `rafa1944.github.io`, so local testing is never counted. No cookies and nothing stored on the phone. The dashboard (visits per day, pages, referrers, country, device) is private to the site owner.
 
 ## 10. Legal notice
 
