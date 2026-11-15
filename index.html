@@ -52,6 +52,8 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--void)}
+/* sin zoom al tocar dos veces (el zoom con dos dedos sigue disponible) */
+html,body,a,button,input,label,summary,.chip,.tab{touch-action:manipulation}
 body{margin:0;background:var(--void);color:var(--star);font:400 16px/1.55 var(--f-display);-webkit-font-smoothing:antialiased}
 body.visor-open{overflow:hidden}
 [hidden]{display:none!important}
@@ -154,7 +156,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tab-go:active .go-circle{transform:scale(.96)}
 .view{display:grid;gap:18px;align-content:start}
 .wave{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;padding:11px 8px 11px 15px;border:1px solid rgba(220,182,94,.55);border-radius:14px;background:rgba(220,182,94,.1);color:var(--star);font-size:.92rem;line-height:1.45}
-.wave .tag{color:var(--gold-hi);font-weight:500;overflow-wrap:anywhere}
+.wave .tag{color:var(--gold-hi);font-weight:500;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:3px}
 .wave-x{width:36px;height:36px;margin:-6px 0 -6px;border:0;border-radius:50%;background:transparent;color:var(--dim);display:grid;place-items:center;padding:0}
 .wave-x svg{width:18px;height:18px}
 .view-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px 14px;flex-wrap:wrap;margin-top:4px}
@@ -837,7 +839,7 @@ en:{
   modeT:'How to send',modeSteady:'Steady light',modeSteadyD:'The flashlight stays on until you tap Stop.',
   modeMorse:'Morse message',modeMorseD:'The flashlight spells your message once, then stops. If the phone is slow to switch the flash, the Morse runs slower.',modeLabel:'Or write your own (up to 24 letters)',
   morseDefault:'VGR',morseHello:'HELLO VOYAGER',presetsK:'Messages',morseCode:'In Morse: {c}',
-  waveText:'Tuesday 17, after sunset: join NASA’s wave of light for Voyager 1 🔦 <span class="tag">#ShineBrightForVoyager</span>',waveClose:'Close notice',
+  waveText:'Tuesday 17, after sunset: join NASA’s wave of light for Voyager 1 🔦 <a class="tag" href="https://x.com/hashtag/ShineBrightForVoyager" target="_blank" rel="noopener">#ShineBrightForVoyager</a>',waveClose:'Close notice',
   bodies:{voyager:['Voyager 1','Voyager 1'],moon:['the Moon','Moon'],sun:['the Sun','Sun']},
   dir16:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'],
   dir8:['the north','the northeast','the east','the southeast','the south','the southwest','the west','the northwest']
@@ -947,7 +949,7 @@ es:{
   modeT:'Cómo emitir',modeSteady:'Luz fija',modeSteadyD:'La linterna queda encendida hasta que pulses Detener.',
   modeMorse:'Mensaje en Morse',modeMorseD:'La linterna deletrea tu mensaje una vez y se apaga. Si el móvil tarda en encender y apagar el flash, el Morse irá más despacio.',modeLabel:'O escribe el tuyo (hasta 24 letras)',
   morseDefault:'VGR',morseHello:'HOLA VOYAGER',presetsK:'Mensajes',morseCode:'En Morse: {c}',
-  waveText:'Martes 17, tras la puesta de sol: únete a la ola de luz de la NASA por la Voyager 1 🔦 <span class="tag">#ShineBrightForVoyager</span>',waveClose:'Cerrar aviso',
+  waveText:'Martes 17, tras la puesta de sol: únete a la ola de luz de la NASA por la Voyager 1 🔦 <a class="tag" href="https://x.com/hashtag/ShineBrightForVoyager" target="_blank" rel="noopener">#ShineBrightForVoyager</a>',waveClose:'Cerrar aviso',
   bodies:{voyager:['la Voyager 1','Voyager 1'],moon:['la Luna','Luna'],sun:['el Sol','Sol']},
   dir16:['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO'],
   dir8:['el norte','el noreste','el este','el sureste','el sur','el suroeste','el oeste','el noroeste']

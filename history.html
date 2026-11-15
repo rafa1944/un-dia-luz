@@ -40,6 +40,8 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background:var(--void);scroll-padding-top:16px}
+/* sin zoom al tocar dos veces (el zoom con dos dedos sigue disponible) */
+html,body,a,button,input,label,summary,.chip,.tab{touch-action:manipulation}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--void);color:var(--star);font:400 16px/1.55 var(--f-display);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
 [hidden]{display:none!important}
