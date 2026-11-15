@@ -4,11 +4,11 @@
 
 A phone web app to point at **Voyager 1** in real time and say hello with a beam of light. On **18 November 2026 at 10:16:07 UTC** (05:16:07 in New York, 11:16:07 in Madrid) Voyager 1 becomes the first human-made object one light-day from Earth. The page shows where the spacecraft is in your sky, guides your phone towards it with the compass, switches on the flashlight (steady or a Morse message) and follows your light on its one-day journey across the solar system.
 
-Single HTML file, no build step, no server, no tracking.
+Single HTML file, no build step, no server, no tracking: only an anonymous visit count.
 
 Author: **Rafa Alcántara** · [@rafa1944](https://x.com/rafa1944) on X · Issues: https://github.com/rafa1944/un-dia-luz/issues · Licence: [MIT](LICENSE)
 
-> **Resumen en español.** Web para el móvil que apunta en tiempo real hacia la Voyager 1 y la saluda con un haz de luz el día que llega a un día luz de la Tierra: el 18 de noviembre de 2026 a las 10:16:07 UTC (11:16:07 en Madrid), la misma hora que da la NASA. Te dice cuándo y hacia dónde mirar desde tu ubicación, guía el móvil con la brújula, enciende la linterna (luz fija o un mensaje en Morse) y te enseña el viaje de tu luz por el sistema solar. Está en inglés y español, no tiene publicidad ni seguimiento y es un proyecto educativo sin ánimo de lucro, sin relación con la NASA.
+> **Resumen en español.** Web para el móvil que apunta en tiempo real hacia la Voyager 1 y la saluda con un haz de luz el día que llega a un día luz de la Tierra: el 18 de noviembre de 2026 a las 10:16:07 UTC (11:16:07 en Madrid), la misma hora que da la NASA. Te dice cuándo y hacia dónde mirar desde tu ubicación, guía el móvil con la brújula, enciende la linterna (luz fija o un mensaje en Morse) y te enseña el viaje de tu luz por el sistema solar. Está en inglés y español, no tiene publicidad, cookies ni seguimiento (solo cuenta las visitas de forma anónima) y es un proyecto educativo sin ánimo de lucro, sin relación con la NASA.
 
 ---
 
@@ -106,7 +106,7 @@ Version, purpose, developer, data sources, privacy, legal notice, support and sh
 
 ## 3. Architecture
 
-- **No build step, no dependencies, no server.** Plain HTML, CSS and JavaScript inline. The only external requests are Google Fonts (Jost, Instrument Serif, IBM Plex Mono).
+- **No build step, no dependencies, no server.** Plain HTML, CSS and JavaScript inline. The only external requests are Google Fonts (Jost, Instrument Serif, IBM Plex Mono) and the anonymous GoatCounter visit count.
 - **Hosting**: GitHub Pages from the `main` branch root. HTTPS is required for the compass, location and camera.
 
 | File | Contents |
@@ -192,7 +192,7 @@ A "Add a reminder to my calendar" button (Home light-day card and When tab) offe
 
 ## 9. Stored data and privacy
 
-Everything is stored in the phone's `localStorage`; there is no server, no cookies, no analytics and no advertising.
+Everything is stored in the phone's `localStorage`; there is no server of our own, no cookies and no advertising. The only measurement is an anonymous visit count with [GoatCounter](https://www.goatcounter.com/) (see below).
 
 | Key | Contents |
 |---|---|
@@ -203,13 +203,15 @@ Everything is stored in the phone's `localStorage`; there is no server, no cooki
 | `udl-morse-en`, `udl-morse-es` | Custom Morse message (empty means the default, VGR) |
 | `udl-wave-x` | The wave-of-light banner was closed |
 
-External requests: Google Fonts (typefaces) and, only when the user taps them, links to NASA, JPL, GitHub and Google Calendar.
+External requests: Google Fonts (typefaces), GoatCounter (visit count) and, only when the user taps them, links to NASA, JPL, GitHub and Google Calendar.
+
+**Anonymous visit count.** `index.html` and `history.html` load GoatCounter's `count.js` (`https://undialuz.goatcounter.com/count`). It sets no cookies and stores nothing on the phone. Before the script loads, `window.goatcounter.path` returns `location.pathname` only, so the query (`?beam=…&from=…&lang=…`) and the hash (`#when`, `#visor`…) are never sent. GoatCounter does not count `localhost`. The dashboard (visits per day, pages, referrers, country, device) is private to the site owner.
 
 ## 10. Legal notice
 
 Shown in the app (About › Legal notice, and the Story tab footer) and on `history.html`:
 
-- **Non-profit and educational.** A free, non-commercial project made for outreach and learning. No advertising, nothing for sale, and no personal data collected, stored or shared: no cookies, analytics or tracking.
+- **Non-profit and educational.** A free, non-commercial project made for outreach and learning. No advertising, nothing for sale, and no personal data collected, stored or shared: no cookies and no tracking. Visits are only counted anonymously, in aggregate, with GoatCounter.
 - **Not affiliated with NASA.** An independent project, not affiliated with, sponsored or endorsed by NASA, JPL or Caltech. Voyager data comes from public NASA/JPL sources and is credited to NASA/JPL-Caltech. Names and trademarks belong to their owners.
 - **No warranty.** Positions and times are calculated in good faith and provided as they are, for information only. A phone compass can be off by several degrees.
 - **Safety.** Never look at the Sun, directly or through the camera. Don't shine the flashlight at people, drivers or aircraft, and watch your step outdoors at night.
@@ -300,6 +302,7 @@ Developed by Rafa Alcántara. Released under the [MIT License](LICENSE).
 ## 16. Changelog
 
 **1.0.0** (November 2026)
+- Anonymous visit count with GoatCounter (path only, no cookies); privacy and legal texts updated.
 - MIT licence.
 - Share card image, follow-my-light links and link previews.
 - Header logo reloads the app on Home.
